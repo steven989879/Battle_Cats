@@ -1,0 +1,10 @@
+﻿cl : 命令列 warning D9035: 選項 'Gm' 已被取代，在未來的發行版本中將會移除
+  MainFrm.cpp
+  正在產生程式碼...
+  正在編譯...
+  gameutil.cpp
+  gamecore.cpp
+  audio.cpp
+  game.cpp
+  正在產生程式碼...
+  game.vcxproj -> C:\Users\Feng\OneDrive\文件\OOPL\111_2OOP\material\game-framework-practice\.\Debug\game.exe
