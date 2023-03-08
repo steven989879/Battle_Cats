@@ -44,7 +44,7 @@ void CGameStateInit::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 
 void CGameStateInit::OnLButtonDown(UINT nFlags, CPoint point)
 {
-	if (point.x >= 100 && point.x <= 500 && point.y >= 100 && point.y <= 500) {
+	if (point.x >= 630 && point.x <= 1083 && point.y >= 432 && point.y <= 507) {
 		GotoGameState(GAME_STATE_RUN);		// 切換至GAME_STATE_RUN
 	}
 	
@@ -53,10 +53,25 @@ void CGameStateInit::OnLButtonDown(UINT nFlags, CPoint point)
 void CGameStateInit::OnShow()
 {
 	background.ShowBitmap();
+	draw_text();
 }
 
 void CGameStateInit::load_background() {
 	background.LoadBitmapByString({ "resources/background.bmp" });
 	background.SetTopLeft(0, 0);
 	
+}
+void CGameStateInit::draw_text() {
+	CDC *pDC = CDDraw::GetBackCDC();
+	CFont* fp;
+
+	/* Print title */
+	CTextDraw::ChangeFontLog(pDC, fp, 28, "微軟正黑體", RGB(255, 255, 255));
+	CTextDraw::Print(pDC, 79, 228, "Game Framework Practice");
+
+	/* Print info */
+	CTextDraw::ChangeFontLog(pDC, fp, 19, "微軟正黑體", RGB(255, 255, 255));
+	CTextDraw::Print(pDC, 182, 431, "Press any key to start");
+
+	CDDraw::ReleaseBackCDC();
 }
