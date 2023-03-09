@@ -95,6 +95,7 @@ namespace game_framework {
 	private:
 		CMovingBitmap background;
 		CMovingBitmap character;
+		CMovingBitmap character_enemy;
 
 	};
 
