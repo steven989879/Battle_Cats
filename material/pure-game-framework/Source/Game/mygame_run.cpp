@@ -39,7 +39,7 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 
 	character.LoadBitmapByString({
 		"resources/cat_1.bmp" , "resources/cat_2.bmp" , "resources/cat_3.bmp" , 
-		});
+		}, RGB(255, 255, 255));
 	character.SetTopLeft(0, 30);
 	character.SetAnimation(300, 0);
 }
