@@ -9,7 +9,7 @@
 
 using namespace game_framework;
 /////////////////////////////////////////////////////////////////////////////
-// ³o­Óclass¬°¹CÀ¸ªº¹CÀ¸¶}ÀYµe­±ª«¥ó
+// é€™å€‹classç‚ºéŠæˆ²çš„éŠæˆ²é–‹é ­ç•«é¢ç‰©ä»¶
 /////////////////////////////////////////////////////////////////////////////
 
 CGameStateInit::CGameStateInit(CGame *g) : CGameState(g)
@@ -19,17 +19,17 @@ CGameStateInit::CGameStateInit(CGame *g) : CGameState(g)
 void CGameStateInit::OnInit()
 {
 	//
-	// ·í¹Ï«Ü¦h®É¡AOnInit¸ü¤J©Ò¦³ªº¹Ï­nªá«Ü¦h®É¶¡¡C¬°Á×§Kª±¹CÀ¸ªº¤H
-	//     µ¥ªº¤£­@·Ð¡A¹CÀ¸·|¥X²{¡uLoading ...¡v¡AÅã¥ÜLoadingªº¶i«×¡C
+	// ç•¶åœ–å¾ˆå¤šæ™‚ï¼ŒOnInitè¼‰å…¥æ‰€æœ‰çš„åœ–è¦èŠ±å¾ˆå¤šæ™‚é–“ã€‚ç‚ºé¿å…çŽ©éŠæˆ²çš„äºº
+	//     ç­‰çš„ä¸è€ç…©ï¼ŒéŠæˆ²æœƒå‡ºç¾ã€ŒLoading ...ã€ï¼Œé¡¯ç¤ºLoadingçš„é€²åº¦ã€‚
 	//
-	ShowInitProgress(0, "¿ß«}¤j¾Ôª§");	// ¤@¶}©lªºloading¶i«×¬°0%
+	ShowInitProgress(0, "Start Initialize...");	// ä¸€é–‹å§‹çš„loadingé€²åº¦ç‚º0%
 	//
-	// ¶}©l¸ü¤J¸ê®Æ
+	// é–‹å§‹è¼‰å…¥è³‡æ–™
 	//
 	load_background();
-	Sleep(1000);				// ©ñºC¡A¥H«K¬Ý²M·¡¶i«×¡A¹ê»Ú¹CÀ¸½Ð§R°£¦¹Sleep
+	Sleep(1000);				// æ”¾æ…¢ï¼Œä»¥ä¾¿çœ‹æ¸…æ¥šé€²åº¦ï¼Œå¯¦éš›éŠæˆ²è«‹åˆªé™¤æ­¤Sleep
 	//
-	// ¦¹OnInit°Ê§@·|±µ¨ìCGameStaterRun::OnInit()¡A©Ò¥H¶i«×ÁÙ¨S¨ì100%
+	// æ­¤OnInitå‹•ä½œæœƒæŽ¥åˆ°CGameStaterRun::OnInit()ï¼Œæ‰€ä»¥é€²åº¦é‚„æ²’åˆ°100%
 	//
 }
 
@@ -39,39 +39,40 @@ void CGameStateInit::OnBeginState()
 
 void CGameStateInit::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
-	
+
 }
 
 void CGameStateInit::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	if (point.x >= 630 && point.x <= 1083 && point.y >= 432 && point.y <= 507) {
-		GotoGameState(GAME_STATE_RUN);		// ¤Á´«¦ÜGAME_STATE_RUN
+		GotoGameState(GAME_STATE_RUN);		// åˆ‡æ›è‡³GAME_STATE_RUN
 	}
-	
 }
 
 void CGameStateInit::OnShow()
 {
 	background.ShowBitmap();
-	draw_text();
+	//draw_text();
 }
-
 void CGameStateInit::load_background() {
 	background.LoadBitmapByString({ "resources/background.bmp" });
 	background.SetTopLeft(0, 0);
-	
+
 }
+/*
 void CGameStateInit::draw_text() {
 	CDC *pDC = CDDraw::GetBackCDC();
 	CFont* fp;
 
-	/* Print title */
-	CTextDraw::ChangeFontLog(pDC, fp, 28, "·L³n¥¿¶ÂÅé", RGB(255, 255, 255));
+	--Print title 
+	CTextDraw::ChangeFontLog(pDC, fp, 28, "å¾®è»Ÿæ­£é»‘é«”", RGB(255, 255, 255));
 	CTextDraw::Print(pDC, 79, 228, "Game Framework Practice");
 
-	/* Print info */
-	CTextDraw::ChangeFontLog(pDC, fp, 19, "·L³n¥¿¶ÂÅé", RGB(255, 255, 255));
+	-- Print info 
+	CTextDraw::ChangeFontLog(pDC, fp, 19, "å¾®è»Ÿæ­£é»‘é«”", RGB(255, 255, 255));
 	CTextDraw::Print(pDC, 182, 431, "Press any key to start");
 
 	CDDraw::ReleaseBackCDC();
+
 }
+*/
