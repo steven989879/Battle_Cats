@@ -54,6 +54,10 @@
     <ClCompile Include="Source\Game\mygame_run.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
+    <ClCompile Include="cat_one.cpp" />
+    <ClCompile Include="monster.cpp">
+      <Filter>GameLibrary</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Library\audio.h">
@@ -88,6 +92,10 @@
     </ClInclude>
     <ClInclude Include="Source\Game\config.h">
       <Filter>MyGame</Filter>
+    </ClInclude>
+    <ClInclude Include="cat_one.h" />
+    <ClInclude Include="monster.h">
+      <Filter>GameLibrary</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

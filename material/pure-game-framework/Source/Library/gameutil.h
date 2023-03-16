@@ -66,6 +66,9 @@
 // Header for STL (Standard Template Library)
 /////////////////////////////////////////////////////////////////////////////
 
+#ifndef GAMEUTIL_H
+#define GAMEUTIL_H
+
 #include <list>
 #include <vector>
 #include <map>
@@ -143,7 +146,7 @@ namespace game_framework {
 		string   imageFileName = "";
 		//! 儲存物件過濾的圖片顏色
 		COLORREF filterColor = CLR_INVALID;
-
+		
 	private:
 		void InitializeRectByBITMAP(BITMAP bitmap);
 		void ShowBitmapBySetting();
@@ -156,3 +159,5 @@ namespace game_framework {
 	};
 
 }
+
+#endif

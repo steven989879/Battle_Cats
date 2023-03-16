@@ -111,7 +111,7 @@
       <ObjectFileName>.\Debug/</ObjectFileName>
       <ProgramDataBaseFileName>.\Debug/</ProgramDataBaseFileName>
       <WarningLevel>Level3</WarningLevel>
-      <TreatWarningAsError>true</TreatWarningAsError>
+      <TreatWarningAsError>false</TreatWarningAsError>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
@@ -236,6 +236,8 @@
     <None Include="RES\GAME.RC2" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="cat_one.cpp" />
+    <ClCompile Include="monster.cpp" />
     <ClCompile Include="Source\Core\game.cpp" />
     <ClCompile Include="Source\Core\gameDoc.cpp" />
     <ClCompile Include="Source\Core\gameView.cpp" />
@@ -253,6 +255,8 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="cat_one.h" />
+    <ClInclude Include="monster.h" />
     <ClInclude Include="Source\Core\Game.h" />
     <ClInclude Include="Source\Core\gameDoc.h" />
     <ClInclude Include="Source\Core\gameView.h" />
