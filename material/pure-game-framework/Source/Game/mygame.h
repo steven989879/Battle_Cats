@@ -96,6 +96,7 @@ namespace game_framework {
 		CMovingBitmap background;
 		CMovingBitmap character;
 		CMovingBitmap character_enemy;
+		CMovingBitmap character_test;
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
