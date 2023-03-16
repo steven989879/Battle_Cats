@@ -1,3 +1,6 @@
+#ifndef MONSTER_H
+#define MONSTER_H
+
 #include <list>
 #include <vector>
 #include <map>
@@ -38,3 +41,5 @@ namespace game_framework {
 	};
 
 }
+
+#endif
