@@ -6,6 +6,11 @@
 #include "../Library/gameutil.h"
 #include "../Library/gamecore.h"
 #include "mygame.h"
+#include<vector>
+#include"../../monster.h"
+#include"../../cat_one.h"
+
+
 
 using namespace game_framework;
 
@@ -23,6 +28,8 @@ CGameStateRun::~CGameStateRun()
 
 void CGameStateRun::OnBeginState()
 {
+	vector<cat_one*> cat_one_friend ;
+	cat_one *try_1;
 }
 
 void CGameStateRun::OnMove()							// 移動遊戲元素
@@ -75,6 +82,7 @@ void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 
 void CGameStateRun::OnLButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的動作
 {
+	cat_one_friend.push_back(try_1); 
 }
 
 void CGameStateRun::OnLButtonUp(UINT nFlags, CPoint point)	// 處理滑鼠的動作

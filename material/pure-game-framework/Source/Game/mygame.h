@@ -37,7 +37,8 @@
  *      2. Replace the demonstration of animation as a new bouncing ball.
  *      3. Use ShowInitProgress(percent) to display loading progress.
 */
-
+#include"../../cat_one.h"
+#include"../../monster.h"
 
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
@@ -97,6 +98,8 @@ namespace game_framework {
 		CMovingBitmap character;
 		CMovingBitmap character_enemy;
 		CMovingBitmap character_test;
+		vector<cat_one*> cat_one_friend ; 
+		cat_one *try_1;
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
