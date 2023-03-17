@@ -66,7 +66,7 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	character_test.LoadBitmapByString({
 		"resources/cat_attack_1_inverse.bmp" , "resources/cat_attack_2_inverse.bmp" , "resources/cat_attack_1_inverse.bmp" , "resources/cat_attack_3_inverse.bmp" , "resources/cat_attack_4_inverse.bmp" ,
 		}, RGB(255, 255, 255));
-	character_test.SetTopLeft(0, 60);
+	character_test.SetTopLeft(0, 300);
 	character_test.SetAnimation(300, 0);
 }
 
