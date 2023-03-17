@@ -1,3 +1,6 @@
+#ifndef CAT_ONE_H
+#define CAT_ONE_H
+
 #include <list>
 #include <vector>
 #include <map>
@@ -33,3 +36,5 @@ namespace game_framework {
 	};
 
 }
+
+#endif
