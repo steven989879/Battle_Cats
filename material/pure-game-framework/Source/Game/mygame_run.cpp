@@ -27,40 +27,55 @@ void CGameStateRun::OnBeginState()
 
 void CGameStateRun::OnMove()							// 移動遊戲元素
 {
-	if (character.GetLeft() + character.GetWidth() != character_enemy.GetLeft() && character.GetLeft() + character.GetWidth() < character_enemy.GetLeft()) {
+	if (character.GetLeft() + 60 + character.GetWidth() != character_enemy.GetLeft() && character.GetLeft() + 60 + character.GetWidth() < character_enemy.GetLeft()) {
 		character.SetTopLeft(character.GetLeft() + 1, character.GetTop());
 		character_enemy.SetTopLeft(character_enemy.GetLeft() - 1, character_enemy.GetTop());
 	}
 	else {
+		character_cat_1.SetAnimation(200, 0);
+		character_cat_2.SetAnimation(100, 0);
+		character_cat_2_bump.SetAnimation(100, 0);
 		character.SetFrameIndexOfBitmap(1);
 		character_enemy.SetFrameIndexOfBitmap(1);
+		
 	}
 }
 
 void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 {
 	background.LoadBitmapByString({
-		"resources/game_background.bmp",
+		"resources/game_background_1.bmp",
 		});
 	background.SetTopLeft(0, 0);
 
 	character.LoadBitmapByString({
-		"resources/cat_1_inverse.bmp" , "resources/cat_2_inverse.bmp" , "resources/cat_3_inverse.bmp" ,
+		"resources/cat_walk_1_inverse.bmp" , "resources/cat_walk_2_inverse.bmp" , "resources/cat_walk_3_inverse.bmp" ,"resources/cat_walk_2_inverse.bmp" 
 		}, RGB(255, 255, 255));
-	character.SetTopLeft(0, 30);
-	character.SetAnimation(300, 0);
+	character.SetTopLeft(0, 420);
+	character.SetAnimation(250, 0);
 
 	character_enemy.LoadBitmapByString({
-		"resources/cat_1.bmp" , "resources/cat_2.bmp" , "resources/cat_3.bmp" ,
+		"resources/cat_walk_1.bmp" , "resources/cat_walk_2.bmp" , "resources/cat_walk_3.bmp" , "resources/cat_walk_2.bmp" ,
 		}, RGB(255, 255, 255));
-	character_enemy.SetTopLeft(1000, 30);
-	character_enemy.SetAnimation(300, 0);
+	character_enemy.SetTopLeft(1000, 420);
+	character_enemy.SetAnimation(250, 0);
 
-	character_test.LoadBitmapByString({
-		"resources/cat_attack_1_inverse.bmp" , "resources/cat_attack_2_inverse.bmp" , "resources/cat_attack_1_inverse.bmp" , "resources/cat_attack_3_inverse.bmp" , "resources/cat_attack_4_inverse.bmp" ,
+	character_cat_1.LoadBitmapByString({
+		"resources/cat_attack_1_inverse.bmp" , "resources/cat_attack_2_inverse.bmp" , "resources/cat_attack_1_inverse.bmp" , "resources/cat_attack_3_origin_inverse.bmp" , "resources/cat_attack_4_origin_inverse.bmp" , "resources/cat_attack_5_origin_inverse.bmp" ,
+		"resources/cat_attack_6_origin_inverse.bmp" , "resources/cat_attack_7_origin_inverse.bmp" , "resources/cat_attack_8_inverse.bmp" , "resources/cat_attack_8_inverse.bmp" , "resources/cat_attack_8_inverse.bmp" , "resources/cat_attack_8_inverse.bmp" ,
 		}, RGB(255, 255, 255));
-	character_test.SetTopLeft(0, 300);
-	character_test.SetAnimation(300, 0);
+	
+
+	character_cat_2.LoadBitmapByString({
+		"resources/cat_attack_1.bmp" , "resources/cat_attack_2.bmp" , "resources/cat_attack_1.bmp" , "resources/cat_attack_3.bmp" , "resources/cat_attack_4.bmp" , "resources/cat_attack_5.bmp" ,
+		"resources/cat_attack_6.bmp" , "resources/cat_attack_7.bmp" , "resources/cat_attack_8.bmp" , "resources/cat_attack_8.bmp" , "resources/cat_attack_8.bmp" , "resources/cat_attack_8.bmp" ,
+		}, RGB(255, 255, 255));
+
+	character_cat_2_bump.LoadBitmapByString({
+		"resources/cat_attack_0_bump.bmp" , "resources/cat_attack_0_bump.bmp" , "resources/cat_attack_0_bump.bmp" , "resources/cat_attack_3_bump.bmp" , "resources/cat_attack_4_bump.bmp" , "resources/cat_attack_5_bump.bmp" ,
+		"resources/cat_attack_6_bump.bmp" , "resources/cat_attack_7_bump.bmp" , "resources/cat_attack_0_bump.bmp" , "resources/cat_attack_0_bump.bmp" , "resources/cat_attack_0_bump.bmp" , "resources/cat_attack_0_bump.bmp" ,
+		}, RGB(255, 255, 255));
+
 }
 
 void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
@@ -94,9 +109,27 @@ void CGameStateRun::OnRButtonUp(UINT nFlags, CPoint point)	// 處理滑鼠的動
 }
 
 void CGameStateRun::OnShow()
-{
+{	
+	int i=0;
 	background.ShowBitmap();
-	character.ShowBitmap();
-	character_enemy.ShowBitmap();
-	character_test.ShowBitmap();
+	if (character.GetLeft() + 60 + character.GetWidth() != character_enemy.GetLeft() && character.GetLeft() + 60 + character.GetWidth() < character_enemy.GetLeft()) {
+		if (i == 1) {
+			character.SetTopLeft(character_cat_1.GetLeft(), 420);
+			character_enemy.SetTopLeft(character_cat_2.GetLeft(), 420);
+			i = 0;
+		}
+		character.ShowBitmap();
+		character_enemy.ShowBitmap();
+	}
+	else {
+		if (i == 0) {
+			character_cat_1.SetTopLeft(character.GetLeft(), 420);
+			character_cat_2.SetTopLeft(character_enemy.GetLeft(), 420);
+			character_cat_2_bump.SetTopLeft(character_enemy.GetLeft() - 162, 420);
+			i = 1;
+		}
+		character_cat_2.ShowBitmap();
+		character_cat_1.ShowBitmap();
+		character_cat_2_bump.ShowBitmap();
+	}
 }

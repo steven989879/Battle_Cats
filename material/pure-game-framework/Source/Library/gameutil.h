@@ -1,3 +1,4 @@
+#pragma once
 /*
  * gamelib.h: 本檔案儲遊戲相關的class的interface
  * Copyright (C) 2002-2008 Woei-Kae Chen <wkc@csie.ntut.edu.tw>
@@ -65,9 +66,6 @@
 /////////////////////////////////////////////////////////////////////////////
 // Header for STL (Standard Template Library)
 /////////////////////////////////////////////////////////////////////////////
-
-#ifndef GAMEUTIL_H
-#define GAMEUTIL_H
 
 #include <list>
 #include <vector>
@@ -139,14 +137,14 @@ namespace game_framework {
 		bool isBitmapLoaded = false;	// whether a bitmap has been loaded
 		//! 儲存物件動畫是否為單次動畫
 		bool isOnce = false;
-		CRect    location;			// location of the bitmap
+		vector<CRect>    locations;			// location of the bitmap
 		vector<unsigned> surfaceID;
 		clock_t last_time = clock();
 		//! 儲存物件讀取的圖片路徑
 		string   imageFileName = "";
 		//! 儲存物件過濾的圖片顏色
 		COLORREF filterColor = CLR_INVALID;
-		
+
 	private:
 		void InitializeRectByBITMAP(BITMAP bitmap);
 		void ShowBitmapBySetting();
@@ -159,5 +157,3 @@ namespace game_framework {
 	};
 
 }
-
-#endif
