@@ -48,16 +48,31 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 		});
 	background.SetTopLeft(0, 0);
 
+	character_call_cat_1.LoadBitmapByString({
+		"resources/call_cat_1.bmp" ,
+		}, RGB(255, 255, 255));
+	character_call_cat_1.SetTopLeft(470, 680);
+
+	character_tower_1.LoadBitmapByString({
+		"resources/tower_1.bmp" ,
+		}, RGB(255, 255, 255));
+	character_tower_1.SetTopLeft(1400, 175);
+
+	character_tower_2.LoadBitmapByString({
+		"resources/tower_2.bmp" ,
+		}, RGB(255, 255, 255));
+	character_tower_2.SetTopLeft(100, 163);
+
 	character.LoadBitmapByString({
 		"resources/cat_walk_1_inverse.bmp" , "resources/cat_walk_2_inverse.bmp" , "resources/cat_walk_3_inverse.bmp" ,"resources/cat_walk_2_inverse.bmp" 
 		}, RGB(255, 255, 255));
-	character.SetTopLeft(0, 420);
+	character.SetTopLeft(285, 420);
 	character.SetAnimation(250, 0);
 
 	character_enemy.LoadBitmapByString({
 		"resources/cat_walk_1.bmp" , "resources/cat_walk_2.bmp" , "resources/cat_walk_3.bmp" , "resources/cat_walk_2.bmp" ,
 		}, RGB(255, 255, 255));
-	character_enemy.SetTopLeft(1000, 420);
+	character_enemy.SetTopLeft(1295, 420);
 	character_enemy.SetAnimation(250, 0);
 
 	character_cat_1.LoadBitmapByString({
@@ -112,6 +127,9 @@ void CGameStateRun::OnShow()
 {	
 	int i=0;
 	background.ShowBitmap();
+	character_call_cat_1.ShowBitmap();
+	character_tower_1.ShowBitmap();
+	character_tower_2.ShowBitmap();
 	if (character.GetLeft() + 60 + character.GetWidth() != character_enemy.GetLeft() && character.GetLeft() + 60 + character.GetWidth() < character_enemy.GetLeft()) {
 		if (i == 1) {
 			character.SetTopLeft(character_cat_1.GetLeft(), 420);
