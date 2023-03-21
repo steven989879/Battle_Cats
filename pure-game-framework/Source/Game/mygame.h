@@ -93,6 +93,7 @@ namespace game_framework {
 		void OnMove();									// 移動遊戲元素
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
+		int call_cat_number = 0;
 		CMovingBitmap background;
 		CMovingBitmap character_call_cat_1;
 		CMovingBitmap character_tower_1;
