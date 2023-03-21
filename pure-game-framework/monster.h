@@ -31,7 +31,9 @@ namespace game_framework {
 		int get_power();
 		int get_walk_speed();
 		int get_cool_time();
+		void set_name(int i);
 	protected:
+		int name;
 		int price ;
 		int heart ;
 		int attack_range ;

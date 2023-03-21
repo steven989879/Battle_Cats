@@ -17,7 +17,7 @@
 template<class T>
 class cat_factory
 {
-	static T* create_cat(int cat_one_friend.size());
+	static T* create_cat(int cat_size);
 
 	~cat_factory();
 };
@@ -29,8 +29,9 @@ cat_factory<T>::~cat_factory<T>()
 }
 
 template <class T>
-T* cat_factory<T>::create_cat(int cat_one_friend.size()){
-	
+T* cat_factory<T>::create_cat(int cat_size){
+	T *temp1 = new T();
+	return(temp1);
 }
 
 #endif // !CAT_FACTORY_H

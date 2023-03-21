@@ -58,6 +58,11 @@ namespace game_framework {
 		return cool_time;
 	}
 
+	void monster::set_name(int i)
+	{
+		name = i;
+	}
+
 
 
 }

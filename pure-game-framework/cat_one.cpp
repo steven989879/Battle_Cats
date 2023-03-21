@@ -31,5 +31,13 @@ namespace game_framework {
 
 
 
+	cat_one * cat_one::create_cat()
+	{
+		cat_one *temp1 = new cat_one();
+		return(temp1);
+	}
+
+
+
 
 }
