@@ -98,6 +98,10 @@ namespace game_framework {
 		int call_cat_number = 0;
 		CMovingBitmap background;
 		CMovingBitmap character_call_cat_1;
+		CMovingBitmap character_call_cat_2;
+		CMovingBitmap character_call_cat_3;
+		CMovingBitmap character_call_cat_4;
+		CMovingBitmap character_call_cat_5;
 		CMovingBitmap character_tower_1;
 		CMovingBitmap character_tower_2;
 		CMovingBitmap character;

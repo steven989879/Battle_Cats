@@ -75,6 +75,26 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 		}, RGB(255, 255, 255));
 	character_call_cat_1.SetTopLeft(470, 680);
 
+	character_call_cat_2.LoadBitmapByString({
+		"resources/call_cat_empty.bmp" , 
+		}, RGB(255, 255, 255));
+	character_call_cat_2.SetTopLeft(625, 680);
+
+	character_call_cat_3.LoadBitmapByString({
+		"resources/call_cat_empty.bmp" ,
+		}, RGB(255, 255, 255));
+	character_call_cat_3.SetTopLeft(780, 680);
+
+	character_call_cat_4.LoadBitmapByString({
+		"resources/call_cat_empty.bmp" ,
+		}, RGB(255, 255, 255));
+	character_call_cat_4.SetTopLeft(935, 680);
+
+	character_call_cat_5.LoadBitmapByString({
+		"resources/call_cat_empty.bmp" ,
+		}, RGB(255, 255, 255));
+	character_call_cat_5.SetTopLeft(1090, 680);
+
 	character_tower_1.LoadBitmapByString({
 		"resources/tower_1.bmp" ,
 		}, RGB(255, 255, 255));
@@ -163,6 +183,10 @@ void CGameStateRun::OnShow()
 {	
 	background.ShowBitmap();
 	character_call_cat_1.ShowBitmap();
+	character_call_cat_2.ShowBitmap();
+	character_call_cat_3.ShowBitmap();
+	character_call_cat_4.ShowBitmap();
+	character_call_cat_5.ShowBitmap();
 	character_tower_1.ShowBitmap();
 	character_tower_2.ShowBitmap();
 	int j = 0;
