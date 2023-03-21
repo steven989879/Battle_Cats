@@ -40,6 +40,7 @@
 
 #include <vector>
 #include "../../cat_one.h"
+#include "../../enemy_one.h"
 
 namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
@@ -106,6 +107,7 @@ namespace game_framework {
 		CMovingBitmap character_cat_2;
 		CMovingBitmap character_cat_2_bump;
 		vector<cat_one*> cat_one_friend;
+		vector<enemy_one*> enemy_one_v;
 		//cat_one_vector cat_one_v ;
 	};
 

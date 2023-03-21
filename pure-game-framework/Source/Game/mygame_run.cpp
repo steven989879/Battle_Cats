@@ -9,6 +9,7 @@
 #include "../../monster.h"
 #include "../../cat_one.h"
 #include "../../cat_factory.h"
+#include "../../enemy_one.h"
 
 using namespace game_framework;
 
@@ -61,7 +62,17 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 					}
 				}
 		}
-	
+		// 敵對貓自動生成 待修 
+		/*
+		enemy_one *enemy1 = new enemy_one();
+		enemy_one_v.push_back(enemy1);
+		enemy_one_v[enemy_one_v.size() - 1]->set_name(enemy_one_v.size());
+		enemy_one_v[enemy_one_v.size() - 1]->LoadBitmapByString({
+		"resources/cat_walk_1_inverse.bmp" , "resources/cat_walk_2_inverse.bmp" , "resources/cat_walk_3_inverse.bmp" , "resources/cat_walk_2_inverse.bmp"
+			}, RGB(255, 255, 255));
+		enemy_one_v[enemy_one_v.size() - 1]->SetTopLeft(400, 420);
+		enemy_one_v[enemy_one_v.size() - 1]->SetAnimation(250, 0);
+		*/
 }
 
 void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
@@ -194,5 +205,10 @@ void CGameStateRun::OnShow()
 			cat_one_friend[i]->ShowBitmap();
 		}
 	}
-	
+
+	if (enemy_one_v.size() >= 1) {
+		for (int i = 0; i < enemy_one_v.size(); i++) {
+			enemy_one_v[i]->ShowBitmap();
+		}
+	}
 }

@@ -238,7 +238,7 @@
   <ItemGroup>
     <ClCompile Include="cat_factory.cpp" />
     <ClCompile Include="cat_one.cpp" />
-    <ClCompile Include="enemy_1.cpp" />
+    <ClCompile Include="enemy_one.cpp" />
     <ClCompile Include="monster.cpp" />
     <ClCompile Include="Source\Core\game.cpp" />
     <ClCompile Include="Source\Core\gameDoc.cpp" />
@@ -259,7 +259,7 @@
   <ItemGroup>
     <ClInclude Include="cat_factory.h" />
     <ClInclude Include="cat_one.h" />
-    <ClInclude Include="enemy_1.h" />
+    <ClInclude Include="enemy_one.h" />
     <ClInclude Include="monster.h" />
     <ClInclude Include="Source\Core\Game.h" />
     <ClInclude Include="Source\Core\gameDoc.h" />

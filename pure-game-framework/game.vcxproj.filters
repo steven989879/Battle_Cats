@@ -59,7 +59,7 @@
       <Filter>GameLibrary</Filter>
     </ClCompile>
     <ClCompile Include="cat_factory.cpp" />
-    <ClCompile Include="enemy_1.cpp" />
+    <ClCompile Include="enemy_one.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Library\audio.h">
@@ -100,7 +100,7 @@
       <Filter>GameLibrary</Filter>
     </ClInclude>
     <ClInclude Include="cat_factory.h" />
-    <ClInclude Include="enemy_1.h" />
+    <ClInclude Include="enemy_one.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Source\Core\game.rc">
