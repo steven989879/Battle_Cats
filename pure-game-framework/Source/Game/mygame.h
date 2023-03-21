@@ -105,10 +105,8 @@ namespace game_framework {
 		CMovingBitmap character_tower_1;
 		CMovingBitmap character_tower_2;
 		CMovingBitmap character;
-		CMovingBitmap character_enemy;
-		CMovingBitmap character_cat_1;
-		CMovingBitmap character_cat_2;
-		CMovingBitmap character_cat_2_bump;
+		CMovingBitmap character_attack;
+		CMovingBitmap character_bump;
 		vector<cat_one*> cat_one_friend;
 		vector<cat_one*> cat_one_friend_attack;
 		vector<cat_one*> cat_one_friend_bump;
