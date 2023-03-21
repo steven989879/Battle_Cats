@@ -55,10 +55,12 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	}
 	*/
 	if (cat_one_friend.size() >= 1) {
-		if (character.GetLeft() + 60 + character.GetWidth() != cat_one_friend[cat_one_friend.size() - 1]->GetLeft() && character.GetLeft() + 60 + character.GetWidth() < cat_one_friend[cat_one_friend.size() - 1]->GetLeft()) {
-			cat_one_friend[cat_one_friend.size() - 1]->SetTopLeft(cat_one_friend[cat_one_friend.size() - 1]->GetLeft() - 1, cat_one_friend[cat_one_friend.size() - 1]->GetTop());
+		for (int i = 1; i <= cat_one_friend.size(); i++) {
+			if (character.GetLeft() + 60 + character.GetWidth() != cat_one_friend[cat_one_friend.size() - i]->GetLeft() && character.GetLeft() + 60 + character.GetWidth() < cat_one_friend[cat_one_friend.size() - i]->GetLeft()) {
+						cat_one_friend[cat_one_friend.size() - i]->SetTopLeft(cat_one_friend[cat_one_friend.size() - i]->GetLeft() - 1, cat_one_friend[cat_one_friend.size() - i]->GetTop());
+					}
+				}
 		}
-	}
 	
 }
 
