@@ -99,15 +99,23 @@ namespace game_framework {
 		int call_cat_number = 0;
 		CMovingBitmap background;
 		CMovingBitmap character_call_cat_1;
+		CMovingBitmap character_call_cat_2;
+		CMovingBitmap character_call_cat_3;
+		CMovingBitmap character_call_cat_4;
+		CMovingBitmap character_call_cat_5;
 		CMovingBitmap character_tower_1;
 		CMovingBitmap character_tower_2;
 		CMovingBitmap character;
-		CMovingBitmap character_enemy;
-		CMovingBitmap character_cat_1;
-		CMovingBitmap character_cat_2;
-		CMovingBitmap character_cat_2_bump;
+		CMovingBitmap character_attack;
+		CMovingBitmap character_bump;
 		vector<cat_one*> cat_one_friend;
+<<<<<<< HEAD
 		vector<enemy_one*> enemy_one_v;
+=======
+		vector<cat_one*> cat_one_friend_attack;
+		vector<cat_one*> cat_one_friend_bump;
+		vector<int> cat_one_friend_type;
+>>>>>>> d55ef94ff7d55386158a0970df970153883aafd9
 		//cat_one_vector cat_one_v ;
 	};
 
