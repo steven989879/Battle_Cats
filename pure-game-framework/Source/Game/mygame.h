@@ -106,6 +106,9 @@ namespace game_framework {
 		CMovingBitmap character_cat_2;
 		CMovingBitmap character_cat_2_bump;
 		vector<cat_one*> cat_one_friend;
+		vector<cat_one*> cat_one_friend_attack;
+		vector<cat_one*> cat_one_friend_bump;
+		vector<int> cat_one_friend_type;
 		//cat_one_vector cat_one_v ;
 	};
 
