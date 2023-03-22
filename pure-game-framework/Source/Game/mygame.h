@@ -96,6 +96,7 @@ namespace game_framework {
 		void OnMove();									// 移動遊戲元素
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
+		int enemy = 300;
 		int call_cat_number = 0;
 		CMovingBitmap background;
 		CMovingBitmap character_call_cat_1;
@@ -108,14 +109,15 @@ namespace game_framework {
 		CMovingBitmap character;
 		CMovingBitmap character_attack;
 		CMovingBitmap character_bump;
-		vector<cat_one*> cat_one_friend;
-<<<<<<< HEAD
 		vector<enemy_one*> enemy_one_v;
-=======
+		vector<enemy_one*> enemy_one_v_attack;
+		vector<enemy_one*> enemy_one_v_bump;
+		vector<int> enemy_one_v_type;
+		vector<cat_one*> cat_one_friend;
 		vector<cat_one*> cat_one_friend_attack;
 		vector<cat_one*> cat_one_friend_bump;
 		vector<int> cat_one_friend_type;
->>>>>>> d55ef94ff7d55386158a0970df970153883aafd9
+		vector<int> cat_one_friend_c;
 		//cat_one_vector cat_one_v ;
 	};
 

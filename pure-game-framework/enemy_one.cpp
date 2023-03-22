@@ -27,6 +27,7 @@ namespace game_framework {
 
 	enemy_one::enemy_one()
 	{
+		isBitmapLoaded = false;
 	}
 
 	enemy_one * enemy_one::create_enemy()

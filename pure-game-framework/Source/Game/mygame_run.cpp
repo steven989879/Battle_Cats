@@ -31,112 +31,127 @@ void CGameStateRun::OnBeginState()
 
 void CGameStateRun::OnMove()							// 移動遊戲元素
 {
-	if (call_cat_number > 0) {
-		character_call_cat_1.SetFrameIndexOfBitmap(1);
+	/////////////////////////////////////
+	// 設定敵對生物及貓咪移動停止參數
+	/////////////////////////////////////
+	for (int i = 0; i < cat_one_friend_c.size(); i++) {        // 清空貓咪動作次數計數
+		cat_one_friend_c[i] = 0;
 	}
-	else {
-		character_call_cat_1.SetFrameIndexOfBitmap(0);
-	}
-
-	/*
-	if (cat_one_friend[cat_one_friend.size() - 1]->GetLeft() + 60 + cat_one_friend[cat_one_friend.size() - 1]->GetWidth() != character_enemy.GetLeft() && cat_one_friend[cat_one_friend.size() - 1]->GetLeft() + 60 + cat_one_friend[cat_one_friend.size() - 1]->GetWidth() < character_enemy.GetLeft()) {
-		cat_one_friend[cat_one_friend.size() - 1]->SetTopLeft(cat_one_friend[cat_one_friend.size() - 1]->GetLeft() + 1, cat_one_friend[cat_one_friend.size() - 1]->GetTop());
-	}
-	*/
-
-	if (cat_one_friend.size() >= 1) {
-		for (int i = 0,t = 0; i < cat_one_friend.size(); i++) {
-			if (character.GetLeft() + 50 + character.GetWidth() != cat_one_friend[i]->GetLeft() && character.GetLeft() + 50 + character.GetWidth() < cat_one_friend[i]->GetLeft()) {
-				cat_one_friend[i]->SetTopLeft(cat_one_friend[i]->GetLeft() - 2, cat_one_friend[i]->GetTop());
-				if (t == 0) {
-					character.SetTopLeft(character.GetLeft() + 1, character.GetTop());
-					t = 1;
+	for (int d = 0; d < enemy_one_v.size(); d++) {
+		if (cat_one_friend.size() > 0) {
+			for (int i = 0, t = 0; i < cat_one_friend.size(); i++) {
+				if (enemy_one_v[d]->GetLeft() + 50 + enemy_one_v[d]->GetWidth() < cat_one_friend[i]->GetLeft()) {        // 設定敵對生物及貓咪移動參數
+					if (cat_one_friend_c[i] == 0) {
+						cat_one_friend[i]->SetTopLeft(cat_one_friend[i]->GetLeft() - 2, cat_one_friend[i]->GetTop());
+						cat_one_friend_c[i] = 1;
+					}
+					if (t == 0) {
+						enemy_one_v[d]->SetTopLeft(enemy_one_v[d]->GetLeft() + 1, enemy_one_v[d]->GetTop());
+						t = 1;
+					}
 				}
-			}
-			else {
-				cat_one_friend[i]->SetFrameIndexOfBitmap(1);
-				if (t == 0) {
-					character.SetFrameIndexOfBitmap(1);
-					t = 1;
+				else {        // 設定敵對生物及貓咪中止移動動畫
+					if (cat_one_friend_c[i] == 0) {
+						cat_one_friend[i]->SetFrameIndexOfBitmap(1);
+						cat_one_friend_c[i] = 1;
+					}
+					if (t == 0) {
+						enemy_one_v[d]->SetFrameIndexOfBitmap(1);
+						t = 1;
+					}
 				}
 			}
 		}
-<<<<<<< HEAD
-		// 敵對貓自動生成 待修 
-		/*
+		else if (cat_one_friend.size() == 0) {        // 設定無召喚貓時敵對生物移動參數
+			enemy_one_v[d]->SetTopLeft(enemy_one_v[d]->GetLeft() + 1, enemy_one_v[d]->GetTop());
+		}
+	}
+
+	///////////////////////
+	// 敵對生物自動生成
+	///////////////////////
+	if(enemy - 300 == 0){        // 計數達指定次數生成敵對生物
+		enemy_one_v_type.push_back(0);
+
 		enemy_one *enemy1 = new enemy_one();
 		enemy_one_v.push_back(enemy1);
 		enemy_one_v[enemy_one_v.size() - 1]->set_name(enemy_one_v.size());
 		enemy_one_v[enemy_one_v.size() - 1]->LoadBitmapByString({
-		"resources/cat_walk_1_inverse.bmp" , "resources/cat_walk_2_inverse.bmp" , "resources/cat_walk_3_inverse.bmp" , "resources/cat_walk_2_inverse.bmp"
+		"resources/dog_walk_1.bmp" , "resources/dog_walk_2.bmp" , "resources/dog_walk_3.bmp" , "resources/dog_walk_2.bmp"        // 載入敵對狗走路動畫
 			}, RGB(255, 255, 255));
-		enemy_one_v[enemy_one_v.size() - 1]->SetTopLeft(400, 420);
+		enemy_one_v[enemy_one_v.size() - 1]->SetTopLeft(285, 430);
 		enemy_one_v[enemy_one_v.size() - 1]->SetAnimation(250, 0);
-		*/
-=======
+
+		enemy_one *enemy1_attack = new enemy_one();
+		enemy_one_v_attack.push_back(enemy1_attack);
+		enemy_one_v_attack[enemy_one_v_attack.size() - 1]->set_name(enemy_one_v_attack.size());
+		enemy_one_v_attack[enemy_one_v_attack.size() - 1]->LoadBitmapByString({
+		"resources/dog_attack_1.bmp" , "resources/dog_attack_2.bmp" , "resources/dog_attack_1.bmp" ,
+		"resources/dog_attack_3.bmp" , "resources/dog_attack_3.bmp" , "resources/dog_attack_3.bmp" ,
+		"resources/dog_attack_3.bmp" , "resources/dog_attack_3.bmp" , "resources/dog_walk_2.bmp" , 
+		"resources/dog_walk_2.bmp" , "resources/dog_walk_2.bmp" , "resources/dog_walk_2.bmp" ,
+		"resources/dog_walk_2.bmp" , "resources/dog_walk_2.bmp" , "resources/dog_walk_2.bmp" , 
+		"resources/dog_walk_2.bmp" , "resources/dog_walk_2.bmp" , "resources/dog_walk_2.bmp"        // 載入敵對狗攻擊動畫
+			}, RGB(255, 255, 255));
+
+		enemy_one *enemy1_bump = new enemy_one();
+		enemy_one_v_bump.push_back(enemy1_bump);
+		enemy_one_v_bump[enemy_one_v_bump.size() - 1]->set_name(enemy_one_v_bump.size());
+		enemy_one_v_bump[enemy_one_v_bump.size() - 1]->LoadBitmapByString({
+		"resources/bump_0.bmp" , "resources/bump_0.bmp" , "resources/bump_0.bmp" , 
+		"resources/bump_1_inverse.bmp" , "resources/bump_2_inverse.bmp" , "resources/bump_3_inverse.bmp" ,
+		"resources/bump_4_inverse.bmp" , "resources/bump_5_inverse.bmp" , "resources/bump_0.bmp" , 
+		"resources/bump_0.bmp" , "resources/bump_0.bmp" , "resources/bump_0.bmp" ,
+		"resources/bump_0.bmp" , "resources/bump_0.bmp" , "resources/bump_0.bmp" , 
+		"resources/bump_0.bmp" , "resources/bump_0.bmp" , "resources/bump_0.bmp"        // 載入敵對狗攻擊爆炸動畫
+			}, RGB(255, 255, 255));
+
+		enemy = 0;        // 計數歸零
 	}
->>>>>>> d55ef94ff7d55386158a0970df970153883aafd9
+	enemy += 1;        // 時間計數每秒+30
 }
 
 void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 {
 	background.LoadBitmapByString({
-		"resources/game_background_1.bmp",
+		"resources/game_background_1.bmp",        // 載入關卡背景
 		});
 	background.SetTopLeft(0, 0);
 
 	character_call_cat_1.LoadBitmapByString({
-		"resources/call_cat_2.bmp" , "resources/call_cat_1.bmp" ,
+		"resources/call_cat_2.bmp" , "resources/call_cat_1.bmp"        // 載入招喚貓咪1按鈕
 		}, RGB(255, 255, 255));
 	character_call_cat_1.SetTopLeft(470, 680);
 
 	character_call_cat_2.LoadBitmapByString({
-		"resources/call_cat_empty.bmp" , 
+		"resources/call_cat_empty.bmp"        // 載入召喚貓咪2(空)按鈕
 		}, RGB(255, 255, 255));
 	character_call_cat_2.SetTopLeft(625, 680);
 
 	character_call_cat_3.LoadBitmapByString({
-		"resources/call_cat_empty.bmp" ,
+		"resources/call_cat_empty.bmp"        // 載入召喚貓咪3(空)按鈕
 		}, RGB(255, 255, 255));
 	character_call_cat_3.SetTopLeft(780, 680);
 
 	character_call_cat_4.LoadBitmapByString({
-		"resources/call_cat_empty.bmp" ,
+		"resources/call_cat_empty.bmp"        // 載入召喚貓咪4(空)按鈕
 		}, RGB(255, 255, 255));
 	character_call_cat_4.SetTopLeft(935, 680);
 
 	character_call_cat_5.LoadBitmapByString({
-		"resources/call_cat_empty.bmp" ,
+		"resources/call_cat_empty.bmp"        // 載入召喚貓咪5(空)按鈕
 		}, RGB(255, 255, 255));
 	character_call_cat_5.SetTopLeft(1090, 680);
 
 	character_tower_1.LoadBitmapByString({
-		"resources/tower_1.bmp" ,
+		"resources/tower_1.bmp"        // 載入己方防禦塔
 		}, RGB(255, 255, 255));
 	character_tower_1.SetTopLeft(1400, 175);
 
 	character_tower_2.LoadBitmapByString({
-		"resources/tower_2.bmp" ,
+		"resources/tower_2.bmp"        // 載入敵方防禦塔
 		}, RGB(255, 255, 255));
 	character_tower_2.SetTopLeft(100, 163);
-
-	character.LoadBitmapByString({
-		"resources/dog_walk_1.bmp" , "resources/dog_walk_2.bmp" , "resources/dog_walk_3.bmp" ,"resources/dog_walk_2.bmp" 
-		}, RGB(255, 255, 255));
-	character.SetTopLeft(285, 430);
-	character.SetAnimation(250, 0);
-
-	character_attack.LoadBitmapByString({
-		"resources/dog_attack_1.bmp" , "resources/dog_attack_2.bmp" , "resources/dog_attack_1.bmp" , "resources/dog_attack_3.bmp" , "resources/dog_attack_3.bmp" , "resources/dog_attack_3.bmp" ,
-		"resources/dog_attack_3.bmp" , "resources/dog_attack_3.bmp" , "resources/dog_walk_2.bmp" , "resources/dog_walk_2.bmp" , "resources/dog_walk_2.bmp" , "resources/dog_walk_2.bmp" ,
-		"resources/dog_walk_2.bmp" , "resources/dog_walk_2.bmp" , "resources/dog_walk_2.bmp" , "resources/dog_walk_2.bmp" , "resources/dog_walk_2.bmp" , "resources/dog_walk_2.bmp" , 
-		}, RGB(255, 255, 255));
-
-	character_bump.LoadBitmapByString({
-		"resources/bump_0.bmp" , "resources/bump_0.bmp" , "resources/bump_0.bmp" , "resources/bump_1_inverse.bmp" , "resources/bump_2_inverse.bmp" , "resources/bump_3_inverse.bmp" ,
-		"resources/bump_4_inverse.bmp" , "resources/bump_5_inverse.bmp" , "resources/bump_0.bmp" , "resources/bump_0.bmp" , "resources/bump_0.bmp" , "resources/bump_0.bmp" ,
-		"resources/bump_0.bmp" , "resources/bump_0.bmp" , "resources/bump_0.bmp" , "resources/bump_0.bmp" , "resources/bump_0.bmp" , "resources/bump_0.bmp" ,
-		}, RGB(255, 255, 255));
 }
 
 void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
@@ -150,15 +165,19 @@ void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 }
 
 void CGameStateRun::OnLButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的動作
-{
+{	
+	///////////////////////////////////
+	// 藉由點擊次數生成相應數量貓咪
+	///////////////////////////////////
 	if (point.x >= 470 && point.x <= 614 && point.y >= 680 && point.y <= 789) {
-		cat_one_friend_type.push_back(0);
+		cat_one_friend_type.push_back(0);        //紀錄貓咪當前動作狀態
+		cat_one_friend_c.push_back(0);        //紀錄貓咪動作執行次數
 
 		cat_one *temp1 = new cat_one();
 		cat_one_friend.push_back(temp1);
 		cat_one_friend[cat_one_friend.size() - 1]->set_name(cat_one_friend.size());
 		cat_one_friend[cat_one_friend.size() - 1]->LoadBitmapByString({
-		"resources/cat_walk_1.bmp" , "resources/cat_walk_2.bmp" , "resources/cat_walk_3.bmp" , "resources/cat_walk_2.bmp"
+		"resources/cat_walk_1.bmp" , "resources/cat_walk_2.bmp" , "resources/cat_walk_3.bmp" , "resources/cat_walk_2.bmp"        // 載入貓咪1走路動畫
 			}, RGB(255, 255, 255));
 		cat_one_friend[cat_one_friend.size() - 1]->SetTopLeft(1300, 430);
 		cat_one_friend[cat_one_friend.size() - 1]->SetAnimation(125, 0);
@@ -167,20 +186,21 @@ void CGameStateRun::OnLButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的
 		cat_one_friend_attack.push_back(attack1);
 		cat_one_friend_attack[cat_one_friend_attack.size() - 1]->set_name(cat_one_friend_attack.size());
 		cat_one_friend_attack[cat_one_friend_attack.size() - 1]->LoadBitmapByString({
-		"resources/cat_attack_1.bmp" , "resources/cat_attack_2.bmp" , "resources/cat_attack_1.bmp" , "resources/cat_attack_3.bmp" , "resources/cat_attack_3.bmp" , "resources/cat_attack_3.bmp" ,
-		"resources/cat_attack_3.bmp" , "resources/cat_attack_3.bmp" , "resources/cat_walk_2.bmp" , "resources/cat_walk_2.bmp" , "resources/cat_walk_2.bmp" , "resources/cat_walk_2.bmp" ,
+		"resources/cat_attack_1.bmp" , "resources/cat_attack_2.bmp" , "resources/cat_attack_1.bmp" ,
+		"resources/cat_attack_3.bmp" , "resources/cat_attack_3.bmp" , "resources/cat_attack_3.bmp" ,
+		"resources/cat_attack_3.bmp" , "resources/cat_attack_3.bmp" , "resources/cat_walk_2.bmp" ,
+		"resources/cat_walk_2.bmp" , "resources/cat_walk_2.bmp" , "resources/cat_walk_2.bmp"        // 載入貓咪1攻擊動畫
 			}, RGB(255, 255, 255));
 
 		cat_one *bump1 = new cat_one();
 		cat_one_friend_bump.push_back(bump1);
 		cat_one_friend_bump[cat_one_friend_bump.size() - 1]->set_name(cat_one_friend_bump.size());
 		cat_one_friend_bump[cat_one_friend_bump.size() - 1]->LoadBitmapByString({
-		"resources/bump_0.bmp" , "resources/bump_0.bmp" , "resources/bump_0.bmp" , "resources/bump_1.bmp" , "resources/bump_2.bmp" , "resources/bump_3.bmp" ,
-		"resources/bump_4.bmp" , "resources/bump_5.bmp" , "resources/bump_0.bmp" , "resources/bump_0.bmp" , "resources/bump_0.bmp" , "resources/bump_0.bmp" ,
+		"resources/bump_0.bmp" , "resources/bump_0.bmp" , "resources/bump_0.bmp" ,
+		"resources/bump_1.bmp" , "resources/bump_2.bmp" , "resources/bump_3.bmp" ,
+		"resources/bump_4.bmp" , "resources/bump_5.bmp" , "resources/bump_0.bmp" ,
+		"resources/bump_0.bmp" , "resources/bump_0.bmp" , "resources/bump_0.bmp"        // 載入貓咪1攻擊爆炸動畫
 			}, RGB(255, 255, 255));
-	}
-	if (point.x >= 470 && point.x <= 614 && point.y >= 680 && point.y <= 789) {
-		call_cat_number += 1;
 	}
 }
 
@@ -202,65 +222,73 @@ void CGameStateRun::OnRButtonUp(UINT nFlags, CPoint point)	// 處理滑鼠的動
 
 void CGameStateRun::OnShow()
 {	
-	background.ShowBitmap();
-	character_call_cat_1.ShowBitmap();
-	character_call_cat_2.ShowBitmap();
-	character_call_cat_3.ShowBitmap();
-	character_call_cat_4.ShowBitmap();
-	character_call_cat_5.ShowBitmap();
-	character_tower_1.ShowBitmap();
-	character_tower_2.ShowBitmap();
-	int j = 0;
-	if (cat_one_friend.size() >= 1) {
-		for (int i = 0,t = 0; i < cat_one_friend.size(); i++) {
-			if (character.GetLeft() + 50 + character.GetWidth() != cat_one_friend[i]->GetLeft() && character.GetLeft() + 50 + character.GetWidth() < cat_one_friend[i]->GetLeft()) {
-				if (cat_one_friend_type[i] == 1) {
-					cat_one_friend[i]->SetTopLeft(cat_one_friend_attack[i]->GetLeft(), cat_one_friend_attack[i]->GetTop());
-					cat_one_friend[i]->SetAnimation(125, 0);
-					cat_one_friend_type[i] = 0;
-				}
-				if (t == 0) {
-					if (j == 1) {
-						character.SetTopLeft(character_attack.GetLeft(), character_attack.GetTop());
-						j = 0;
+	background.ShowBitmap();        // 顯示關卡背景
+	character_call_cat_1.ShowBitmap();        // 顯示招喚貓咪1按鈕
+	character_call_cat_2.ShowBitmap();        // 顯示召喚貓咪2(空)按鈕
+	character_call_cat_3.ShowBitmap();        // 顯示召喚貓咪3(空)按鈕
+	character_call_cat_4.ShowBitmap();        // 顯示召喚貓咪4(空)按鈕
+	character_call_cat_5.ShowBitmap();        // 顯示召喚貓咪5(空)按鈕
+	character_tower_1.ShowBitmap();        // 顯示己方防禦塔
+	character_tower_2.ShowBitmap();        // 顯示敵方防禦塔
+	///////////////////////////////////////////
+	// 顯示敵對生物及貓咪所有動畫、動畫切換
+	///////////////////////////////////////////
+	for (int i = 0; i < cat_one_friend_c.size(); i++) {        // 清空貓咪動作次數計數
+		cat_one_friend_c[i] = 0;
+	}
+	for (int d = 0; d < enemy_one_v.size(); d++) {
+		if (cat_one_friend.size() > 0) {
+			for (int i = 0, t = 0; i < cat_one_friend.size(); i++) {
+				if (enemy_one_v[d]->GetLeft() + 50 + enemy_one_v[d]->GetWidth() < cat_one_friend[i]->GetLeft()) {
+					if (cat_one_friend_c[i] == 0) {
+						if (cat_one_friend_type[i] == 1) {        // 設定貓咪由攻擊狀態切成走路動畫及位置
+							cat_one_friend[i]->SetTopLeft(cat_one_friend_attack[i]->GetLeft(), cat_one_friend_attack[i]->GetTop());
+							cat_one_friend[i]->SetAnimation(125, 0);
+							cat_one_friend_type[i] = 0;
+						}
+						cat_one_friend[i]->ShowBitmap();        // 顯示貓咪走路動畫
+						cat_one_friend_c[i] = 1;
 					}
-					character.ShowBitmap();
-					t = 1;
-				}
-				cat_one_friend[i]->ShowBitmap();
-			}
-			else {
-				if (cat_one_friend_type[i] == 0) {
-					cat_one_friend_attack[i]->SetTopLeft(cat_one_friend[i]->GetLeft(), cat_one_friend[i]->GetTop());
-					cat_one_friend_attack[i]->SetAnimation(100, 0);
-					cat_one_friend_bump[i]->SetTopLeft(cat_one_friend[i]->GetLeft() - 150, cat_one_friend[i]->GetTop() - 25);
-					cat_one_friend_bump[i]->SetAnimation(100, 0);
-					cat_one_friend_type[i] = 1;
-				}
-				cat_one_friend_attack[i]->ShowBitmap();
-				if (t == 0) {
-					if (j == 0) {
-						character_attack.SetTopLeft(character.GetLeft(), character.GetTop());
-						character_attack.SetAnimation(150, 0);
-						character_bump.SetTopLeft(character.GetLeft() + 100, character.GetTop() - 25);
-						character_bump.SetAnimation(150, 0);
-						j = 1;
+					if (t == 0) {
+						if (enemy_one_v_type[d] == 1) {        // 設定敵對生物由攻擊狀態切成走路動畫及位置
+							enemy_one_v[d]->SetTopLeft(enemy_one_v_attack[d]->GetLeft(), enemy_one_v_attack[d]->GetTop());
+							enemy_one_v[d]->SetAnimation(250, 0);
+							enemy_one_v_type[d] = 0;
+						}
+						enemy_one_v[d]->ShowBitmap();        // 顯示敵對生物走路動畫
+						t = 1;
 					}
-					character_attack.ShowBitmap();
-					t = 1;
 				}
-				character_bump.ShowBitmap();
-				cat_one_friend_bump[i]->ShowBitmap();
+				else {
+					if (cat_one_friend_c[i] == 0) {
+						if (cat_one_friend_type[i] == 0) {        // 設定貓咪由走路狀態切成攻擊動畫及位置
+							cat_one_friend_attack[i]->SetTopLeft(cat_one_friend[i]->GetLeft(), cat_one_friend[i]->GetTop());
+							cat_one_friend_attack[i]->SetAnimation(100, 0);
+							cat_one_friend_bump[i]->SetTopLeft(cat_one_friend[i]->GetLeft() - 150, cat_one_friend[i]->GetTop() - 25);
+							cat_one_friend_bump[i]->SetAnimation(100, 0);
+							cat_one_friend_type[i] = 1;
+						}
+						cat_one_friend_c[i] = 1;
+					}
+					cat_one_friend_attack[i]->ShowBitmap();        // 顯示貓咪攻擊動畫
+					if (t == 0) {
+						if (enemy_one_v_type[d] == 0) {        // 設定敵對生物由走路狀態切成攻擊動畫及位置
+							enemy_one_v_attack[d]->SetTopLeft(enemy_one_v[d]->GetLeft(), enemy_one_v[d]->GetTop());
+							enemy_one_v_attack[d]->SetAnimation(150, 0);
+							enemy_one_v_bump[d]->SetTopLeft(enemy_one_v[d]->GetLeft() + 100, enemy_one_v[d]->GetTop() - 25);
+							enemy_one_v_bump[d]->SetAnimation(150, 0);
+							enemy_one_v_type[d] = 1;
+						}
+						enemy_one_v_attack[d]->ShowBitmap();      // 顯示敵對生物攻擊動畫
+						t = 1;
+					}
+					enemy_one_v_bump[d]->ShowBitmap();        //顯示敵對生物及貓咪攻擊爆炸動畫
+					cat_one_friend_bump[i]->ShowBitmap();
+				}
 			}
 		}
-	}
-<<<<<<< HEAD
-
-	if (enemy_one_v.size() >= 1) {
-		for (int i = 0; i < enemy_one_v.size(); i++) {
-			enemy_one_v[i]->ShowBitmap();
+		else if (cat_one_friend.size() == 0) {        // 顯示無召喚貓時敵對生物走路動畫
+			enemy_one_v[d]->ShowBitmap();
 		}
 	}
-=======
->>>>>>> d55ef94ff7d55386158a0970df970153883aafd9
 }
