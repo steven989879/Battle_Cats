@@ -10,6 +10,7 @@
 #include "../../cat_one.h"
 #include "../../cat_factory.h"
 #include "../../enemy_one.h"
+#include <string>
 
 using namespace game_framework;
 
@@ -66,6 +67,10 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 			enemy_one_v[d]->SetTopLeft(enemy_one_v[d]->GetLeft() + 1, enemy_one_v[d]->GetTop());
 		}
 	}
+
+	// 錢
+	money += 1;
+	money_30 = money / 30;
 
 	///////////////////////
 	// 敵對生物自動生成
@@ -152,6 +157,9 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 		"resources/tower_2.bmp"        // 載入敵方防禦塔
 		}, RGB(255, 255, 255));
 	character_tower_2.SetTopLeft(100, 163);
+
+	base = cat_one();
+	base.price = 8;
 }
 
 void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
@@ -169,7 +177,12 @@ void CGameStateRun::OnLButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的
 	///////////////////////////////////
 	// 藉由點擊次數生成相應數量貓咪
 	///////////////////////////////////
-	if (point.x >= 470 && point.x <= 614 && point.y >= 680 && point.y <= 789) {
+	if (point.x >= 470 && point.x <= 614 && point.y >= 680 && point.y <= 789 && money_30 >= base.get_price()) {
+		money_30 = money_30 - base.get_price();
+		money = money - (base.get_price() * 30);
+		s = std::to_string(money_30);
+		draw_text();
+
 		cat_one_friend_type.push_back(0);        //紀錄貓咪當前動作狀態
 		cat_one_friend_c.push_back(0);        //紀錄貓咪動作執行次數
 
@@ -223,6 +236,7 @@ void CGameStateRun::OnRButtonUp(UINT nFlags, CPoint point)	// 處理滑鼠的動
 void CGameStateRun::OnShow()
 {	
 	background.ShowBitmap();        // 顯示關卡背景
+	draw_text();
 	character_call_cat_1.ShowBitmap();        // 顯示招喚貓咪1按鈕
 	character_call_cat_2.ShowBitmap();        // 顯示召喚貓咪2(空)按鈕
 	character_call_cat_3.ShowBitmap();        // 顯示召喚貓咪3(空)按鈕
@@ -291,4 +305,18 @@ void CGameStateRun::OnShow()
 			enemy_one_v[d]->ShowBitmap();
 		}
 	}
+}
+
+void CGameStateRun::draw_text() {
+	CDC *pDC = CDDraw::GetBackCDC();
+	//CFont* fp;
+	s = std::to_string(money_30);
+	std::string  print = s + "/ 100";
+	CTextDraw::ChangeFontLog(pDC, 20, "微軟正黑體", RGB(0, 0, 0));
+	CTextDraw::Print(pDC, 1300, 150, print);
+
+
+
+	CDDraw::ReleaseBackCDC();
+
 }

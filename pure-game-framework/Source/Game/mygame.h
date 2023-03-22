@@ -97,7 +97,10 @@ namespace game_framework {
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
 		int enemy = 300;
-		int call_cat_number = 0;
+		void draw_text();
+		int times = 0;
+		int money = 0;
+		int money_30 = 0;
 		CMovingBitmap background;
 		CMovingBitmap character_call_cat_1;
 		CMovingBitmap character_call_cat_2;
@@ -118,7 +121,8 @@ namespace game_framework {
 		vector<cat_one*> cat_one_friend_bump;
 		vector<int> cat_one_friend_type;
 		vector<int> cat_one_friend_c;
-		//cat_one_vector cat_one_v ;
+		cat_one base;
+		std::string s;
 	};
 
 	/////////////////////////////////////////////////////////////////////////////

@@ -27,7 +27,6 @@ namespace game_framework {
 	{
 		isBitmapLoaded = false;
 	}
-
 	int monster::get_price() 
 	{
 		return price ; 
@@ -62,7 +61,6 @@ namespace game_framework {
 	{
 		name = i;
 	}
-
 
 
 }
