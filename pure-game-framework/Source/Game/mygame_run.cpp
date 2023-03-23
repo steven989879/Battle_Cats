@@ -69,13 +69,13 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	}
 
 	// 錢
-	money += 1;
+	money += 6;
 	money_30 = money / 30;
 
 	///////////////////////
 	// 敵對生物自動生成
 	///////////////////////
-	if(enemy - 300 == 0){        // 計數達指定次數生成敵對生物
+	if(enemy - 300 >= 0){        // 計數達指定次數生成敵對生物
 		enemy_one_v_type.push_back(0);
 
 		enemy_one *enemy1 = new enemy_one();
@@ -127,6 +127,7 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 		"resources/call_cat_2.bmp" , "resources/call_cat_1.bmp"        // 載入招喚貓咪1按鈕
 		}, RGB(255, 255, 255));
 	character_call_cat_1.SetTopLeft(470, 680);
+	character_call_cat_1.SetFrameIndexOfBitmap(1);
 
 	character_call_cat_2.LoadBitmapByString({
 		"resources/call_cat_empty.bmp"        // 載入召喚貓咪2(空)按鈕
@@ -159,7 +160,7 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	character_tower_2.SetTopLeft(100, 163);
 
 	base = cat_one();
-	base.price = 8;
+	base.price = 50;
 }
 
 void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
@@ -180,8 +181,9 @@ void CGameStateRun::OnLButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的
 	if (point.x >= 470 && point.x <= 614 && point.y >= 680 && point.y <= 789 && money_30 >= base.get_price()) {
 		money_30 = money_30 - base.get_price();
 		money = money - (base.get_price() * 30);
-		s = std::to_string(money_30);
-		draw_text();
+		//s = std::to_string(money_30);
+		//draw_text();
+		character_call_cat_1.SetFrameIndexOfBitmap(1);
 
 		cat_one_friend_type.push_back(0);        //紀錄貓咪當前動作狀態
 		cat_one_friend_c.push_back(0);        //紀錄貓咪動作執行次數
@@ -237,6 +239,9 @@ void CGameStateRun::OnShow()
 {	
 	background.ShowBitmap();        // 顯示關卡背景
 	draw_text();
+	if (money_30 >= base.get_price()) {
+		character_call_cat_1.SetFrameIndexOfBitmap(0);
+	}
 	character_call_cat_1.ShowBitmap();        // 顯示招喚貓咪1按鈕
 	character_call_cat_2.ShowBitmap();        // 顯示召喚貓咪2(空)按鈕
 	character_call_cat_3.ShowBitmap();        // 顯示召喚貓咪3(空)按鈕
@@ -308,12 +313,19 @@ void CGameStateRun::OnShow()
 }
 
 void CGameStateRun::draw_text() {
+	int Px = 1400;
 	CDC *pDC = CDDraw::GetBackCDC();
 	//CFont* fp;
 	s = std::to_string(money_30);
-	std::string  print = s + "/ 100";
-	CTextDraw::ChangeFontLog(pDC, 20, "微軟正黑體", RGB(0, 0, 0));
-	CTextDraw::Print(pDC, 1300, 150, print);
+	std::string  print = s + "/100";
+	CTextDraw::ChangeFontLog(pDC, 36, "微軟正黑體", RGB(255, 200, 0), 1500);
+	if (money_30 > 9) {
+		Px -= 30;
+		if (money_30 > 99) {
+			Px -= 30;
+		}
+	}
+	CTextDraw::Print(pDC, Px, 20, print);
 
 
 
