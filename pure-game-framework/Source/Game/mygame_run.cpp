@@ -63,14 +63,19 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 				}
 			}
 		}
-		else if (cat_one_friend.size() == 0) {        // 設定無召喚貓時敵對生物移動參數
+		else if (cat_one_friend.size() == 0 && enemy_one_v[d]->GetLeft() + 50 + enemy_one_v[d]->GetWidth() < character_tower_1.GetLeft()) {        // 設定無召喚貓時敵對生物移動參數
 			enemy_one_v[d]->SetTopLeft(enemy_one_v[d]->GetLeft() + 1, enemy_one_v[d]->GetTop());
 		}
 	}
 
 	// 錢
-	money += 6;
+	if (money_30 < max_money_30) {
+		money += 7;
+	}
 	money_30 = money / 30;
+	if (money_30 >= base.get_price()) {
+		character_call_cat_1.SetFrameIndexOfBitmap(0);
+	}
 
 	///////////////////////
 	// 敵對生物自動生成
@@ -86,6 +91,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 			}, RGB(255, 255, 255));
 		enemy_one_v[enemy_one_v.size() - 1]->SetTopLeft(285, 430);
 		enemy_one_v[enemy_one_v.size() - 1]->SetAnimation(250, 0);
+
 
 		enemy_one *enemy1_attack = new enemy_one();
 		enemy_one_v_attack.push_back(enemy1_attack);
@@ -119,9 +125,14 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 {
 	background.LoadBitmapByString({
-		"resources/game_background_1.bmp",        // 載入關卡背景
+		"resources/game_background_1.bmp"        // 載入關卡背景
 		});
 	background.SetTopLeft(0, 0);
+
+	money_map.LoadBitmapByString({
+		"resources/money.bmp"
+		}, RGB(255, 255, 255));
+	money_map.SetTopLeft(1540, 25);
 
 	character_call_cat_1.LoadBitmapByString({
 		"resources/call_cat_2.bmp" , "resources/call_cat_1.bmp"        // 載入招喚貓咪1按鈕
@@ -181,8 +192,6 @@ void CGameStateRun::OnLButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的
 	if (point.x >= 470 && point.x <= 614 && point.y >= 680 && point.y <= 789 && money_30 >= base.get_price()) {
 		money_30 = money_30 - base.get_price();
 		money = money - (base.get_price() * 30);
-		//s = std::to_string(money_30);
-		//draw_text();
 		character_call_cat_1.SetFrameIndexOfBitmap(1);
 
 		cat_one_friend_type.push_back(0);        //紀錄貓咪當前動作狀態
@@ -238,10 +247,8 @@ void CGameStateRun::OnRButtonUp(UINT nFlags, CPoint point)	// 處理滑鼠的動
 void CGameStateRun::OnShow()
 {	
 	background.ShowBitmap();        // 顯示關卡背景
+	money_map.ShowBitmap();
 	draw_text();
-	if (money_30 >= base.get_price()) {
-		character_call_cat_1.SetFrameIndexOfBitmap(0);
-	}
 	character_call_cat_1.ShowBitmap();        // 顯示招喚貓咪1按鈕
 	character_call_cat_2.ShowBitmap();        // 顯示召喚貓咪2(空)按鈕
 	character_call_cat_3.ShowBitmap();        // 顯示召喚貓咪3(空)按鈕
@@ -307,28 +314,44 @@ void CGameStateRun::OnShow()
 			}
 		}
 		else if (cat_one_friend.size() == 0) {        // 顯示無召喚貓時敵對生物走路動畫
-			enemy_one_v[d]->ShowBitmap();
+			if (enemy_one_v[d]->GetLeft() + 50 + enemy_one_v[d]->GetWidth() < character_tower_1.GetLeft()) {
+				enemy_one_v[d]->ShowBitmap();
+				if (enemy_one_v_type[d] == 1) {
+					enemy_one_v[d]->SetTopLeft(enemy_one_v_attack[d]->GetLeft(), enemy_one_v_attack[d]->GetTop());
+					enemy_one_v[d]->SetAnimation(250, 0);
+					enemy_one_v_type[d] = 0;
+				}
+				enemy_one_v[d]->ShowBitmap();
+			}
+			else {
+				if (enemy_one_v_type[d] == 0) {
+					enemy_one_v_attack[d]->SetTopLeft(enemy_one_v[d]->GetLeft(), enemy_one_v[d]->GetTop());
+					enemy_one_v_attack[d]->SetAnimation(150, 0);
+					enemy_one_v_bump[d]->SetTopLeft(enemy_one_v[d]->GetLeft() + 100, enemy_one_v[d]->GetTop() - 25);
+					enemy_one_v_bump[d]->SetAnimation(150, 0);
+					enemy_one_v_type[d] = 1;
+				}
+				enemy_one_v_attack[d]->ShowBitmap();
+				enemy_one_v_bump[d]->ShowBitmap();
+			}
 		}
 	}
 }
 
 void CGameStateRun::draw_text() {
-	int Px = 1400;
+	int Px = 1345;
 	CDC *pDC = CDDraw::GetBackCDC();
 	//CFont* fp;
 	s = std::to_string(money_30);
 	std::string  print = s + "/100";
-	CTextDraw::ChangeFontLog(pDC, 36, "微軟正黑體", RGB(255, 200, 0), 1500);
+	CTextDraw::ChangeFontLog(pDC, 32, "Arial Black", RGB(255, 200, 0), 900);
 	if (money_30 > 9) {
-		Px -= 30;
+		Px -= 43;
 		if (money_30 > 99) {
-			Px -= 30;
+			Px -= 43;
 		}
 	}
-	CTextDraw::Print(pDC, Px, 20, print);
-
-
+	CTextDraw::Print(pDC, Px, 0, print);
 
 	CDDraw::ReleaseBackCDC();
-
 }

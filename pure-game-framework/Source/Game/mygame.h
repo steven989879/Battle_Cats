@@ -96,12 +96,14 @@ namespace game_framework {
 		void OnMove();									// 移動遊戲元素
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
-		int enemy = 300;
+		int enemy = 150;
 		void draw_text();
 		int times = 0;
 		int money = 0;
 		int money_30 = 0;
+		int max_money_30 = 100;
 		CMovingBitmap background;
+		CMovingBitmap money_map;
 		CMovingBitmap character_call_cat_1;
 		CMovingBitmap character_call_cat_2;
 		CMovingBitmap character_call_cat_3;

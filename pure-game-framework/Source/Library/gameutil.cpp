@@ -421,6 +421,7 @@ namespace game_framework {
 		memset(&lf, 0, sizeof(lf));
 		lf.lfHeight = -MulDiv(size, GetDeviceCaps(pDC->GetSafeHdc(), LOGPIXELSY), 96);
 		lf.lfWeight = weight;
+		//lf.lfStrikeOut = true;
 		strcpy(lf.lfFaceName, fontName.c_str());
 		f.CreateFontIndirect(&lf);
 		fp = pDC->SelectObject(&f);
