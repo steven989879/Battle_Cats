@@ -109,6 +109,7 @@ namespace game_framework {
 		CMovingBitmap character_call_cat_3;
 		CMovingBitmap character_call_cat_4;
 		CMovingBitmap character_call_cat_5;
+		CMovingBitmap cat_1_cool;
 		CMovingBitmap character_tower_1;
 		CMovingBitmap character_tower_2;
 		CMovingBitmap character;

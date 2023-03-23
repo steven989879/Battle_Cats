@@ -70,10 +70,10 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 
 	// 錢
 	if (money_30 < max_money_30) {
-		money += 7;
+		money += 6;
 	}
 	money_30 = money / 30;
-	if (money_30 >= base.get_price()) {
+	if (money_30 >= base.get_price() && cat_1_cool.GetFrameIndexOfBitmap() == 24) {
 		character_call_cat_1.SetFrameIndexOfBitmap(0);
 	}
 
@@ -135,7 +135,7 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	money_map.SetTopLeft(1540, 25);
 
 	character_call_cat_1.LoadBitmapByString({
-		"resources/call_cat_2.bmp" , "resources/call_cat_1.bmp"        // 載入招喚貓咪1按鈕
+		"resources/call_cat_2.bmp" , "resources/call_cat_1.bmp" , "resources/call_cat_load.bmp"        // 載入招喚貓咪1按鈕
 		}, RGB(255, 255, 255));
 	character_call_cat_1.SetTopLeft(470, 680);
 	character_call_cat_1.SetFrameIndexOfBitmap(1);
@@ -160,6 +160,20 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 		}, RGB(255, 255, 255));
 	character_call_cat_5.SetTopLeft(1090, 680);
 
+	cat_1_cool.LoadBitmapByString({
+		"resources/load_1.bmp" , "resources/load_2.bmp" , "resources/load_3.bmp" ,
+		"resources/load_4.bmp" , "resources/load_5.bmp" , "resources/load_6.bmp" ,
+		"resources/load_7.bmp" , "resources/load_8.bmp" , "resources/load_9.bmp" ,
+		"resources/load_10.bmp" , "resources/load_11.bmp" , "resources/load_12.bmp" ,
+		"resources/load_13.bmp" , "resources/load_14.bmp" , "resources/load_15.bmp" ,
+		"resources/load_16.bmp" , "resources/load_17.bmp" , "resources/load_18.bmp" ,
+		"resources/load_19.bmp" , "resources/load_20.bmp" , "resources/load_21.bmp" ,
+		"resources/load_22.bmp" , "resources/load_23.bmp" , "resources/load_24.bmp" ,
+		"resources/load_25.bmp"
+		}, RGB(255, 255, 255));
+	cat_1_cool.SetTopLeft(477, 757);
+	cat_1_cool.SetFrameIndexOfBitmap(24);
+	
 	character_tower_1.LoadBitmapByString({
 		"resources/tower_1.bmp"        // 載入己方防禦塔
 		}, RGB(255, 255, 255));
@@ -189,10 +203,12 @@ void CGameStateRun::OnLButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的
 	///////////////////////////////////
 	// 藉由點擊次數生成相應數量貓咪
 	///////////////////////////////////
-	if (point.x >= 470 && point.x <= 614 && point.y >= 680 && point.y <= 789 && money_30 >= base.get_price()) {
+	if (point.x >= 470 && point.x <= 614 && point.y >= 680 && point.y <= 789 && money_30 >= base.get_price() && cat_1_cool.GetFrameIndexOfBitmap() == 24) {
 		money_30 = money_30 - base.get_price();
 		money = money - (base.get_price() * 30);
-		character_call_cat_1.SetFrameIndexOfBitmap(1);
+		character_call_cat_1.SetFrameIndexOfBitmap(2);
+		cat_1_cool.SetFrameIndexOfBitmap(0);
+		cat_1_cool.SetAnimation(250, 0);
 
 		cat_one_friend_type.push_back(0);        //紀錄貓咪當前動作狀態
 		cat_one_friend_c.push_back(0);        //紀錄貓咪動作執行次數
@@ -249,7 +265,17 @@ void CGameStateRun::OnShow()
 	background.ShowBitmap();        // 顯示關卡背景
 	money_map.ShowBitmap();
 	draw_text();
-	character_call_cat_1.ShowBitmap();        // 顯示招喚貓咪1按鈕
+	if (cat_1_cool.GetFrameIndexOfBitmap() > 23) {        // 顯示招喚貓咪1按鈕與冷卻
+		if (money_30 < base.get_price()) {
+			character_call_cat_1.SetFrameIndexOfBitmap(1);
+		}
+		character_call_cat_1.ShowBitmap();
+		cat_1_cool.SetFrameIndexOfBitmap(24);
+	}
+	else {
+		character_call_cat_1.ShowBitmap();
+		cat_1_cool.ShowBitmap();
+	}
 	character_call_cat_2.ShowBitmap();        // 顯示召喚貓咪2(空)按鈕
 	character_call_cat_3.ShowBitmap();        // 顯示召喚貓咪3(空)按鈕
 	character_call_cat_4.ShowBitmap();        // 顯示召喚貓咪4(空)按鈕
