@@ -343,7 +343,28 @@ void CGameStateRun::draw_text() {
 	CDC *pDC = CDDraw::GetBackCDC();
 	//CFont* fp;
 	s = std::to_string(money_30);
+	int move = 0;
 	std::string  print = s + "/100";
+
+	std::string  print_1 = s + "/100";
+
+	CTextDraw::ChangeFontLog(pDC, 32, "Arial Black", RGB(0, 0, 0), 1300);
+	Px -= 30 ;
+	if (money_30 > 9) {
+		Px -= 43;
+		move = 1;
+		if (money_30 > 99) {
+			Px -= 43;
+			move = 2;
+		}
+	}
+	CTextDraw::Print(pDC, Px, 0, print_1);
+	if (move == 2) {
+		Px += 86;
+	}
+	else if(move == 1){
+		Px += 43;
+	}
 	CTextDraw::ChangeFontLog(pDC, 32, "Arial Black", RGB(255, 200, 0), 900);
 	if (money_30 > 9) {
 		Px -= 43;
@@ -351,6 +372,8 @@ void CGameStateRun::draw_text() {
 			Px -= 43;
 		}
 	}
+
+
 	CTextDraw::Print(pDC, Px, 0, print);
 
 	CDDraw::ReleaseBackCDC();
