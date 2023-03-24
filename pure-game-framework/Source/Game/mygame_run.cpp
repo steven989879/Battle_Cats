@@ -132,7 +132,7 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	money_map.LoadBitmapByString({
 		"resources/money.bmp"
 		}, RGB(255, 255, 255));
-	money_map.SetTopLeft(1540, 25);
+	money_map.SetTopLeft(1540, 15);
 
 	character_call_cat_1.LoadBitmapByString({
 		"resources/call_cat_2.bmp" , "resources/call_cat_1.bmp" , "resources/call_cat_load.bmp"        // 載入招喚貓咪1按鈕
@@ -365,24 +365,21 @@ void CGameStateRun::OnShow()
 }
 
 void CGameStateRun::draw_text() {
-	int Px = 1345;
+	int Px = 1390;
 	CDC *pDC = CDDraw::GetBackCDC();
 	//CFont* fp;
 	s = std::to_string(money_30);
 	int move = 0;
 	std::string  print = s + "/100";
-
 	CTextDraw::ChangeFontLog(pDC, 32, "Arial Black", RGB(255, 200, 0), 900);
-	
 	if (money_30 > 9) {
-		Px -= 43;
+		Px -= 32;
 		if (money_30 > 99) {
-			Px -= 43;
+			Px -= 32;
 		}
 	}
 
-
-	CTextDraw::Print(pDC, Px, 0, print);
+	CTextDraw::Print(pDC, Px, 3, print);
 
 	CDDraw::ReleaseBackCDC();
 }
