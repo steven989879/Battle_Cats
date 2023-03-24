@@ -28,15 +28,17 @@ namespace game_framework {
 		enemy_one();
 		~enemy_one() = default;
 		enemy_one* create_enemy();
-
-
-	protected:
 		int price = 50;
 		int heart = 30;
+		int single_attack;
 		int attack_range = 5;
 		int power = 5;
 		int walk_speed = 2;
 		int cool_time = 5;
+
+
+	protected:
+		
 
 	private:
 		//vector<cat_one*> cat_one_friend;

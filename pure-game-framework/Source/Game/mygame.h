@@ -124,7 +124,10 @@ namespace game_framework {
 		vector<cat_one*> cat_one_friend_bump;
 		vector<int> cat_one_friend_type;
 		vector<int> cat_one_friend_c;
-		cat_one base;
+		int current_cat_1 = 0;
+		int current_enemy_1 = 0;
+		cat_one base_1;
+		enemy_one base_enemy_1;
 		std::string s;
 	};
 
