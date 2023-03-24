@@ -35,6 +35,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	/////////////////////////////////////
 	// 設定敵對生物及貓咪移動停止參數
 	/////////////////////////////////////
+	/*
 	for (int i = 0; i < cat_one_friend_c.size(); i++) {        // 清空貓咪動作次數計數
 		cat_one_friend_c[i] = 0;
 	}
@@ -66,8 +67,38 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		else if (cat_one_friend.size() == 0 && enemy_one_v[d]->GetLeft() + 50 + enemy_one_v[d]->GetWidth() < character_tower_1.GetLeft()) {        // 設定無召喚貓時敵對生物移動參數
 			enemy_one_v[d]->SetTopLeft(enemy_one_v[d]->GetLeft() + 1, enemy_one_v[d]->GetTop());
 		}
+	}*/
+	
+	for (int d = 0; d < enemy_one_v.size(); d++) {
+		int t = 0;
+		for (int i = 0; i < cat_one_friend.size(); i++) {
+			if (enemy_one_v[d]->GetLeft() + 50 + enemy_one_v[d]->GetWidth() < cat_one_friend[i]->GetLeft()) {
+				t += 1;
+			}
+		}
+		if ((t == cat_one_friend.size() || cat_one_friend.size() == 0) && enemy_one_v[d]->GetLeft() + 50 + enemy_one_v[d]->GetWidth() < character_tower_1.GetLeft()) {
+			enemy_one_v[d]->SetTopLeft(enemy_one_v[d]->GetLeft() + 1, enemy_one_v[d]->GetTop());
+		}
+		else {
+			enemy_one_v[d]->SetFrameIndexOfBitmap(1);
+		}
 	}
 
+	for (int i = 0; i < cat_one_friend.size(); i++) {
+		int t = 0;
+		for (int d = 0; d < enemy_one_v.size(); d++) {
+			if (enemy_one_v[d]->GetLeft() + 50 + enemy_one_v[d]->GetWidth() < cat_one_friend[i]->GetLeft()) {
+				t += 1;
+			}
+		}
+		if ((t == enemy_one_v.size() || enemy_one_v.size() == 0) && cat_one_friend[i]->GetLeft() > character_tower_2.GetLeft() + 50 + character_tower_2.GetWidth()) {
+			cat_one_friend[i]->SetTopLeft(cat_one_friend[i]->GetLeft() - 2, cat_one_friend[i]->GetTop());
+		}
+		else {
+			cat_one_friend[i]->SetFrameIndexOfBitmap(1);
+		}
+	}
+	
 	// 錢
 	if (money_30 < max_money_30) {
 		money += 6;
@@ -285,6 +316,7 @@ void CGameStateRun::OnShow()
 	///////////////////////////////////////////
 	// 顯示敵對生物及貓咪所有動畫、動畫切換
 	///////////////////////////////////////////
+	/*
 	for (int i = 0; i < cat_one_friend_c.size(); i++) {        // 清空貓咪動作次數計數
 		cat_one_friend_c[i] = 0;
 	}
@@ -360,6 +392,62 @@ void CGameStateRun::OnShow()
 				enemy_one_v_attack[d]->ShowBitmap();
 				enemy_one_v_bump[d]->ShowBitmap();
 			}
+		}
+	}*/
+
+	for (int d = 0; d < enemy_one_v.size(); d++) {
+		int t = 0;
+		for (int i = 0; i < cat_one_friend.size(); i++) {
+			if (enemy_one_v[d]->GetLeft() + 50 + enemy_one_v[d]->GetWidth() < cat_one_friend[i]->GetLeft()) {
+				t += 1;
+			}
+		}
+		if ((t == cat_one_friend.size() || cat_one_friend.size() == 0) && enemy_one_v[d]->GetLeft() + 50 + enemy_one_v[d]->GetWidth() < character_tower_1.GetLeft()) {
+			if (enemy_one_v_type[d] == 1) {
+				enemy_one_v[d]->SetTopLeft(enemy_one_v_attack[d]->GetLeft(), enemy_one_v_attack[d]->GetTop());
+				enemy_one_v_type[d] = 0;
+			}
+			enemy_one_v[d]->SetAnimation(250, 0);
+			enemy_one_v[d]->ShowBitmap();
+		}
+		else {
+			if (enemy_one_v_type[d] == 0) {
+				enemy_one_v_attack[d]->SetTopLeft(enemy_one_v[d]->GetLeft(), enemy_one_v[d]->GetTop());
+				enemy_one_v_type[d] = 1;
+			}
+			enemy_one_v_attack[d]->SetAnimation(150, 0);
+			enemy_one_v_bump[d]->SetTopLeft(enemy_one_v[d]->GetLeft() + 100, enemy_one_v[d]->GetTop() - 25);
+			enemy_one_v_bump[d]->SetAnimation(150, 0);
+			enemy_one_v_attack[d]->ShowBitmap();
+			enemy_one_v_bump[d]->ShowBitmap();
+		}
+	}
+
+	for (int i = 0; i < cat_one_friend.size(); i++) {
+		int t = 0;
+		for (int d = 0; d < enemy_one_v.size(); d++) {
+			if (enemy_one_v[d]->GetLeft() + 50 + enemy_one_v[d]->GetWidth() < cat_one_friend[i]->GetLeft()) {
+				t += 1;
+			}
+		}
+		if ((t == enemy_one_v.size() || enemy_one_v.size() == 0) && cat_one_friend[i]->GetLeft() > character_tower_2.GetLeft() + 50 + character_tower_2.GetWidth() ) {
+			if (cat_one_friend_type[i] == 1) {
+				cat_one_friend[i]->SetTopLeft(cat_one_friend_attack[i]->GetLeft(), cat_one_friend_attack[i]->GetTop());
+				cat_one_friend_type[i] = 0;
+			}
+			cat_one_friend[i]->SetAnimation(125, 0);
+			cat_one_friend[i]->ShowBitmap();
+		}
+		else {
+			if (cat_one_friend_type[i] == 0) {
+				cat_one_friend_attack[i]->SetTopLeft(cat_one_friend[i]->GetLeft(), cat_one_friend[i]->GetTop());
+				cat_one_friend_type[i] = 1;
+			}
+			cat_one_friend_attack[i]->SetAnimation(100, 0);
+			cat_one_friend_bump[i]->SetTopLeft(cat_one_friend[i]->GetLeft() - 150, cat_one_friend[i]->GetTop() - 25);
+			cat_one_friend_bump[i]->SetAnimation(100, 0);
+			cat_one_friend_attack[i]->ShowBitmap();
+			cat_one_friend_bump[i]->ShowBitmap();
 		}
 	}
 }
