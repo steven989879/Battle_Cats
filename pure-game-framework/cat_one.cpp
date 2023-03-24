@@ -53,6 +53,11 @@ namespace game_framework {
 		return heart;
 	}
 
+	int cat_one::get_single_attack()
+	{
+		return single_attack;
+	}
+
 	int cat_one::get_attack_range()
 	{
 		return attack_range;

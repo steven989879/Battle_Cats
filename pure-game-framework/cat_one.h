@@ -27,23 +27,42 @@ namespace game_framework {
 		cat_one();
 		~cat_one() = default;
 		cat_one* create_cat();
-		int price = 50 ;
-		int heart = 30;
-		int attack_range = 5;
-		int power = 5 ;
-		int walk_speed = 2 ;
-		int cool_time = 5;
+		
 		int get_price();
 		int get_heart();
+		int get_single_attack();
 		int get_attack_range();
 		int get_power();
 		int get_walk_speed();
 		int get_cool_time();
 		void set_name(int i);
+		int price;
+		int heart;
+		int single_attack;
+		int attack_range;
+		int power;
+		int walk_speed;
+		int cool_time;
 
 	protected:
-		
-
+		/*
+		int price = 50;
+		int heart = 30;
+		int single_attack = 1;
+		int attack_range = 5;
+		int power = 5;
+		int walk_speed = 2;
+		int cool_time = 5;
+		*/
+		/*
+		int price ;
+		int heart ;
+		int single_attack ;
+		int attack_range ;
+		int power ;
+		int walk_speed ;
+		int cool_time ;
+		*/
 	private:
 		//vector<cat_one*> cat_one_friend;
 	};

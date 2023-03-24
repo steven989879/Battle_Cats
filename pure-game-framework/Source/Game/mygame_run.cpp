@@ -11,7 +11,6 @@
 #include "../../cat_factory.h"
 #include "../../enemy_one.h"
 #include <string>
-
 using namespace game_framework;
 
 /////////////////////////////////////////////////////////////////////////////
@@ -39,9 +38,9 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	for (int i = 0; i < cat_one_friend_c.size(); i++) {        // 清空貓咪動作次數計數
 		cat_one_friend_c[i] = 0;
 	}
-	for (int d = 0; d < enemy_one_v.size(); d++) {
+	for (int d = current_enemy_1; d < enemy_one_v.size(); d++) {
 		if (cat_one_friend.size() > 0) {
-			for (int i = 0, t = 0; i < cat_one_friend.size(); i++) {
+			for (int i = current_cat_1, t = 0; i < cat_one_friend.size(); i++) {
 				if (enemy_one_v[d]->GetLeft() + 50 + enemy_one_v[d]->GetWidth() < cat_one_friend[i]->GetLeft()) {        // 設定敵對生物及貓咪移動參數
 					if (cat_one_friend_c[i] == 0) {
 						cat_one_friend[i]->SetTopLeft(cat_one_friend[i]->GetLeft() - 2, cat_one_friend[i]->GetTop());
@@ -104,7 +103,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		money += 6;
 	}
 	money_30 = money / 30;
-	if (money_30 >= base.get_price() && cat_1_cool.GetFrameIndexOfBitmap() == 24) {
+	if (money_30 >= base_1.get_price() && cat_1_cool.GetFrameIndexOfBitmap() == 24) {
 		character_call_cat_1.SetFrameIndexOfBitmap(0);
 	}
 
@@ -117,6 +116,11 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		enemy_one *enemy1 = new enemy_one();
 		enemy_one_v.push_back(enemy1);
 		enemy_one_v[enemy_one_v.size() - 1]->set_name(enemy_one_v.size());
+		enemy_one_v[enemy_one_v.size() - 1]->attack_range = 5;
+		enemy_one_v[enemy_one_v.size() - 1]->heart = 30;
+		enemy_one_v[enemy_one_v.size() - 1]->power = 3;
+		enemy_one_v[enemy_one_v.size() - 1]->single_attack = 1;
+		enemy_one_v[enemy_one_v.size() - 1]->walk_speed = 1;
 		enemy_one_v[enemy_one_v.size() - 1]->LoadBitmapByString({
 		"resources/dog_walk_1.bmp" , "resources/dog_walk_2.bmp" , "resources/dog_walk_3.bmp" , "resources/dog_walk_2.bmp"        // 載入敵對狗走路動畫
 			}, RGB(255, 255, 255));
@@ -215,8 +219,15 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 		}, RGB(255, 255, 255));
 	character_tower_2.SetTopLeft(100, 163);
 
-	base = cat_one();
-	base.price = 50;
+	//base_1 = cat_one();
+	base_1.price = 50;
+	base_1.single_attack = 1;
+	base_1.power = 5;
+	base_1.heart = 50;
+
+	base_enemy_1.single_attack = 1;
+	base_enemy_1.power = 3;
+	base_enemy_1.heart = 30;
 }
 
 void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
@@ -234,9 +245,9 @@ void CGameStateRun::OnLButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的
 	///////////////////////////////////
 	// 藉由點擊次數生成相應數量貓咪
 	///////////////////////////////////
-	if (point.x >= 470 && point.x <= 614 && point.y >= 680 && point.y <= 789 && money_30 >= base.get_price() && cat_1_cool.GetFrameIndexOfBitmap() == 24) {
-		money_30 = money_30 - base.get_price();
-		money = money - (base.get_price() * 30);
+	if (point.x >= 470 && point.x <= 614 && point.y >= 680 && point.y <= 789 && money_30 >= base_1.get_price() && cat_1_cool.GetFrameIndexOfBitmap() == 24) {
+		money_30 = money_30 - base_1.get_price();
+		money = money - (base_1.get_price() * 30);
 		character_call_cat_1.SetFrameIndexOfBitmap(2);
 		cat_1_cool.SetFrameIndexOfBitmap(0);
 		cat_1_cool.SetAnimation(250, 0);
@@ -247,6 +258,12 @@ void CGameStateRun::OnLButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的
 		cat_one *temp1 = new cat_one();
 		cat_one_friend.push_back(temp1);
 		cat_one_friend[cat_one_friend.size() - 1]->set_name(cat_one_friend.size());
+		cat_one_friend[cat_one_friend.size() - 1]->attack_range = 5;
+		cat_one_friend[cat_one_friend.size() - 1]->heart = 50;
+		cat_one_friend[cat_one_friend.size() - 1]->power = 5;
+		cat_one_friend[cat_one_friend.size() - 1]->price = 50;
+		cat_one_friend[cat_one_friend.size() - 1]->single_attack = 1;
+		cat_one_friend[cat_one_friend.size() - 1]->walk_speed = 2;
 		cat_one_friend[cat_one_friend.size() - 1]->LoadBitmapByString({
 		"resources/cat_walk_1.bmp" , "resources/cat_walk_2.bmp" , "resources/cat_walk_3.bmp" , "resources/cat_walk_2.bmp"        // 載入貓咪1走路動畫
 			}, RGB(255, 255, 255));
@@ -297,7 +314,7 @@ void CGameStateRun::OnShow()
 	money_map.ShowBitmap();
 	draw_text();
 	if (cat_1_cool.GetFrameIndexOfBitmap() > 23) {        // 顯示招喚貓咪1按鈕與冷卻
-		if (money_30 < base.get_price()) {
+		if (money_30 < base_1.get_price()) {
 			character_call_cat_1.SetFrameIndexOfBitmap(1);
 		}
 		character_call_cat_1.ShowBitmap();
@@ -316,13 +333,17 @@ void CGameStateRun::OnShow()
 	///////////////////////////////////////////
 	// 顯示敵對生物及貓咪所有動畫、動畫切換
 	///////////////////////////////////////////
+
 	/*
 	for (int i = 0; i < cat_one_friend_c.size(); i++) {        // 清空貓咪動作次數計數
+=======
+	for (int i = current_cat_1; i < cat_one_friend_c.size(); i++) {        // 清空貓咪動作次數計數
+>>>>>>> 74f8b20e77c993de58978e47abee49cf0066321f
 		cat_one_friend_c[i] = 0;
 	}
-	for (int d = 0; d < enemy_one_v.size(); d++) {
-		if (cat_one_friend.size() > 0) {
-			for (int i = 0, t = 0; i < cat_one_friend.size(); i++) {
+	for (int d = current_enemy_1; d < enemy_one_v.size(); d++) {
+		if (cat_one_friend.size() > current_cat_1) {
+			for (int i = current_cat_1, t = 0; i < cat_one_friend.size(); i++) {
 				if (enemy_one_v[d]->GetLeft() + 50 + enemy_one_v[d]->GetWidth() < cat_one_friend[i]->GetLeft()) {
 					if (cat_one_friend_c[i] == 0) {
 						if (cat_one_friend_type[i] == 1) {        // 設定貓咪由攻擊狀態切成走路動畫及位置
@@ -342,12 +363,33 @@ void CGameStateRun::OnShow()
 						enemy_one_v[d]->ShowBitmap();        // 顯示敵對生物走路動畫
 						t = 1;
 					}
+					int been_attack = 0;
+					if (cat_one_friend_attack[i]->GetFrameIndexOfBitmap() == 4) { //設定攻擊動畫扣血
+						for (int j = 0; i < enemy_one_v.size(); i++) {
+							if (been_attack == 0) {
+								enemy_one_v[j]->heart -= cat_one_friend[i]->power;
+								been_attack = 1;
+							}
+						}
+					}
+					//if()
+					
+					std::string str1(cat_one_friend_attack[i]->GetImageFileName());
+					std::string str2("resources / cat_attack_2.bmp");
+					if (str1.compare(str2) == 0) {
+						cat_one_friend_attack[i]->SetTopLeft(1000, 0);
+						cat_one_friend_bump[i]->SetTopLeft(1000, 0);
+						cat_one_friend[i]->SetTopLeft(1000, 0);
+						GotoGameState(GAME_STATE_OVER);
+					}
+					
 				}
 				else {
 					if (cat_one_friend_c[i] == 0) {
 						if (cat_one_friend_type[i] == 0) {        // 設定貓咪由走路狀態切成攻擊動畫及位置
 							cat_one_friend_attack[i]->SetTopLeft(cat_one_friend[i]->GetLeft(), cat_one_friend[i]->GetTop());
 							cat_one_friend_attack[i]->SetAnimation(100, 0);
+							
 							cat_one_friend_bump[i]->SetTopLeft(cat_one_friend[i]->GetLeft() - 150, cat_one_friend[i]->GetTop() - 25);
 							cat_one_friend_bump[i]->SetAnimation(100, 0);
 							cat_one_friend_type[i] = 1;
@@ -371,7 +413,7 @@ void CGameStateRun::OnShow()
 				}
 			}
 		}
-		else if (cat_one_friend.size() == 0) {        // 顯示無召喚貓時敵對生物走路動畫
+		else if (cat_one_friend.size() == 0 || cat_one_friend.size() == current_cat_1) {        // 顯示無召喚貓時敵對生物走路動畫
 			if (enemy_one_v[d]->GetLeft() + 50 + enemy_one_v[d]->GetWidth() < character_tower_1.GetLeft()) {
 				enemy_one_v[d]->ShowBitmap();
 				if (enemy_one_v_type[d] == 1) {
