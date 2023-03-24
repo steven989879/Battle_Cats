@@ -34,40 +34,6 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	/////////////////////////////////////
 	// 設定敵對生物及貓咪移動停止參數
 	/////////////////////////////////////
-	/*
-	for (int i = 0; i < cat_one_friend_c.size(); i++) {        // 清空貓咪動作次數計數
-		cat_one_friend_c[i] = 0;
-	}
-	for (int d = current_enemy_1; d < enemy_one_v.size(); d++) {
-		if (cat_one_friend.size() > 0) {
-			for (int i = current_cat_1, t = 0; i < cat_one_friend.size(); i++) {
-				if (enemy_one_v[d]->GetLeft() + 50 + enemy_one_v[d]->GetWidth() < cat_one_friend[i]->GetLeft()) {        // 設定敵對生物及貓咪移動參數
-					if (cat_one_friend_c[i] == 0) {
-						cat_one_friend[i]->SetTopLeft(cat_one_friend[i]->GetLeft() - 2, cat_one_friend[i]->GetTop());
-						cat_one_friend_c[i] = 1;
-					}
-					if (t == 0) {
-						enemy_one_v[d]->SetTopLeft(enemy_one_v[d]->GetLeft() + 1, enemy_one_v[d]->GetTop());
-						t = 1;
-					}
-				}
-				else {        // 設定敵對生物及貓咪中止移動動畫
-					if (cat_one_friend_c[i] == 0) {
-						cat_one_friend[i]->SetFrameIndexOfBitmap(1);
-						cat_one_friend_c[i] = 1;
-					}
-					if (t == 0) {
-						enemy_one_v[d]->SetFrameIndexOfBitmap(1);
-						t = 1;
-					}
-				}
-			}
-		}
-		else if (cat_one_friend.size() == 0 && enemy_one_v[d]->GetLeft() + 50 + enemy_one_v[d]->GetWidth() < character_tower_1.GetLeft()) {        // 設定無召喚貓時敵對生物移動參數
-			enemy_one_v[d]->SetTopLeft(enemy_one_v[d]->GetLeft() + 1, enemy_one_v[d]->GetTop());
-		}
-	}*/
-	
 	for (int d = 0; d < enemy_one_v.size(); d++) {
 		int t = 0;
 		for (int i = 0; i < cat_one_friend.size(); i++) {
@@ -334,13 +300,10 @@ void CGameStateRun::OnShow()
 	// 顯示敵對生物及貓咪所有動畫、動畫切換
 	///////////////////////////////////////////
 
-	/*
-	for (int i = 0; i < cat_one_friend_c.size(); i++) {        // 清空貓咪動作次數計數
-=======
 	for (int i = current_cat_1; i < cat_one_friend_c.size(); i++) {        // 清空貓咪動作次數計數
->>>>>>> 74f8b20e77c993de58978e47abee49cf0066321f
 		cat_one_friend_c[i] = 0;
 	}
+	/*
 	for (int d = current_enemy_1; d < enemy_one_v.size(); d++) {
 		if (cat_one_friend.size() > current_cat_1) {
 			for (int i = current_cat_1, t = 0; i < cat_one_friend.size(); i++) {
@@ -479,6 +442,29 @@ void CGameStateRun::OnShow()
 			}
 			cat_one_friend[i]->SetAnimation(125, 0);
 			cat_one_friend[i]->ShowBitmap();
+
+
+			int been_attack = 0;
+			if (cat_one_friend_attack[i]->GetFrameIndexOfBitmap() == 4) { //設定攻擊動畫扣血
+				for (int j = 0; i < enemy_one_v.size(); i++) {
+					if (been_attack == 0) {
+						enemy_one_v[j]->heart -= cat_one_friend[i]->power;
+						been_attack = 1;
+					}
+				}
+			}
+			//if()
+
+			std::string str1(cat_one_friend_attack[i]->GetImageFileName());
+			std::string str2("resources / cat_attack_2.bmp");
+			if (str1.compare(str2) == 0) {
+				cat_one_friend_attack[i]->SetTopLeft(1000, 0);
+				cat_one_friend_bump[i]->SetTopLeft(1000, 0);
+				cat_one_friend[i]->SetTopLeft(1000, 0);
+				GotoGameState(GAME_STATE_OVER);
+			}
+
+
 		}
 		else {
 			if (cat_one_friend_type[i] == 0) {
