@@ -102,6 +102,7 @@ namespace game_framework {
 		int money = 0;
 		int money_30 = 0;
 		int max_money_30 = 100;
+		
 		CMovingBitmap background;
 		CMovingBitmap money_map;
 		CMovingBitmap character_call_cat_1;
@@ -119,6 +120,7 @@ namespace game_framework {
 		vector<enemy_one*> enemy_one_v_attack;
 		vector<enemy_one*> enemy_one_v_bump;
 		vector<int> enemy_one_v_type;
+		vector<bool> enemy_whether_attack;
 		vector<cat_one*> cat_one_friend;
 		vector<cat_one*> cat_one_friend_attack;
 		vector<cat_one*> cat_one_friend_bump;
