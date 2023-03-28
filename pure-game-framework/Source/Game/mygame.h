@@ -101,17 +101,21 @@ namespace game_framework {
 		void draw_text();
 		int times = 0;
 		int money = 0;
+		int money_persecond = 6;
 		int money_30 = 0;
 		int max_money_30 = 100;
+		int now_Level = 1;
 		
 		CMovingBitmap background;
 		CMovingBitmap money_map;
 		CMovingBitmap character_call_cat_1;
+		CMovingBitmap cat_1_cool;
 		CMovingBitmap character_call_cat_2;
 		CMovingBitmap character_call_cat_3;
 		CMovingBitmap character_call_cat_4;
 		CMovingBitmap character_call_cat_5;
-		CMovingBitmap cat_1_cool;
+		CMovingBitmap Level_dark;
+		CMovingBitmap Level_shine[5];
 		CMovingBitmap character_tower_1;
 		CMovingBitmap character_tower_2;
 		CMovingBitmap character;
@@ -132,6 +136,7 @@ namespace game_framework {
 		cat_one base_1;
 		enemy_one base_enemy_1;
 		std::string s;
+		std::string s2;
 		CMovingBitmap try1;
 		clock_t t1 = 0;
 	};

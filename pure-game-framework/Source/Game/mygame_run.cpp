@@ -67,7 +67,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 
 	// 錢
 	if (money_30 < max_money_30) {
-		money += 6;
+		money += money_persecond;
 	}
 	money_30 = money / 30;
 	if (money_30 >= base_1.get_price() && cat_1_cool.GetFrameIndexOfBitmap() == 24) {
@@ -132,11 +132,42 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 		}, RGB(255, 255, 255));
 	money_map.SetTopLeft(1540, 15);
 
+	Level_dark.LoadBitmapByString({
+		"resources/Level_1_dark.bmp" , "resources/Level_2_dark.bmp" , "resources/Level_3_dark.bmp"
+		}, RGB(255, 255, 255));
+	Level_dark.SetTopLeft(50, 636);
+
+	Level_shine[0].LoadBitmapByString({
+		"resources/Level_1_shine_1.bmp" , "resources/Level_1_shine_2.bmp"
+		}, RGB(255, 255, 255));
+	Level_shine[0].SetTopLeft(50, 636);
+	Level_shine[0].SetAnimation(100, 0);
+
+	Level_shine[1].LoadBitmapByString({
+		"resources/Level_2_shine_1.bmp" , "resources/Level_2_shine_2.bmp"
+		}, RGB(255, 255, 255));
+	Level_shine[1].SetTopLeft(50, 636);
+	Level_shine[1].SetAnimation(100, 0);
+
 	character_call_cat_1.LoadBitmapByString({
 		"resources/call_cat_2.bmp" , "resources/call_cat_1.bmp" , "resources/call_cat_load.bmp"        // 載入招喚貓咪1按鈕
 		}, RGB(255, 255, 255));
 	character_call_cat_1.SetTopLeft(470, 680);
 	character_call_cat_1.SetFrameIndexOfBitmap(1);
+
+	cat_1_cool.LoadBitmapByString({
+		"resources/load_1.bmp" , "resources/load_2.bmp" , "resources/load_3.bmp" ,
+		"resources/load_4.bmp" , "resources/load_5.bmp" , "resources/load_6.bmp" ,
+		"resources/load_7.bmp" , "resources/load_8.bmp" , "resources/load_9.bmp" ,
+		"resources/load_10.bmp" , "resources/load_11.bmp" , "resources/load_12.bmp" ,
+		"resources/load_13.bmp" , "resources/load_14.bmp" , "resources/load_15.bmp" ,
+		"resources/load_16.bmp" , "resources/load_17.bmp" , "resources/load_18.bmp" ,
+		"resources/load_19.bmp" , "resources/load_20.bmp" , "resources/load_21.bmp" ,
+		"resources/load_22.bmp" , "resources/load_23.bmp" , "resources/load_24.bmp" ,
+		"resources/load_25.bmp"
+		}, RGB(255, 255, 255));
+	cat_1_cool.SetTopLeft(477, 757);
+	cat_1_cool.SetFrameIndexOfBitmap(24);
 
 	character_call_cat_2.LoadBitmapByString({
 		"resources/call_cat_empty.bmp"        // 載入召喚貓咪2(空)按鈕
@@ -157,20 +188,6 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 		"resources/call_cat_empty.bmp"        // 載入召喚貓咪5(空)按鈕
 		}, RGB(255, 255, 255));
 	character_call_cat_5.SetTopLeft(1090, 680);
-
-	cat_1_cool.LoadBitmapByString({
-		"resources/load_1.bmp" , "resources/load_2.bmp" , "resources/load_3.bmp" ,
-		"resources/load_4.bmp" , "resources/load_5.bmp" , "resources/load_6.bmp" ,
-		"resources/load_7.bmp" , "resources/load_8.bmp" , "resources/load_9.bmp" ,
-		"resources/load_10.bmp" , "resources/load_11.bmp" , "resources/load_12.bmp" ,
-		"resources/load_13.bmp" , "resources/load_14.bmp" , "resources/load_15.bmp" ,
-		"resources/load_16.bmp" , "resources/load_17.bmp" , "resources/load_18.bmp" ,
-		"resources/load_19.bmp" , "resources/load_20.bmp" , "resources/load_21.bmp" ,
-		"resources/load_22.bmp" , "resources/load_23.bmp" , "resources/load_24.bmp" ,
-		"resources/load_25.bmp"
-		}, RGB(255, 255, 255));
-	cat_1_cool.SetTopLeft(477, 757);
-	cat_1_cool.SetFrameIndexOfBitmap(24);
 
 	character_tower_1.LoadBitmapByString({
 		"resources/tower_1.bmp"        // 載入己方防禦塔
@@ -249,6 +266,16 @@ void CGameStateRun::OnLButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的
 		"resources/bump_0.bmp" , "resources/bump_0.bmp" , "resources/bump_0.bmp"        // 載入貓咪1攻擊爆炸動畫
 			}, RGB(255, 255, 255));
 	}
+
+	if (point.x > 50 && point.x < 292 && point.y > 636 && point.y < 800 && money_30 >= now_Level * 40 && now_Level <= 2) {
+		money_persecond += 1;
+		max_money_30 += 50;
+		money_30 -= now_Level * 40;
+		money -= (now_Level * 40 * 30);
+		Level_shine[now_Level - 1].SetFrameIndexOfBitmap(0);
+		now_Level += 1;
+		Level_dark.SetFrameIndexOfBitmap(now_Level - 1);
+	}
 }
 
 void CGameStateRun::OnLButtonUp(UINT nFlags, CPoint point)	// 處理滑鼠的動作
@@ -271,6 +298,12 @@ void CGameStateRun::OnShow()
 {
 	background.ShowBitmap();        // 顯示關卡背景
 	money_map.ShowBitmap();
+	if (money_30 < now_Level * 40 && now_Level <= 3 ) {
+		Level_dark.ShowBitmap();
+	}
+	else if(money_30 >= now_Level * 40 && now_Level <= 2){
+		Level_shine[now_Level - 1].ShowBitmap();
+	}
 	draw_text();
 	if (cat_1_cool.GetFrameIndexOfBitmap() > 23) {        // 顯示招喚貓咪1按鈕與冷卻
 		if (money_30 < base_1.get_price()) {
@@ -386,8 +419,9 @@ void CGameStateRun::draw_text() {
 	CDC *pDC = CDDraw::GetBackCDC();
 	//CFont* fp;
 	s = std::to_string(money_30);
+	s2 = std::to_string(max_money_30);
 	int move = 0;
-	std::string  print = s + "/100";
+	std::string  print = s + "/" + s2;
 	CTextDraw::ChangeFontLog(pDC, 30, "Arial Black", RGB(255, 200, 0), 900);
 	if (money_30 > 9) {
 		Px -= 30;
