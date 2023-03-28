@@ -11,6 +11,7 @@
 #include "../../cat_factory.h"
 #include "../../enemy_one.h"
 #include <string>
+#include <ctime>
 using namespace game_framework;
 
 /////////////////////////////////////////////////////////////////////////////
@@ -83,11 +84,6 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		enemy_one *enemy1 = new enemy_one();
 		enemy_one_v.push_back(enemy1);
 		enemy_one_v[enemy_one_v.size() - 1]->set_name(enemy_one_v.size());
-		enemy_one_v[enemy_one_v.size() - 1]->attack_range = 5; //設定敵對生物屬性
-		enemy_one_v[enemy_one_v.size() - 1]->heart = 30;
-		enemy_one_v[enemy_one_v.size() - 1]->power = 3;
-		enemy_one_v[enemy_one_v.size() - 1]->single_attack = 1;
-		enemy_one_v[enemy_one_v.size() - 1]->walk_speed = 1;
 		enemy_one_v[enemy_one_v.size() - 1]->LoadBitmapByString({
 		"resources/dog_walk_1.bmp" , "resources/dog_walk_2.bmp" , "resources/dog_walk_3.bmp" , "resources/dog_walk_2.bmp"        // 載入敵對狗走路動畫
 			}, RGB(255, 255, 255));
@@ -227,12 +223,6 @@ void CGameStateRun::OnLButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的
 		cat_one *temp1 = new cat_one();
 		cat_one_friend.push_back(temp1);
 		cat_one_friend[cat_one_friend.size() - 1]->set_name(cat_one_friend.size());
-		cat_one_friend[cat_one_friend.size() - 1]->attack_range = 5; //設定我方貓咪屬性
-		cat_one_friend[cat_one_friend.size() - 1]->heart = 50;
-		cat_one_friend[cat_one_friend.size() - 1]->power = 5;
-		cat_one_friend[cat_one_friend.size() - 1]->price = 50;
-		cat_one_friend[cat_one_friend.size() - 1]->single_attack = 1;
-		cat_one_friend[cat_one_friend.size() - 1]->walk_speed = 2;
 		cat_one_friend[cat_one_friend.size() - 1]->LoadBitmapByString({
 		"resources/cat_walk_1.bmp" , "resources/cat_walk_2.bmp" , "resources/cat_walk_3.bmp" , "resources/cat_walk_2.bmp"        // 載入貓咪1走路動畫
 			}, RGB(255, 255, 255));
@@ -348,47 +338,35 @@ void CGameStateRun::OnShow()
 			}
 			cat_one_friend[i]->SetAnimation(125, 0);
 			cat_one_friend[i]->ShowBitmap();
-
-
-
-			if (cat_one_friend_attack[i]->GetFrameIndexOfBitmap() == 4 && cat_one_friend_type[i] == 1) { //設定攻擊動畫扣血
-				for (int j = 0; i < enemy_one_v.size(); i++) {
-					if (been_attack == 0) {
-						enemy_one_v[j]->heart -= cat_one_friend[i]->power;
-						try1.ShowBitmap();
-						cat_one_friend_attack[i]->SetTopLeft(1000, 0);
-						cat_one_friend_bump[i]->SetTopLeft(1000, 0);
-						cat_one_friend[i]->SetTopLeft(1000, 0);
-						been_attack = 1;
-						if (enemy_one_v[j]->get_heart() <= 0) {
-							enemy_one_v[j]->SetTopLeft(0, 0);
-						}
-					}
-				}
-				been_attack = 0;
-			}
-
-			std::string str1(cat_one_friend_attack[i]->GetImageFileName());
-			std::string str2("resources / cat_attack_2.bmp");
-			if (str1.compare(str2) == 0) {
-				cat_one_friend_attack[i]->SetTopLeft(1000, 0);
-				cat_one_friend_bump[i]->SetTopLeft(1000, 0);
-				cat_one_friend[i]->SetTopLeft(1000, 0);
-				GotoGameState(GAME_STATE_OVER);
-			}
-
-
 		}
 		else {
 			if (cat_one_friend_type[i] == 0) {
 				cat_one_friend_attack[i]->SetTopLeft(cat_one_friend[i]->GetLeft(), cat_one_friend[i]->GetTop());
 				cat_one_friend_type[i] = 1;
 			}
+
 			cat_one_friend_attack[i]->SetAnimation(100, 0);
 			cat_one_friend_bump[i]->SetTopLeft(cat_one_friend[i]->GetLeft() - 150, cat_one_friend[i]->GetTop() - 25);
 			cat_one_friend_bump[i]->SetAnimation(100, 0);
 			cat_one_friend_attack[i]->ShowBitmap();
 			cat_one_friend_bump[i]->ShowBitmap();
+
+			if (cat_one_friend_attack[i]->GetFrameIndexOfBitmap() == 4 && cat_one_friend_type[i] == 1 && (t1==0 || clock() - t1 >= 1100)) { //設定攻擊動畫扣血
+				for (int j = 0; j < enemy_one_v.size(); j++) {
+					if (been_attack == 0 ) {
+						t1 = clock();
+						enemy_one_v[j]->heart -= cat_one_friend[i]->power;
+						been_attack = 1;
+						if (enemy_one_v[j]->get_heart() <= 0) {
+							enemy_one_v[j]->SetTopLeft(0, 0);
+							enemy_one_v_attack[0,0]->SetTopLeft(0, 0);
+							enemy_one_v_bump[0,0]->SetTopLeft(0, 0);
+						}
+						break;
+					}
+				}
+			}
+			been_attack = 0;
 		}
 	}
 
@@ -414,8 +392,25 @@ void CGameStateRun::draw_text() {
 			Px -= 30;
 		}
 	}
-
 	CTextDraw::Print(pDC, Px, 3, print);
+	//test
+	if (enemy_one_v.size() >= 1 && cat_one_friend.size() >= 1)
+	{
+		std::string s1 = std::to_string(enemy_one_v[0]->get_heart());
+		std::string s2 = std::to_string(cat_one_friend[0]->get_heart());
+		std::string s3 = s1 + "//" + s2;
+		int Px = 500;
+		CTextDraw::ChangeFontLog(pDC, 30, "Arial Black", RGB(255, 200, 0), 900);
+		CTextDraw::Print(pDC, Px, 3, s3);
+
+		Px = 700;
+		std::string s4 = std::to_string(cat_one_friend[0]->get_power());
+		CTextDraw::ChangeFontLog(pDC, 30, "Arial Black", RGB(255, 200, 0), 900);
+		CTextDraw::Print(pDC, Px, 3, s4);;
+	}
+	
+
+	
 
 	CDDraw::ReleaseBackCDC();
 }

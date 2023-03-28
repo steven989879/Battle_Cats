@@ -39,6 +39,7 @@
 */
 
 #include <vector>
+#include<ctime>
 #include "../../cat_one.h"
 #include "../../enemy_one.h"
 
@@ -131,7 +132,8 @@ namespace game_framework {
 		cat_one base_1;
 		enemy_one base_enemy_1;
 		std::string s;
-		CMovingBitmap try1; 
+		CMovingBitmap try1;
+		clock_t t1 = 0;
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
