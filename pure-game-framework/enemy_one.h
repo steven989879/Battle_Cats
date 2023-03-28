@@ -28,13 +28,20 @@ namespace game_framework {
 		enemy_one();
 		~enemy_one() = default;
 		enemy_one* create_enemy();
-		int price = 50;
-		int heart = 30;
+		
+		int get_price();
+		int get_heart();
+		int get_single_attack();
+		int get_attack_range();
+		int get_power();
+		int get_walk_speed();
+		void set_name(int i);
+		int price;
+		int heart;
 		int single_attack;
-		int attack_range = 5;
-		int power = 5;
-		int walk_speed = 2;
-		int cool_time = 5;
+		int attack_range;
+		int power;
+		int walk_speed;
 
 
 	protected:
