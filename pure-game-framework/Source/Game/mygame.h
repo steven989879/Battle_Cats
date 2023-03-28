@@ -131,6 +131,7 @@ namespace game_framework {
 		cat_one base_1;
 		enemy_one base_enemy_1;
 		std::string s;
+		CMovingBitmap try1; 
 	};
 
 	/////////////////////////////////////////////////////////////////////////////

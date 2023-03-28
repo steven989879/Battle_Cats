@@ -63,7 +63,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 			cat_one_friend[i]->SetFrameIndexOfBitmap(1);
 		}
 	}
-	
+
 	// 錢
 	if (money_30 < max_money_30) {
 		money += 6;
@@ -76,14 +76,14 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 	///////////////////////
 	// 敵對生物自動生成
 	///////////////////////
-	if(enemy - 300 >= 0){        // 計數達指定次數生成敵對生物
+	if (enemy - 300 >= 0) {        // 計數達指定次數生成敵對生物
 		enemy_one_v_type.push_back(0);
 		enemy_whether_attack.push_back(false);
 
 		enemy_one *enemy1 = new enemy_one();
 		enemy_one_v.push_back(enemy1);
 		enemy_one_v[enemy_one_v.size() - 1]->set_name(enemy_one_v.size());
-		enemy_one_v[enemy_one_v.size() - 1]->attack_range = 5;
+		enemy_one_v[enemy_one_v.size() - 1]->attack_range = 5; //設定敵對生物屬性
 		enemy_one_v[enemy_one_v.size() - 1]->heart = 30;
 		enemy_one_v[enemy_one_v.size() - 1]->power = 3;
 		enemy_one_v[enemy_one_v.size() - 1]->single_attack = 1;
@@ -101,9 +101,9 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		enemy_one_v_attack[enemy_one_v_attack.size() - 1]->LoadBitmapByString({
 		"resources/dog_attack_1.bmp" , "resources/dog_attack_2.bmp" , "resources/dog_attack_1.bmp" ,
 		"resources/dog_attack_3.bmp" , "resources/dog_attack_3.bmp" , "resources/dog_attack_3.bmp" ,
-		"resources/dog_attack_3.bmp" , "resources/dog_attack_3.bmp" , "resources/dog_walk_2.bmp" , 
+		"resources/dog_attack_3.bmp" , "resources/dog_attack_3.bmp" , "resources/dog_walk_2.bmp" ,
 		"resources/dog_walk_2.bmp" , "resources/dog_walk_2.bmp" , "resources/dog_walk_2.bmp" ,
-		"resources/dog_walk_2.bmp" , "resources/dog_walk_2.bmp" , "resources/dog_walk_2.bmp" , 
+		"resources/dog_walk_2.bmp" , "resources/dog_walk_2.bmp" , "resources/dog_walk_2.bmp" ,
 		"resources/dog_walk_2.bmp" , "resources/dog_walk_2.bmp" , "resources/dog_walk_2.bmp"        // 載入敵對狗攻擊動畫
 			}, RGB(255, 255, 255));
 
@@ -111,11 +111,11 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		enemy_one_v_bump.push_back(enemy1_bump);
 		enemy_one_v_bump[enemy_one_v_bump.size() - 1]->set_name(enemy_one_v_bump.size());
 		enemy_one_v_bump[enemy_one_v_bump.size() - 1]->LoadBitmapByString({
-		"resources/bump_0.bmp" , "resources/bump_0.bmp" , "resources/bump_0.bmp" , 
-		"resources/bump_1_inverse.bmp" , "resources/bump_2_inverse.bmp" , "resources/bump_3_inverse.bmp" ,
-		"resources/bump_4_inverse.bmp" , "resources/bump_5_inverse.bmp" , "resources/bump_0.bmp" , 
 		"resources/bump_0.bmp" , "resources/bump_0.bmp" , "resources/bump_0.bmp" ,
-		"resources/bump_0.bmp" , "resources/bump_0.bmp" , "resources/bump_0.bmp" , 
+		"resources/bump_1_inverse.bmp" , "resources/bump_2_inverse.bmp" , "resources/bump_3_inverse.bmp" ,
+		"resources/bump_4_inverse.bmp" , "resources/bump_5_inverse.bmp" , "resources/bump_0.bmp" ,
+		"resources/bump_0.bmp" , "resources/bump_0.bmp" , "resources/bump_0.bmp" ,
+		"resources/bump_0.bmp" , "resources/bump_0.bmp" , "resources/bump_0.bmp" ,
 		"resources/bump_0.bmp" , "resources/bump_0.bmp" , "resources/bump_0.bmp"        // 載入敵對狗攻擊爆炸動畫
 			}, RGB(255, 255, 255));
 
@@ -175,7 +175,7 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 		}, RGB(255, 255, 255));
 	cat_1_cool.SetTopLeft(477, 757);
 	cat_1_cool.SetFrameIndexOfBitmap(24);
-	
+
 	character_tower_1.LoadBitmapByString({
 		"resources/tower_1.bmp"        // 載入己方防禦塔
 		}, RGB(255, 255, 255));
@@ -195,20 +195,23 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	base_enemy_1.single_attack = 1;
 	base_enemy_1.power = 3;
 	base_enemy_1.heart = 30;
+
+	try1.LoadBitmapByString({ "resources/bulb_dark.bmp" });
+	try1.SetTopLeft(0, 0);
 }
 
 void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
-	
+
 }
 
 void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
-	
+
 }
 
 void CGameStateRun::OnLButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的動作
-{	
+{
 	///////////////////////////////////
 	// 藉由點擊次數生成相應數量貓咪
 	///////////////////////////////////
@@ -224,7 +227,7 @@ void CGameStateRun::OnLButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的
 		cat_one *temp1 = new cat_one();
 		cat_one_friend.push_back(temp1);
 		cat_one_friend[cat_one_friend.size() - 1]->set_name(cat_one_friend.size());
-		cat_one_friend[cat_one_friend.size() - 1]->attack_range = 5;
+		cat_one_friend[cat_one_friend.size() - 1]->attack_range = 5; //設定我方貓咪屬性
 		cat_one_friend[cat_one_friend.size() - 1]->heart = 50;
 		cat_one_friend[cat_one_friend.size() - 1]->power = 5;
 		cat_one_friend[cat_one_friend.size() - 1]->price = 50;
@@ -275,7 +278,7 @@ void CGameStateRun::OnRButtonUp(UINT nFlags, CPoint point)	// 處理滑鼠的動
 }
 
 void CGameStateRun::OnShow()
-{	
+{
 	background.ShowBitmap();        // 顯示關卡背景
 	money_map.ShowBitmap();
 	draw_text();
@@ -330,7 +333,7 @@ void CGameStateRun::OnShow()
 			enemy_whether_attack[d] = true;
 		}
 	}
-
+	int been_attack = 0;
 	for (int i = 0; i < cat_one_friend.size(); i++) {
 		int t = 0;
 		for (int d = 0; d < enemy_one_v.size(); d++) {
@@ -338,7 +341,7 @@ void CGameStateRun::OnShow()
 				t += 1;
 			}
 		}
-		if ((t == enemy_one_v.size() || enemy_one_v.size() == 0) && cat_one_friend[i]->GetLeft() > character_tower_2.GetLeft() + 50 + character_tower_2.GetWidth() ) {
+		if ((t == enemy_one_v.size() || enemy_one_v.size() == 0) && cat_one_friend[i]->GetLeft() > character_tower_2.GetLeft() + 50 + character_tower_2.GetWidth()) {
 			if (cat_one_friend_type[i] == 1) {
 				cat_one_friend[i]->SetTopLeft(cat_one_friend_attack[i]->GetLeft(), cat_one_friend_attack[i]->GetTop());
 				cat_one_friend_type[i] = 0;
@@ -347,16 +350,23 @@ void CGameStateRun::OnShow()
 			cat_one_friend[i]->ShowBitmap();
 
 
-			int been_attack = 0;
-			if (cat_one_friend_attack[i]->GetFrameIndexOfBitmap() == 4) { //設定攻擊動畫扣血
+
+			if (cat_one_friend_attack[i]->GetFrameIndexOfBitmap() == 4 && cat_one_friend_type[i] == 1) { //設定攻擊動畫扣血
 				for (int j = 0; i < enemy_one_v.size(); i++) {
 					if (been_attack == 0) {
 						enemy_one_v[j]->heart -= cat_one_friend[i]->power;
+						try1.ShowBitmap();
+						cat_one_friend_attack[i]->SetTopLeft(1000, 0);
+						cat_one_friend_bump[i]->SetTopLeft(1000, 0);
+						cat_one_friend[i]->SetTopLeft(1000, 0);
 						been_attack = 1;
+						if (enemy_one_v[j]->get_heart() <= 0) {
+							enemy_one_v[j]->SetTopLeft(0, 0);
+						}
 					}
 				}
+				been_attack = 0;
 			}
-			//if()
 
 			std::string str1(cat_one_friend_attack[i]->GetImageFileName());
 			std::string str2("resources / cat_attack_2.bmp");
