@@ -68,6 +68,7 @@ namespace game_framework {
 		void OnLButtonDown(UINT nFlags, CPoint point);  // 處理滑鼠的動作
 	protected:
 		void OnShow();									// 顯示這個狀態的遊戲畫面
+		//void load_background();
 	private:
 		CMovingBitmap logo;								// csie的logo
 		void load_background();
@@ -115,7 +116,7 @@ namespace game_framework {
 		CMovingBitmap character_call_cat_4;
 		CMovingBitmap character_call_cat_5;
 		CMovingBitmap Level_dark;
-		CMovingBitmap Level_shine[5];
+		CMovingBitmap Level_shine[7];
 		CMovingBitmap character_tower_1;
 		CMovingBitmap character_tower_2;
 		CMovingBitmap character;

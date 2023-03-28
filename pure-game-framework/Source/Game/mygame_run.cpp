@@ -87,7 +87,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		enemy_one_v[enemy_one_v.size() - 1]->LoadBitmapByString({
 		"resources/dog_walk_1.bmp" , "resources/dog_walk_2.bmp" , "resources/dog_walk_3.bmp" , "resources/dog_walk_2.bmp"        // 載入敵對狗走路動畫
 			}, RGB(255, 255, 255));
-		enemy_one_v[enemy_one_v.size() - 1]->SetTopLeft(285, 430);
+		enemy_one_v[enemy_one_v.size() - 1]->SetTopLeft(170, 430);
 		enemy_one_v[enemy_one_v.size() - 1]->SetAnimation(250, 0);
 
 
@@ -132,8 +132,12 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 		}, RGB(255, 255, 255));
 	money_map.SetTopLeft(1540, 15);
 
+	////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////
 	Level_dark.LoadBitmapByString({
-		"resources/Level_1_dark.bmp" , "resources/Level_2_dark.bmp" , "resources/Level_3_dark.bmp"
+		"resources/Level_1_dark.bmp" , "resources/Level_2_dark.bmp" , "resources/Level_3_dark.bmp" ,
+		"resources/Level_4_dark.bmp" , "resources/Level_5_dark.bmp" , "resources/Level_6_dark.bmp" ,
+		"resources/Level_7_dark.bmp" , "resources/Level_8.bmp"
 		}, RGB(255, 255, 255));
 	Level_dark.SetTopLeft(50, 636);
 
@@ -141,13 +145,38 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 		"resources/Level_1_shine_1.bmp" , "resources/Level_1_shine_2.bmp"
 		}, RGB(255, 255, 255));
 	Level_shine[0].SetTopLeft(50, 636);
-	Level_shine[0].SetAnimation(100, 0);
 
 	Level_shine[1].LoadBitmapByString({
 		"resources/Level_2_shine_1.bmp" , "resources/Level_2_shine_2.bmp"
 		}, RGB(255, 255, 255));
 	Level_shine[1].SetTopLeft(50, 636);
-	Level_shine[1].SetAnimation(100, 0);
+
+	Level_shine[2].LoadBitmapByString({
+		"resources/Level_3_shine_1.bmp" , "resources/Level_3_shine_2.bmp"
+		}, RGB(255, 255, 255));
+	Level_shine[2].SetTopLeft(50, 636);
+
+	Level_shine[3].LoadBitmapByString({
+		"resources/Level_4_shine_1.bmp" , "resources/Level_4_shine_2.bmp"
+		}, RGB(255, 255, 255));
+	Level_shine[3].SetTopLeft(50, 636);
+
+	Level_shine[4].LoadBitmapByString({
+		"resources/Level_5_shine_1.bmp" , "resources/Level_5_shine_2.bmp"
+		}, RGB(255, 255, 255));
+	Level_shine[4].SetTopLeft(50, 636);
+
+	Level_shine[5].LoadBitmapByString({
+		"resources/Level_6_shine_1.bmp" , "resources/Level_6_shine_2.bmp"
+		}, RGB(255, 255, 255));
+	Level_shine[5].SetTopLeft(50, 636);
+
+	Level_shine[6].LoadBitmapByString({
+		"resources/Level_7_shine_1.bmp" , "resources/Level_7_shine_2.bmp"
+		}, RGB(255, 255, 255));
+	Level_shine[6].SetTopLeft(50, 636);
+	////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////
 
 	character_call_cat_1.LoadBitmapByString({
 		"resources/call_cat_2.bmp" , "resources/call_cat_1.bmp" , "resources/call_cat_load.bmp"        // 載入招喚貓咪1按鈕
@@ -243,7 +272,7 @@ void CGameStateRun::OnLButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的
 		cat_one_friend[cat_one_friend.size() - 1]->LoadBitmapByString({
 		"resources/cat_walk_1.bmp" , "resources/cat_walk_2.bmp" , "resources/cat_walk_3.bmp" , "resources/cat_walk_2.bmp"        // 載入貓咪1走路動畫
 			}, RGB(255, 255, 255));
-		cat_one_friend[cat_one_friend.size() - 1]->SetTopLeft(1300, 430);
+		cat_one_friend[cat_one_friend.size() - 1]->SetTopLeft(1400, 430);
 		cat_one_friend[cat_one_friend.size() - 1]->SetAnimation(125, 0);
 
 		cat_one *attack1 = new cat_one();
@@ -267,7 +296,7 @@ void CGameStateRun::OnLButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的
 			}, RGB(255, 255, 255));
 	}
 
-	if (point.x > 50 && point.x < 292 && point.y > 636 && point.y < 800 && money_30 >= now_Level * 40 && now_Level <= 2) {
+	if (point.x > 50 && point.x < 292 && point.y > 636 && point.y < 800 && money_30 >= now_Level * 40 && now_Level < 8) {
 		money_persecond += 1;
 		max_money_30 += 50;
 		money_30 -= now_Level * 40;
@@ -298,10 +327,11 @@ void CGameStateRun::OnShow()
 {
 	background.ShowBitmap();        // 顯示關卡背景
 	money_map.ShowBitmap();
-	if (money_30 < now_Level * 40 && now_Level <= 3 ) {
+	if (money_30 < now_Level * 40 && now_Level <= 8 ) {
 		Level_dark.ShowBitmap();
 	}
-	else if(money_30 >= now_Level * 40 && now_Level <= 2){
+	else if(money_30 >= now_Level * 40 && now_Level < 8){
+		Level_shine[now_Level - 1].SetAnimation(100, 0);
 		Level_shine[now_Level - 1].ShowBitmap();
 	}
 	draw_text();
