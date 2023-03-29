@@ -118,26 +118,6 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		enemy = 0;        // 計數歸零
 	}
 	enemy += 1;        // 時間計數每秒+30
-
-	if (back_t <= 15) {
-		dog_back.SetTopLeft(dog_back.GetLeft() - 3, dog_back.GetTop() - 4);
-		back_t += 1;
-	}
-	else if (back_t > 15 && back_t <= 30) {
-		dog_back.SetTopLeft(dog_back.GetLeft() - 3, dog_back.GetTop() + 4);
-		back_t += 1;
-	}
-	else if (back_t > 30 && back_t <= 37) {
-		dog_back.SetTopLeft(dog_back.GetLeft() - 2, dog_back.GetTop() - 3);
-		back_t += 1;
-	}
-	else if (back_t > 37 && back_t <= 44) {
-		dog_back.SetTopLeft(dog_back.GetLeft() - 2, dog_back.GetTop() + 3);
-		back_t += 1;
-	}
-	else {
-		back_t += 1;
-	}
 }
 
 void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
@@ -377,7 +357,6 @@ void CGameStateRun::OnShow()
 	character_call_cat_5.ShowBitmap();        // 顯示召喚貓咪5(空)按鈕
 	character_tower_1.ShowBitmap();        // 顯示己方防禦塔
 	character_tower_2.ShowBitmap();        // 顯示敵方防禦塔
-	//dog_back.ShowBitmap();
 	///////////////////////////////////////////
 	// 顯示敵對生物及貓咪所有動畫、動畫切換
 	///////////////////////////////////////////
@@ -392,7 +371,7 @@ void CGameStateRun::OnShow()
 				t += 1;
 			}
 		}
-		if ((t == cat_one_friend.size() || cat_one_friend.size() == 0) && enemy_one_v[d]->GetLeft() + 50 + enemy_one_v[d]->GetWidth() < character_tower_1.GetLeft()) {
+		if ((t == cat_one_friend.size() || cat_one_friend.size() == 0) && enemy_one_v[d]->GetLeft() + 50 + enemy_one_v[d]->GetWidth() < character_tower_1.GetLeft() && enemy_one_v_type[d] != 2) {
 			if (enemy_one_v_type[d] == 1) {
 				enemy_one_v[d]->SetTopLeft(enemy_one_v_attack[d]->GetLeft(), enemy_one_v_attack[d]->GetTop());
 				enemy_one_v_type[d] = 0;
@@ -412,8 +391,8 @@ void CGameStateRun::OnShow()
 			enemy_whether_attack[d] = true;
 		}
 	}
-	int been_attack = 0;
 	for (int i = 0; i < cat_one_friend.size(); i++) {
+		int been_attack = 0;
 		int t = 0;
 		for (int d = 0; d < enemy_one_v.size(); d++) {
 			if (enemy_one_v[d]->GetLeft() + 50 + enemy_one_v[d]->GetWidth() < cat_one_friend[i]->GetLeft()) {
@@ -440,25 +419,54 @@ void CGameStateRun::OnShow()
 			cat_one_friend_attack[i]->ShowBitmap();
 			cat_one_friend_bump[i]->ShowBitmap();
 
-			if (cat_one_friend_attack[i]->GetFrameIndexOfBitmap() == 4 && cat_one_friend_type[i] == 1 && (t1==0 || clock() - t1 >= 1100)) { //設定攻擊動畫扣血
+			if (cat_one_friend_attack[i]->GetFrameIndexOfBitmap() == 4 && cat_one_friend_type[i] == 1 && been_attack == 0) { //設定攻擊動畫扣血
+				been_attack = 1;
 				for (int j = 0; j < enemy_one_v.size(); j++) {
-					if (been_attack == 0 ) {
-						t1 = clock();
+					//if (been_attack == 0) {
+						//t1 = clock();
 						enemy_one_v[j]->heart -= cat_one_friend[i]->power;
-						been_attack = 1;
+						//been_attack = 1;
 						if (enemy_one_v[j]->get_heart() <= 0) {
-							/*
-							enemy_one_v[j]->SetTopLeft(0, 0);
-							enemy_one_v_attack[0,0]->SetTopLeft(0, 0);
-							enemy_one_v_bump[0,0]->SetTopLeft(0, 0);
-							*/
-
+							/*enemy_one_v_type[j] = 2;
+							dog_back.SetTopLeft(enemy_one_v[j]->GetLeft(), enemy_one_v[j]->GetTop());
+							enemy_one_v[j]->SetTopLeft(enemy_one_v[j]->GetLeft() - 118, enemy_one_v[j]->GetTop());
+							enemy_one_v_attack[j]->SetTopLeft(enemy_one_v[j]->GetLeft(), enemy_one_v[j]->GetTop());
+							enemy_one_v_bump[j]->SetTopLeft(enemy_one_v[j]->GetLeft(), enemy_one_v[j]->GetTop());*/
+							cat_one_friend_attack[i]->SetFrameIndexOfBitmap(0);
+							cat_one_friend_bump[i]->SetFrameIndexOfBitmap(0);
+							enemy_one_v.erase(enemy_one_v.begin() + i);
+							enemy_one_v_attack.erase(enemy_one_v_attack.begin() + i);
+							enemy_one_v_bump.erase(enemy_one_v_bump.begin() + i);
+							enemy_one_v_type.erase(enemy_one_v_type.begin() + i);
+							enemy_whether_attack.erase(enemy_whether_attack.begin() + i);
 						}
 						break;
-					}
+					//}
 				}
 			}
-			been_attack = 0;
+		}
+		if (enemy_one_v_type[0] == 2 && enemy_one_v.size() > 0) {
+				dog_back.ShowBitmap();
+			if (back_t <= 15) {
+				dog_back.SetTopLeft(dog_back.GetLeft() - 3, dog_back.GetTop() - 4);
+				back_t += 1;
+			}
+			else if (back_t > 15 && back_t <= 30) {
+				dog_back.SetTopLeft(dog_back.GetLeft() - 3, dog_back.GetTop() + 4);
+				back_t += 1;
+			}
+			else if (back_t > 30 && back_t <= 37) {
+				dog_back.SetTopLeft(dog_back.GetLeft() - 2, dog_back.GetTop() - 3);
+				back_t += 1;
+			}
+			else if (back_t > 37 && back_t <= 44) {
+				dog_back.SetTopLeft(dog_back.GetLeft() - 2, dog_back.GetTop() + 3);
+				back_t += 1;
+			}
+			else {
+				back_t += 1;
+				enemy_one_v_type[0] = 1;
+			}
 		}
 	}
 
