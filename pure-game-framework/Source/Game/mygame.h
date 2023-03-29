@@ -106,7 +106,6 @@ namespace game_framework {
 		int money_30 = 0;
 		int max_money_30 = 100;
 		int now_Level = 1;
-		int back_t = 0;
 		
 		CMovingBitmap background;
 		CMovingBitmap money_map;
@@ -120,13 +119,11 @@ namespace game_framework {
 		CMovingBitmap Level_shine[7];
 		CMovingBitmap character_tower_1;
 		CMovingBitmap character_tower_2;
-		CMovingBitmap character;
-		CMovingBitmap character_attack;
-		CMovingBitmap character_bump;
-		CMovingBitmap dog_back;
 		vector<enemy_one*> enemy_one_v;
 		vector<enemy_one*> enemy_one_v_attack;
 		vector<enemy_one*> enemy_one_v_bump;
+		vector<enemy_one*> enemy_one_v_back;
+		vector<enemy_one*> enemy_one_v_death;
 		vector<int> enemy_one_v_type;
 		vector<bool> enemy_whether_attack;
 		vector<cat_one*> cat_one_friend;
@@ -134,6 +131,8 @@ namespace game_framework {
 		vector<cat_one*> cat_one_friend_bump;
 		vector<int> cat_one_friend_type;
 		vector<int> cat_one_friend_c;
+		vector<int> enemy_one_v_back_times;
+		vector<bool> enemy_one_v_if_death;
 		int current_cat_1 = 0;
 		int current_enemy_1 = 0;
 		cat_one base_1;

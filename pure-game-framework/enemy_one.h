@@ -36,13 +36,14 @@ namespace game_framework {
 		int get_power();
 		int get_walk_speed();
 		void set_name(int i);
+		int get_if_attack();
 		int price;
 		int heart;
 		int single_attack;
 		int attack_range;
 		int power;
 		int walk_speed;
-
+		int if_attack;
 
 	protected:
 		

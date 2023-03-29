@@ -36,6 +36,7 @@ namespace game_framework {
 		int get_walk_speed();
 		int get_cool_time();
 		void set_name(int i);
+		int get_if_attack();
 		int price;
 		int heart;
 		int single_attack;
@@ -43,7 +44,7 @@ namespace game_framework {
 		int power;
 		int walk_speed;
 		int cool_time;
-
+		int if_attack;
 	protected:
 		/*
 		int price = 50;

@@ -33,6 +33,7 @@ namespace game_framework {
 		attack_range = 5;
 		power = 5;
 		walk_speed = 2;
+		if_attack = 0;
 	}
 
 	enemy_one * enemy_one::create_enemy()
@@ -77,4 +78,8 @@ namespace game_framework {
 		name = i;
 	}
 
+	int enemy_one::get_if_attack()
+	{
+		return if_attack;
+	}
 }

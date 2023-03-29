@@ -33,6 +33,7 @@ namespace game_framework {
 		power = 5;
 		walk_speed = 2;
 		cool_time = 5;
+		if_attack = 0;
 	}
 
 
@@ -81,6 +82,11 @@ namespace game_framework {
 	void cat_one::set_name(int i)
 	{
 		name = i;
+	}
+
+	int cat_one::get_if_attack()
+	{
+		return if_attack;
 	}
 
 
