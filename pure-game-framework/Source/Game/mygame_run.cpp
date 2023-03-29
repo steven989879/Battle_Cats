@@ -445,7 +445,7 @@ void CGameStateRun::OnShow()
 				}
 			}
 		}
-		if (enemy_one_v_type[0] == 2 && enemy_one_v.size() > 0) {
+		/*if (enemy_one_v_type[0] == 2 && enemy_one_v.size() > 0) {
 				dog_back.ShowBitmap();
 			if (back_t <= 15) {
 				dog_back.SetTopLeft(dog_back.GetLeft() - 3, dog_back.GetTop() - 4);
@@ -467,7 +467,7 @@ void CGameStateRun::OnShow()
 				back_t += 1;
 				enemy_one_v_type[0] = 1;
 			}
-		}
+		}*/
 	}
 
 	for (int d = 0; d < enemy_whether_attack.size(); d++) {
