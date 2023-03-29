@@ -426,7 +426,6 @@ void CGameStateRun::OnShow()
 							enemy_one_v_attack[0,0]->SetTopLeft(0, 0);
 							enemy_one_v_bump[0,0]->SetTopLeft(0, 0);
 							*/
-
 						}
 						break;
 					}
