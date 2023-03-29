@@ -118,6 +118,26 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		enemy = 0;        // 計數歸零
 	}
 	enemy += 1;        // 時間計數每秒+30
+
+	if (back_t <= 15) {
+		dog_back.SetTopLeft(dog_back.GetLeft() - 3, dog_back.GetTop() - 4);
+		back_t += 1;
+	}
+	else if (back_t > 15 && back_t <= 30) {
+		dog_back.SetTopLeft(dog_back.GetLeft() - 3, dog_back.GetTop() + 4);
+		back_t += 1;
+	}
+	else if (back_t > 30 && back_t <= 37) {
+		dog_back.SetTopLeft(dog_back.GetLeft() - 2, dog_back.GetTop() - 3);
+		back_t += 1;
+	}
+	else if (back_t > 37 && back_t <= 44) {
+		dog_back.SetTopLeft(dog_back.GetLeft() - 2, dog_back.GetTop() + 3);
+		back_t += 1;
+	}
+	else {
+		back_t += 1;
+	}
 }
 
 void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
@@ -227,6 +247,11 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 		"resources/tower_2.bmp"        // 載入敵方防禦塔
 		}, RGB(255, 255, 255));
 	character_tower_2.SetTopLeft(100, 163);
+
+	dog_back.LoadBitmapByString({
+		"resources/dog_back.bmp"
+		}, RGB(255, 255, 255));
+	dog_back.SetTopLeft(800, 300);
 
 	//base_1 = cat_one();
 	base_1.price = 50;
@@ -352,6 +377,7 @@ void CGameStateRun::OnShow()
 	character_call_cat_5.ShowBitmap();        // 顯示召喚貓咪5(空)按鈕
 	character_tower_1.ShowBitmap();        // 顯示己方防禦塔
 	character_tower_2.ShowBitmap();        // 顯示敵方防禦塔
+	//dog_back.ShowBitmap();
 	///////////////////////////////////////////
 	// 顯示敵對生物及貓咪所有動畫、動畫切換
 	///////////////////////////////////////////
