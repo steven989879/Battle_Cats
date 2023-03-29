@@ -102,7 +102,7 @@ namespace game_framework {
 		void draw_text();
 		int times = 0;
 		int money = 0;
-		int money_persecond = 6;
+		int money_persecond = 10;
 		int money_30 = 0;
 		int max_money_30 = 100;
 		int now_Level = 1;
