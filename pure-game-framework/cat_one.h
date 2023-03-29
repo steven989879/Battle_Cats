@@ -43,7 +43,6 @@ namespace game_framework {
 		int power;
 		int walk_speed;
 		int cool_time;
-
 	protected:
 		/*
 		int price = 50;
