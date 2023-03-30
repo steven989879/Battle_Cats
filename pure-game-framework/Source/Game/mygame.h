@@ -139,8 +139,12 @@ namespace game_framework {
 		enemy_one base_enemy_1;
 		std::string s;
 		std::string s2;
+		std::string show_friend_tower;
+		std::string show_enemy_tower;
 		CMovingBitmap try1;
 		clock_t t1 = 0;
+		int friend_tower;
+		int enemy_tower;
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
