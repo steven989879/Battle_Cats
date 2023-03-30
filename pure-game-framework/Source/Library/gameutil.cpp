@@ -280,6 +280,11 @@ namespace game_framework {
 		isAnimationDone = false;
 	}
 
+		int CMovingBitmap::get_heart()
+		{
+			return heart;
+		}
+
 	//! 物件是否為動畫物件。
 	/*!
 		\return 布林值，表示物件是否為動畫物件。

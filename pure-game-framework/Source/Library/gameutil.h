@@ -122,6 +122,9 @@ namespace game_framework {
 		/* Toggle function */
 		void  ToggleAnimation();
 
+		int heart;
+		int get_heart();
+
 	protected:
 		//! 當前幀的索引值。
 		int frameIndex = 0;

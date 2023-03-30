@@ -144,6 +144,10 @@ namespace game_framework {
 		std::string s2;
 		CMovingBitmap try1;
 		clock_t t1 = 0;
+		std::string show_friend_tower;
+		std::string show_enemy_tower;
+		int friend_tower;
+		int enemy_tower;
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -161,6 +165,7 @@ namespace game_framework {
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
 		int counter;	// 倒數之計數器
+		CMovingBitmap background;
 	};
 
 }
