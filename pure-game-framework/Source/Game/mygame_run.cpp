@@ -7,9 +7,6 @@
 #include "../Library/gamecore.h"
 #include "mygame.h"
 #include "../../monster.h"
-#include "../../cat_one.h"
-#include "../../cat_factory.h"
-#include "../../enemy_one.h"
 #include <string>
 #include <ctime>
 using namespace game_framework;
@@ -42,7 +39,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 				t += 1;
 			}
 		}
-		if ((t == cat_one_friend.size() || cat_one_friend.size() == 0) && enemy_one_v[d]->GetLeft() + 50 + enemy_one_v[d]->GetWidth() < character_tower_1.GetLeft()) {
+		if ((t == cat_one_friend.size() || cat_one_friend.size() == 0) && enemy_one_v[d]->GetLeft() + 50 + enemy_one_v[d]->GetWidth() < character_tower_1.GetLeft() && enemy_one_v_type[d] != 2) {
 			enemy_one_v[d]->SetTopLeft(enemy_one_v[d]->GetLeft() + 1, enemy_one_v[d]->GetTop());
 		}
 		else {
@@ -57,7 +54,7 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 				t += 1;
 			}
 		}
-		if ((t == enemy_one_v.size() || enemy_one_v.size() == 0) && cat_one_friend[i]->GetLeft() > character_tower_2.GetLeft() + 50 + character_tower_2.GetWidth()) {
+		if ((t == enemy_one_v.size() || enemy_one_v.size() == 0) && cat_one_friend[i]->GetLeft() > character_tower_2.GetLeft() + 50 + character_tower_2.GetWidth() && cat_one_friend_type[i] != 2) {
 			cat_one_friend[i]->SetTopLeft(cat_one_friend[i]->GetLeft() - 2, cat_one_friend[i]->GetTop());
 		}
 		else {
@@ -83,9 +80,8 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		enemy_one_v_if_death.push_back(false);
 		enemy_whether_attack.push_back(false);
 
-		enemy_one *enemy1 = new enemy_one();
+		monster *enemy1 = new monster(11);
 		enemy_one_v.push_back(enemy1);
-		enemy_one_v[enemy_one_v.size() - 1]->set_name(enemy_one_v.size());
 		enemy_one_v[enemy_one_v.size() - 1]->LoadBitmapByString({
 		"resources/dog_walk_1.bmp" , "resources/dog_walk_2.bmp" , "resources/dog_walk_3.bmp" , "resources/dog_walk_2.bmp"        // 載入敵對狗走路動畫
 			}, RGB(255, 255, 255));
@@ -93,9 +89,8 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		enemy_one_v[enemy_one_v.size() - 1]->SetAnimation(250, 0);
 
 
-		enemy_one *enemy1_attack = new enemy_one();
+		monster *enemy1_attack = new monster();
 		enemy_one_v_attack.push_back(enemy1_attack);
-		enemy_one_v_attack[enemy_one_v_attack.size() - 1]->set_name(enemy_one_v_attack.size());
 		enemy_one_v_attack[enemy_one_v_attack.size() - 1]->LoadBitmapByString({
 		"resources/dog_attack_1.bmp" , "resources/dog_attack_2.bmp" , "resources/dog_attack_1.bmp" ,
 		"resources/dog_attack_3.bmp" , "resources/dog_attack_3.bmp" , "resources/dog_attack_3.bmp" ,
@@ -105,9 +100,8 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		"resources/dog_walk_2.bmp" , "resources/dog_walk_2.bmp" , "resources/dog_walk_2.bmp"        // 載入敵對狗攻擊動畫
 			}, RGB(255, 255, 255));
 
-		enemy_one *enemy1_bump = new enemy_one();
+		monster *enemy1_bump = new monster();
 		enemy_one_v_bump.push_back(enemy1_bump);
-		enemy_one_v_bump[enemy_one_v_bump.size() - 1]->set_name(enemy_one_v_bump.size());
 		enemy_one_v_bump[enemy_one_v_bump.size() - 1]->LoadBitmapByString({
 		"resources/bump_0.bmp" , "resources/bump_0.bmp" , "resources/bump_0.bmp" ,
 		"resources/bump_1_inverse.bmp" , "resources/bump_2_inverse.bmp" , "resources/bump_3_inverse.bmp" ,
@@ -117,9 +111,8 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		"resources/bump_0.bmp" , "resources/bump_0.bmp" , "resources/bump_0.bmp"        // 載入敵對狗攻擊爆炸動畫
 			}, RGB(255, 255, 255));
 
-		enemy_one *enemy1_back = new enemy_one();
+		monster *enemy1_back = new monster();
 		enemy_one_v_back.push_back(enemy1_back);
-		enemy_one_v_back[enemy_one_v_back.size() - 1]->set_name(enemy_one_v_back.size());
 		enemy_one_v_back[enemy_one_v_back.size() - 1]->LoadBitmapByString({
 		"resources/dog_back_0.bmp" , "resources/dog_back_1.bmp" , "resources/dog_back_2.bmp" ,
 		"resources/dog_back_3.bmp" , "resources/dog_back_4.bmp" , "resources/dog_back_5.bmp" ,
@@ -135,9 +128,8 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		"resources/dog_back_33.bmp" , "resources/dog_back_34.bmp" , "resources/dog_back_35.bmp"
 			}, RGB(255, 255, 255));
 
-		enemy_one *enemy1_death = new enemy_one();
+		monster *enemy1_death = new monster();
 		enemy_one_v_death.push_back(enemy1_death);
-		enemy_one_v_death[enemy_one_v_death.size() - 1]->set_name(enemy_one_v_death.size());
 		enemy_one_v_death[enemy_one_v_death.size() - 1]->LoadBitmapByString({
 		"resources/death_1.bmp" , "resources/death_2.bmp" , "resources/death_3.bmp" ,
 		"resources/death_4.bmp" , "resources/death_5.bmp" , "resources/death_6.bmp" ,
@@ -275,18 +267,9 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 		}, RGB(255, 255, 255));
 	character_tower_2.SetTopLeft(100, 163);
 
-	//base_1 = cat_one();
-	base_1.price = 50;
-	base_1.single_attack = 1;
-	base_1.power = 5;
-	base_1.heart = 50;
+	base_1 = monster(1);
 
-	base_enemy_1.single_attack = 1;
-	base_enemy_1.power = 3;
-	base_enemy_1.heart = 30;
-
-	try1.LoadBitmapByString({ "resources/bulb_dark.bmp" });
-	try1.SetTopLeft(0, 0);
+	base_11 = monster(11);
 
 	friend_tower = 1000;
 	enemy_tower = 500;
@@ -318,18 +301,16 @@ void CGameStateRun::OnLButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的
 		cat_one_friend_back_times.push_back(0);
 		cat_one_friend_if_death.push_back(false);
 
-		cat_one *temp1 = new cat_one();
+		monster *temp1 = new monster(1);
 		cat_one_friend.push_back(temp1);
-		cat_one_friend[cat_one_friend.size() - 1]->set_name(cat_one_friend.size());
 		cat_one_friend[cat_one_friend.size() - 1]->LoadBitmapByString({
 		"resources/cat_walk_1.bmp" , "resources/cat_walk_2.bmp" , "resources/cat_walk_3.bmp" , "resources/cat_walk_2.bmp"        // 載入貓咪1走路動畫
 			}, RGB(255, 255, 255));
 		cat_one_friend[cat_one_friend.size() - 1]->SetTopLeft(1400, 430);
 		cat_one_friend[cat_one_friend.size() - 1]->SetAnimation(125, 0);
 
-		cat_one *attack1 = new cat_one();
+		monster *attack1 = new monster();
 		cat_one_friend_attack.push_back(attack1);
-		cat_one_friend_attack[cat_one_friend_attack.size() - 1]->set_name(cat_one_friend_attack.size());
 		cat_one_friend_attack[cat_one_friend_attack.size() - 1]->LoadBitmapByString({
 		"resources/cat_attack_1.bmp" , "resources/cat_attack_2.bmp" , "resources/cat_attack_1.bmp" ,
 		"resources/cat_attack_3.bmp" , "resources/cat_attack_3.bmp" , "resources/cat_attack_3.bmp" ,
@@ -337,9 +318,8 @@ void CGameStateRun::OnLButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的
 		"resources/cat_walk_2.bmp" , "resources/cat_walk_2.bmp" , "resources/cat_walk_2.bmp"        // 載入貓咪1攻擊動畫
 			}, RGB(255, 255, 255));
 
-		cat_one *bump1 = new cat_one();
+		monster *bump1 = new monster();
 		cat_one_friend_bump.push_back(bump1);
-		cat_one_friend_bump[cat_one_friend_bump.size() - 1]->set_name(cat_one_friend_bump.size());
 		cat_one_friend_bump[cat_one_friend_bump.size() - 1]->LoadBitmapByString({
 		"resources/bump_0.bmp" , "resources/bump_0.bmp" , "resources/bump_0.bmp" ,
 		"resources/bump_1.bmp" , "resources/bump_2.bmp" , "resources/bump_3.bmp" ,
@@ -347,9 +327,8 @@ void CGameStateRun::OnLButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的
 		"resources/bump_0.bmp" , "resources/bump_0.bmp" , "resources/bump_0.bmp"        // 載入貓咪1攻擊爆炸動畫
 			}, RGB(255, 255, 255));
 
-		cat_one *back1 = new cat_one();
+		monster *back1 = new monster();
 		cat_one_friend_back.push_back(back1);
-		cat_one_friend_back[cat_one_friend_back.size() - 1]->set_name(cat_one_friend_back.size());
 		cat_one_friend_back[cat_one_friend_back.size() - 1]->LoadBitmapByString({
 		"resources/cat_back_0.bmp" , "resources/cat_back_1.bmp" , "resources/cat_back_2.bmp" ,
 		"resources/cat_back_3.bmp" , "resources/cat_back_4.bmp" , "resources/cat_back_5.bmp" ,
@@ -365,9 +344,8 @@ void CGameStateRun::OnLButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的
 		"resources/cat_back_33.bmp" , "resources/cat_back_34.bmp" , "resources/cat_back_35.bmp"
 			}, RGB(255, 255, 255));
 
-		cat_one *death1 = new cat_one();
+		monster *death1 = new monster();
 		cat_one_friend_death.push_back(death1);
-		cat_one_friend_death[cat_one_friend_death.size() - 1]->set_name(cat_one_friend_death.size());
 		cat_one_friend_death[cat_one_friend_death.size() - 1]->LoadBitmapByString({
 		"resources/death_1.bmp" , "resources/death_2.bmp" , "resources/death_3.bmp" ,
 		"resources/death_4.bmp" , "resources/death_5.bmp" , "resources/death_6.bmp" ,
@@ -711,27 +689,11 @@ void CGameStateRun::draw_text() {
 	}
 	CTextDraw::Print(pDC, Px, 3, print);
 
-	CTextDraw::ChangeFontLog(pDC, 16, "Arial Black", RGB(254, 254, 254), 900);
+	CTextDraw::ChangeFontLog(pDC, 20, "Arial Black", RGB(0, 0, 0), 900);
 	show_friend_tower = std::to_string(friend_tower);
-	CTextDraw::Print(pDC, 1425, 130, (show_friend_tower + "/1000"));
+	CTextDraw::Print(pDC, 1290, 175, (show_friend_tower + "/1000"));
 	show_enemy_tower = std::to_string(enemy_tower);
-	CTextDraw::Print(pDC, 160, 130, (show_enemy_tower + "/500"));
+	CTextDraw::Print(pDC, 255, 175, (show_enemy_tower + "/500"));
 
-	//test
-	if (enemy_one_v.size() >= 1 && cat_one_friend.size() >= 1)
-	{
-		std::string s1 = std::to_string(enemy_one_v[0]->get_heart());
-		std::string s2 = std::to_string(cat_one_friend[0]->get_heart());
-		std::string s3 = s1 + "//" + s2;
-		int Px = 500;
-		CTextDraw::ChangeFontLog(pDC, 30, "Arial Black", RGB(255, 200, 0), 900);
-		CTextDraw::Print(pDC, Px, 3, s3);
-
-		Px = 700;
-		std::string s4 = std::to_string(enemy_one_v[0]->get_power());
-		CTextDraw::ChangeFontLog(pDC, 30, "Arial Black", RGB(255, 200, 0), 900);
-		CTextDraw::Print(pDC, Px, 3, s4);;
-	}
-	
 	CDDraw::ReleaseBackCDC();
 }

@@ -24,22 +24,26 @@ namespace game_framework {
 	class monster : public CMovingBitmap {
 	public:
 		monster();
+		monster(int type_ID);
+		~monster() = default;
 
-		virtual int get_price();
-		virtual int get_heart();
-		virtual int get_attack_range();
-		virtual int get_power();
-		virtual int get_walk_speed();
-		virtual int get_cool_time();
-		virtual void set_name(int i);
+		int get_price();
+		int get_heart();
+		int get_single_attack();
+		int get_attack_range();
+		int get_power();
+		int get_walk_speed();
+		int get_cool_time();
+		int get_if_attack();
+		int price;
+		int heart;
+		int single_attack;
+		int attack_range;
+		int power;
+		int walk_speed;
+		int cool_time;
+		int if_attack;
 	protected:
-		int name;
-		int price  ;
-		int heart ;
-		int attack_range ;
-		int power ;
-		int walk_speed ;
-		int cool_time ;
 	};
 
 }

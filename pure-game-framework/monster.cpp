@@ -25,8 +25,31 @@ namespace game_framework {
 
 	monster::monster(): CMovingBitmap()
 	{
-		isBitmapLoaded = false;
+		
 	}
+
+	monster::monster(int type_ID)
+	{
+		if (type_ID == 1) {
+			isBitmapLoaded = false;
+			price = 50;
+			heart = 30;
+			attack_range = 5;
+			power = 5;
+			walk_speed = 2;
+			if_attack = 0;
+		}
+		if (type_ID == 11) {
+			isBitmapLoaded = false;
+			price = 50;
+			heart = 30;
+			attack_range = 5;
+			power = 5;
+			walk_speed = 2;
+			if_attack = 0;
+		}
+	}
+
 	int monster::get_price() 
 	{
 		return price ; 
@@ -35,6 +58,11 @@ namespace game_framework {
 	int monster::get_heart()
 	{
 		return heart;
+	}
+
+	int monster::get_single_attack()
+	{
+		return single_attack;
 	}
 
 	int monster::get_attack_range()
@@ -57,10 +85,11 @@ namespace game_framework {
 		return cool_time;
 	}
 
-	void monster::set_name(int i)
+	int monster::get_if_attack()
 	{
-		name = i;
+		return if_attack;
 	}
+
 
 
 }
