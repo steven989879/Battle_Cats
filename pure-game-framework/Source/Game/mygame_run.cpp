@@ -450,7 +450,9 @@ void CGameStateRun::OnShow()
 				enemy_one_v[d]->attack.SetAnimation(100, 0);
 				enemy_one_v[d]->bump.SetTopLeft(enemy_one_v[d]->GetLeft() + 100, enemy_one_v[d]->GetTop() - 25);
 				enemy_one_v[d]->bump.SetAnimation(100, 0);
-				enemy_one_v[d]->ShowBitmap();
+				enemy_one_v[d]->bump.ShowBitmap();
+				enemy_one_v[d]->attack.SetAnimation(100, 0);
+				enemy_one_v[d]->attack.ShowBitmap();
 				enemy_one_v[d]->whether_attack = true;
 
 				if (enemy_one_v[d]->attack.GetFrameIndexOfBitmap() == 1) {
@@ -466,37 +468,45 @@ void CGameStateRun::OnShow()
 						now_position_cat = j;
 					}
 				}
-
 				if (enemy_one_v[d]->attack.GetFrameIndexOfBitmap() == 4 && enemy_one_v[d]->get_type() == 1 && enemy_one_v[d]->get_if_attack() == 0) { //設定攻擊動畫扣血
 					if (cat_one_friend.size() > 0) {
-						cat_one_friend[now_position_cat]->heart -= enemy_one_v[now_position_cat]->power;
-						enemy_one_v[d]->if_attack = 1;
-						if (cat_one_friend[now_position_cat]->heart <= 0) {
-							enemy_one_v[d]->attack.SetFrameIndexOfBitmap(0);
-							enemy_one_v[d]->bump.SetFrameIndexOfBitmap(0);
-							cat_one_friend_if_death[now_position_cat] = true;
-							cat_one_friend_back[now_position_cat]->SetTopLeft(enemy_one_v[now_position_cat]->GetLeft() + 136, enemy_one_v[now_position_cat]->GetTop() - 50);
-							cat_one_friend_death[now_position_cat]->SetTopLeft(enemy_one_v[now_position_cat]->GetLeft() + 136, 0);
-							cat_one_friend_back[now_position_cat]->SetAnimation(20, 0);
-							cat_one_friend.erase(cat_one_friend.begin() + now_position_cat);
-							/*
-							cat_one_friend_attack.erase(cat_one_friend_attack.begin() + now_position_cat);
-							cat_one_friend_bump.erase(cat_one_friend_bump.begin() + now_position_cat);
-							cat_one_friend_type.erase(cat_one_friend_type.begin() + now_position_cat);
-							cat_one_friend_back_times.erase(cat_one_friend_back_times.begin() + now_position_cat);
-							*/
+						if (enemy_one_v[now_position_cat]->GetLeft() > 1400) {
+							friend_tower -= enemy_one_v[d]->get_power();
+							enemy_one_v[d]->if_attack = 1;
+							if (friend_tower <= 0) {
+								GotoGameState(GAME_STATE_OVER);
+							}
 						}
-						else if (cat_one_friend[now_position_cat]->heart <= 15 && cat_one_friend[now_position_cat]->get_back_time() == 0) {
-							cat_one_friend[now_position_cat]->back_time = 1;
-							cat_one_friend[now_position_cat]->type = 2;
-							enemy_one_v[d]->attack.SetFrameIndexOfBitmap(0);
-							enemy_one_v[d]->bump.SetFrameIndexOfBitmap(0);
-							cat_one_friend[now_position_cat]->SetTopLeft(cat_one_friend[now_position_cat]->GetLeft() + 136, cat_one_friend[now_position_cat]->GetTop());
-							cat_one_friend[now_position_cat]->attack.SetTopLeft(cat_one_friend[now_position_cat]->GetLeft(), cat_one_friend[now_position_cat]->GetTop());
-							cat_one_friend_back[now_position_cat]->SetTopLeft(enemy_one_v[now_position_cat]->GetLeft() + 136, enemy_one_v[now_position_cat]->GetTop() - 50);
-							cat_one_friend[now_position_cat]->attack.SetFrameIndexOfBitmap(0);
-							cat_one_friend[now_position_cat]->bump.SetFrameIndexOfBitmap(0);
-							cat_one_friend_back[now_position_cat]->SetAnimation(20, 0);
+						else {
+							cat_one_friend[now_position_cat]->heart -= enemy_one_v[now_position_cat]->power;
+							enemy_one_v[d]->if_attack = 1;
+							if (cat_one_friend[now_position_cat]->heart <= 0) {
+								enemy_one_v[d]->attack.SetFrameIndexOfBitmap(0);
+								enemy_one_v[d]->bump.SetFrameIndexOfBitmap(0);
+								cat_one_friend_if_death[now_position_cat] = true;
+								cat_one_friend_back[now_position_cat]->SetTopLeft(enemy_one_v[now_position_cat]->GetLeft() + 136, enemy_one_v[now_position_cat]->GetTop() - 50);
+								cat_one_friend_death[now_position_cat]->SetTopLeft(enemy_one_v[now_position_cat]->GetLeft() + 136, 0);
+								cat_one_friend_back[now_position_cat]->SetAnimation(20, 0);
+								cat_one_friend.erase(cat_one_friend.begin() + now_position_cat);
+								/*
+								cat_one_friend_attack.erase(cat_one_friend_attack.begin() + now_position_cat);
+								cat_one_friend_bump.erase(cat_one_friend_bump.begin() + now_position_cat);
+								cat_one_friend_type.erase(cat_one_friend_type.begin() + now_position_cat);
+								cat_one_friend_back_times.erase(cat_one_friend_back_times.begin() + now_position_cat);
+								*/
+							}
+							else if (cat_one_friend[now_position_cat]->heart <= 15 && cat_one_friend[now_position_cat]->get_back_time() == 0) {
+								cat_one_friend[now_position_cat]->back_time = 1;
+								cat_one_friend[now_position_cat]->type = 2;
+								enemy_one_v[d]->attack.SetFrameIndexOfBitmap(0);
+								enemy_one_v[d]->bump.SetFrameIndexOfBitmap(0);
+								cat_one_friend[now_position_cat]->SetTopLeft(cat_one_friend[now_position_cat]->GetLeft() + 136, cat_one_friend[now_position_cat]->GetTop());
+								cat_one_friend[now_position_cat]->attack.SetTopLeft(cat_one_friend[now_position_cat]->GetLeft(), cat_one_friend[now_position_cat]->GetTop());
+								cat_one_friend_back[now_position_cat]->SetTopLeft(enemy_one_v[now_position_cat]->GetLeft() + 136, enemy_one_v[now_position_cat]->GetTop() - 50);
+								cat_one_friend[now_position_cat]->attack.SetFrameIndexOfBitmap(0);
+								cat_one_friend[now_position_cat]->bump.SetFrameIndexOfBitmap(0);
+								cat_one_friend_back[now_position_cat]->SetAnimation(20, 0);
+							}
 						}
 					}
 					else {
@@ -512,7 +522,7 @@ void CGameStateRun::OnShow()
 	}
 	
 	/////////////////////////////////////////////////////////////////////////////////
-	for (int i = 0; i < cat_one_friend.size(); i++) {
+	for (int i = 0; i < cat_one_friend_back.size(); i++) {
 		if (!(cat_one_friend_if_death[i])) {
 			if (cat_one_friend_back[i]->IsAnimation() && cat_one_friend[i]->get_type() == 2) {
 				cat_one_friend_back[i]->ShowBitmap();
@@ -523,7 +533,7 @@ void CGameStateRun::OnShow()
 			}
 		}
 	}
-	for (int i = 0; i < cat_one_friend.size(); i++) {
+	for (int i = 0; i < cat_one_friend_back.size(); i++) {
 		if (cat_one_friend_back[i]->IsAnimation() && cat_one_friend_if_death[i]) {
 			cat_one_friend_back[i]->ShowBitmap();
 		}
@@ -583,39 +593,46 @@ void CGameStateRun::OnShow()
 						now_position_enemy = j;
 					}
 				}
-
-				if (cat_one_friend[i]->attack.GetFrameIndexOfBitmap() == 4 && cat_one_friend[i]->get_type() == 1 && cat_one_friend[i]->get_if_attack() == 0) { //設定攻擊動畫扣血
-					
+				if (cat_one_friend[i]->attack.GetFrameIndexOfBitmap() == 4 && cat_one_friend[i]->get_type() == 1 && cat_one_friend[i]->get_if_attack() == 0) { //設定攻擊動畫扣血	
 					if (enemy_one_v.size() > 0) {
-						enemy_one_v[now_position_enemy]->heart -= cat_one_friend[i]->power;
-						cat_one_friend[i]->if_attack = 1;
-						if (enemy_one_v[now_position_enemy]->heart <= 0) {
-							cat_one_friend[i]->attack.SetFrameIndexOfBitmap(0);
-							cat_one_friend[i]->bump.SetFrameIndexOfBitmap(0);
-							enemy_one_v_if_death[now_position_enemy] = true;
-							enemy_one_v_back[now_position_enemy]->SetTopLeft(enemy_one_v[now_position_enemy]->GetLeft() - 136, enemy_one_v[now_position_enemy]->GetTop() - 50);
-							enemy_one_v_death[now_position_enemy]->SetTopLeft(enemy_one_v[now_position_enemy]->GetLeft() - 136, 0);
-							enemy_one_v_back[now_position_enemy]->SetAnimation(20, 0);
-							enemy_one_v.erase(enemy_one_v.begin() + now_position_enemy); //照刪?
-							/*
-							enemy_one_v_attack.erase(enemy_one_v_attack.begin() + now_position_enemy);
-							enemy_one_v_bump.erase(enemy_one_v_bump.begin() + now_position_enemy);
-							enemy_one_v_type.erase(enemy_one_v_type.begin() + now_position_enemy);
-							enemy_one_v_back_times.erase(enemy_one_v_back_times.begin() + now_position_enemy);
-							enemy_whether_attack.erase(enemy_whether_attack.begin() + now_position_enemy);
-							*/
+						if (enemy_one_v[now_position_enemy]->GetLeft() < 100) {//如果都在塔後
+							enemy_tower -= cat_one_friend[i]->get_power();
+							cat_one_friend[i]->if_attack = 1;
+							if (enemy_tower <= 0) {
+								GotoGameState(GAME_STATE_OVER);
+							}
 						}
-						else if (enemy_one_v[now_position_enemy]->heart <= 15 && enemy_one_v[now_position_enemy]->get_back_time() == 0) {
-							enemy_one_v[now_position_enemy]->back_time = 1;
-							enemy_one_v[now_position_enemy]->type = 2;
-							cat_one_friend[i]->attack.SetFrameIndexOfBitmap(0);
-							cat_one_friend[i]->bump.SetFrameIndexOfBitmap(0);
-							enemy_one_v[now_position_enemy]->SetTopLeft(enemy_one_v[now_position_enemy]->GetLeft() - 136, enemy_one_v[now_position_enemy]->GetTop());
-							enemy_one_v[now_position_enemy]->attack.SetTopLeft(enemy_one_v[now_position_enemy]->GetLeft(), enemy_one_v[now_position_enemy]->GetTop());
-							enemy_one_v_back[now_position_enemy]->SetTopLeft(enemy_one_v[now_position_enemy]->GetLeft(), enemy_one_v[now_position_enemy]->GetTop() - 50);
-							enemy_one_v[now_position_enemy]->attack.SetFrameIndexOfBitmap(0);
-							enemy_one_v[now_position_enemy]->bump.SetFrameIndexOfBitmap(0);
-							enemy_one_v_back[now_position_enemy]->SetAnimation(20, 0);
+						else {
+							enemy_one_v[now_position_enemy]->heart -= cat_one_friend[i]->power;
+							cat_one_friend[i]->if_attack = 1;
+							if (enemy_one_v[now_position_enemy]->heart <= 0) {
+								cat_one_friend[i]->attack.SetFrameIndexOfBitmap(0);
+								cat_one_friend[i]->bump.SetFrameIndexOfBitmap(0);
+								enemy_one_v_if_death[now_position_enemy] = true;
+								enemy_one_v_back[now_position_enemy]->SetTopLeft(enemy_one_v[now_position_enemy]->GetLeft() - 136, enemy_one_v[now_position_enemy]->GetTop() - 50);
+								enemy_one_v_death[now_position_enemy]->SetTopLeft(enemy_one_v[now_position_enemy]->GetLeft() - 136, 0);
+								enemy_one_v_back[now_position_enemy]->SetAnimation(20, 0);
+								enemy_one_v.erase(enemy_one_v.begin() + now_position_enemy); //照刪?
+								/*
+								enemy_one_v_attack.erase(enemy_one_v_attack.begin() + now_position_enemy);
+								enemy_one_v_bump.erase(enemy_one_v_bump.begin() + now_position_enemy);
+								enemy_one_v_type.erase(enemy_one_v_type.begin() + now_position_enemy);
+								enemy_one_v_back_times.erase(enemy_one_v_back_times.begin() + now_position_enemy);
+								enemy_whether_attack.erase(enemy_whether_attack.begin() + now_position_enemy);
+								*/
+							}
+							else if (enemy_one_v[now_position_enemy]->heart <= 15 && enemy_one_v[now_position_enemy]->get_back_time() == 0) {
+								enemy_one_v[now_position_enemy]->back_time = 1;
+								enemy_one_v[now_position_enemy]->type = 2;
+								cat_one_friend[i]->attack.SetFrameIndexOfBitmap(0);
+								cat_one_friend[i]->bump.SetFrameIndexOfBitmap(0);
+								enemy_one_v[now_position_enemy]->SetTopLeft(enemy_one_v[now_position_enemy]->GetLeft() - 136, enemy_one_v[now_position_enemy]->GetTop());
+								enemy_one_v[now_position_enemy]->attack.SetTopLeft(enemy_one_v[now_position_enemy]->GetLeft(), enemy_one_v[now_position_enemy]->GetTop());
+								enemy_one_v_back[now_position_enemy]->SetTopLeft(enemy_one_v[now_position_enemy]->GetLeft(), enemy_one_v[now_position_enemy]->GetTop() - 50);
+								enemy_one_v[now_position_enemy]->attack.SetFrameIndexOfBitmap(0);
+								enemy_one_v[now_position_enemy]->bump.SetFrameIndexOfBitmap(0);
+								enemy_one_v_back[now_position_enemy]->SetAnimation(20, 0);
+							}
 						}
 					}
 					else {
