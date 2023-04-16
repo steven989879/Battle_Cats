@@ -27,6 +27,17 @@ namespace game_framework {
 		monster(int type_ID);
 		~monster() = default;
 
+		int get_type();
+		int get_back_time();
+		bool get_whether_attack();
+
+		int type;
+		int back_time;
+		bool whether_attack;
+		CMovingBitmap attack;
+		CMovingBitmap bump;
+		//CMovingBitmap back;
+		
 		int get_price();
 		int get_heart();
 		int get_single_attack();

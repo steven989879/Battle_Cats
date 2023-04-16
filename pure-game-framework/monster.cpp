@@ -38,6 +38,9 @@ namespace game_framework {
 			power = 5;
 			walk_speed = 2;
 			if_attack = 0;
+			type = 0;
+			back_time = 0;
+			whether_attack = false;
 		}
 		if (type_ID == 11) {
 			isBitmapLoaded = false;
@@ -47,7 +50,25 @@ namespace game_framework {
 			power = 5;
 			walk_speed = 2;
 			if_attack = 0;
+			type = 0;
+			back_time = 0;
+			whether_attack = false;
 		}
+	}
+
+	int monster::get_type()
+	{
+		return type;
+	}
+
+	int monster::get_back_time()
+	{
+		return back_time;
+	}
+
+	bool monster::get_whether_attack()
+	{
+		return whether_attack;
 	}
 
 	int monster::get_price() 
