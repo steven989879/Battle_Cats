@@ -122,7 +122,7 @@ namespace game_framework {
 		vector<monster*> enemy_one_v;
 		//vector<monster*> enemy_one_v_attack;
 		//vector<monster*> enemy_one_v_bump;
-		vector<monster*> enemy_one_v_back;
+		vector<monster> enemy_one_v_back;
 		vector<monster*> enemy_one_v_death;
 		//vector<int> enemy_one_v_type;
 		//vector<int> enemy_one_v_back_times;
@@ -207,14 +207,14 @@ namespace game_framework {
 		CMovingBitmap character_tower_1;
 		CMovingBitmap character_tower_2;
 
-		vector<monster*> enemy_one_v;
-		vector<monster*> enemy_one_v_back;
-		vector<monster*> enemy_one_v_death;
+		vector<monster> enemy_one_v;
+		vector<monster> enemy_one_v_back;
+		vector<monster> enemy_one_v_death;
 		vector<bool> enemy_one_v_if_death;
 
-		vector<monster*> cat_one_friend;
-		vector<monster*> cat_one_friend_back;
-		vector<monster*> cat_one_friend_death;
+		vector<monster> cat_one_friend;
+		vector<monster> cat_one_friend_back;
+		vector<monster> cat_one_friend_death;
 		vector<bool> cat_one_friend_if_death;
 		int current_cat_1 = 0;
 		int current_enemy_1 = 0;

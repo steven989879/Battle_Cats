@@ -109,9 +109,10 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 		"resources/bump_0.bmp" , "resources/bump_0.bmp" , "resources/bump_0.bmp"        // 載入敵對狗攻擊爆炸動畫
 			}, RGB(255, 255, 255));
 
-		monster *enemy1_back = new monster();
+		monster enemy1_back;
+		enemy1_back:monster(11);
 		enemy_one_v_back.push_back(enemy1_back);
-		enemy_one_v_back[enemy_one_v_back.size() - 1]->LoadBitmapByString({
+		enemy_one_v_back[enemy_one_v_back.size() - 1].LoadBitmapByString({
 		"resources/dog_back_0.bmp" , "resources/dog_back_1.bmp" , "resources/dog_back_2.bmp" ,
 		"resources/dog_back_3.bmp" , "resources/dog_back_4.bmp" , "resources/dog_back_5.bmp" ,
 		"resources/dog_back_6.bmp" , "resources/dog_back_7.bmp" , "resources/dog_back_8.bmp" ,
@@ -609,9 +610,9 @@ void CGameStateRun::OnShow()
 								cat_one_friend[i]->attack.SetFrameIndexOfBitmap(0);
 								cat_one_friend[i]->bump.SetFrameIndexOfBitmap(0);
 								enemy_one_v_if_death[now_position_enemy] = true;
-								enemy_one_v_back[now_position_enemy]->SetTopLeft(enemy_one_v[now_position_enemy]->GetLeft() - 136, enemy_one_v[now_position_enemy]->GetTop() - 50);
+								enemy_one_v_back[now_position_enemy].SetTopLeft(enemy_one_v[now_position_enemy]->GetLeft() - 136, enemy_one_v[now_position_enemy]->GetTop() - 50);
 								enemy_one_v_death[now_position_enemy]->SetTopLeft(enemy_one_v[now_position_enemy]->GetLeft() - 136, 0);
-								enemy_one_v_back[now_position_enemy]->SetAnimation(20, 0);
+								enemy_one_v_back[now_position_enemy].SetAnimation(20, 0);
 								enemy_one_v.erase(enemy_one_v.begin() + now_position_enemy); //照刪?
 								/*
 								enemy_one_v_attack.erase(enemy_one_v_attack.begin() + now_position_enemy);
@@ -628,10 +629,10 @@ void CGameStateRun::OnShow()
 								cat_one_friend[i]->bump.SetFrameIndexOfBitmap(0);
 								enemy_one_v[now_position_enemy]->SetTopLeft(enemy_one_v[now_position_enemy]->GetLeft() - 136, enemy_one_v[now_position_enemy]->GetTop());
 								enemy_one_v[now_position_enemy]->attack.SetTopLeft(enemy_one_v[now_position_enemy]->GetLeft(), enemy_one_v[now_position_enemy]->GetTop());
-								enemy_one_v_back[now_position_enemy]->SetTopLeft(enemy_one_v[now_position_enemy]->GetLeft(), enemy_one_v[now_position_enemy]->GetTop() - 50);
+								enemy_one_v_back[now_position_enemy].SetTopLeft(enemy_one_v[now_position_enemy]->GetLeft(), enemy_one_v[now_position_enemy]->GetTop() - 50);
 								enemy_one_v[now_position_enemy]->attack.SetFrameIndexOfBitmap(0);
 								enemy_one_v[now_position_enemy]->bump.SetFrameIndexOfBitmap(0);
-								enemy_one_v_back[now_position_enemy]->SetAnimation(20, 0);
+								enemy_one_v_back[now_position_enemy].SetAnimation(20, 0);
 							}
 						}
 					}
@@ -650,20 +651,20 @@ void CGameStateRun::OnShow()
 	/////////////////////////////////////////////////////////////////////////////////
 	for (int d = 0; d < enemy_one_v_back.size(); d++) {
 		if (!(enemy_one_v_if_death[d])) {
-			if (enemy_one_v_back[d]->IsAnimation() && enemy_one_v[d]->get_type() == 2) {
-				enemy_one_v_back[d]->ShowBitmap();
+			if (enemy_one_v_back[d].IsAnimation() && enemy_one_v[d]->get_type() == 2) {
+				enemy_one_v_back[d].ShowBitmap();
 			}
-			if (enemy_one_v_back[d]->GetFrameIndexOfBitmap() > 33 && enemy_one_v[d]->get_type() == 2) {
-				enemy_one_v_back[d]->SetFrameIndexOfBitmap(0);
+			if (enemy_one_v_back[d].GetFrameIndexOfBitmap() > 33 && enemy_one_v[d]->get_type() == 2) {
+				enemy_one_v_back[d].SetFrameIndexOfBitmap(0);
 				enemy_one_v[d]->type = 1;
 			}
 		}
 	}
 	for (int d = 0; d < enemy_one_v_back.size(); d++) {
-		if (enemy_one_v_back[d]->IsAnimation() && enemy_one_v_if_death[d]) {
-			enemy_one_v_back[d]->ShowBitmap();
+		if (enemy_one_v_back[d].IsAnimation() && enemy_one_v_if_death[d]) {
+			enemy_one_v_back[d].ShowBitmap();
 		}
-		if (enemy_one_v_back[d]->GetFrameIndexOfBitmap() > 33 && enemy_one_v_if_death[d]) {
+		if (enemy_one_v_back[d].GetFrameIndexOfBitmap() > 33 && enemy_one_v_if_death[d]) {
 			enemy_one_v_death[d]->SetAnimation(15, 0);
 			enemy_one_v_back.erase(enemy_one_v_back.begin() + d);
 			enemy_one_v_if_death.erase(enemy_one_v_if_death.begin() + d);
