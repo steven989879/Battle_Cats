@@ -5,7 +5,7 @@
 #include "../Library/audio.h"
 #include "../Library/gameutil.h"
 #include "../Library/gamecore.h"
-#include "/OOPL/111_2OOP/pure-game-framework/Source/Game/mygame.h"
+#include "./Source/Game/mygame.h"
 #include "../../monster.h"
 #include <string>
 #include <ctime>
@@ -261,7 +261,7 @@ void CGameStateRun_1::OnInit()  								// 遊戲的初值及圖形設定
 	character_tower_1.SetTopLeft(1400, 175);
 
 	character_tower_2.LoadBitmapByString({
-		"resources/try_bmp.bmp"        // 載入敵方防禦塔
+		"resources/tower_2.bmp"        // 載入敵方防禦塔
 		}, RGB(255, 255, 255));
 	character_tower_2.SetTopLeft(100, 163);
 
@@ -484,8 +484,8 @@ void CGameStateRun_1::OnShow()
 								enemy_one_v[d]->attack.SetFrameIndexOfBitmap(0);
 								enemy_one_v[d]->bump.SetFrameIndexOfBitmap(0);
 								cat_one_friend_if_death[now_position_cat] = true;
-								cat_one_friend_back[now_position_cat]->SetTopLeft(enemy_one_v[now_position_cat]->GetLeft() + 136, enemy_one_v[now_position_cat]->GetTop() - 50);
-								cat_one_friend_death[now_position_cat]->SetTopLeft(enemy_one_v[now_position_cat]->GetLeft() + 136, 0);
+								cat_one_friend_back[now_position_cat]->SetTopLeft(cat_one_friend[now_position_cat]->GetLeft(), cat_one_friend[now_position_cat]->GetTop() - 50);
+								cat_one_friend_death[now_position_cat]->SetTopLeft(cat_one_friend[now_position_cat]->GetLeft() + 136, 0);
 								cat_one_friend_back[now_position_cat]->SetAnimation(20, 0);
 								cat_one_friend.erase(cat_one_friend.begin() + now_position_cat);
 								/*
@@ -500,9 +500,9 @@ void CGameStateRun_1::OnShow()
 								cat_one_friend[now_position_cat]->type = 2;
 								enemy_one_v[d]->attack.SetFrameIndexOfBitmap(0);
 								enemy_one_v[d]->bump.SetFrameIndexOfBitmap(0);
+								cat_one_friend_back[now_position_cat]->SetTopLeft(cat_one_friend[now_position_cat]->GetLeft(), cat_one_friend[now_position_cat]->GetTop() - 50);
 								cat_one_friend[now_position_cat]->SetTopLeft(cat_one_friend[now_position_cat]->GetLeft() + 136, cat_one_friend[now_position_cat]->GetTop());
 								cat_one_friend[now_position_cat]->attack.SetTopLeft(cat_one_friend[now_position_cat]->GetLeft(), cat_one_friend[now_position_cat]->GetTop());
-								cat_one_friend_back[now_position_cat]->SetTopLeft(enemy_one_v[now_position_cat]->GetLeft() + 136, enemy_one_v[now_position_cat]->GetTop() - 50);
 								cat_one_friend[now_position_cat]->attack.SetFrameIndexOfBitmap(0);
 								cat_one_friend[now_position_cat]->bump.SetFrameIndexOfBitmap(0);
 								cat_one_friend_back[now_position_cat]->SetAnimation(20, 0);
