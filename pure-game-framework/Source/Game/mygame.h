@@ -226,5 +226,10 @@ namespace game_framework {
 		std::string show_enemy_tower;
 		int friend_tower;
 		int enemy_tower;
+
+		//test
+		vector<int> dead_list;
+		vector<int> back_list;
+
 	};
 }

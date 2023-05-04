@@ -34,25 +34,27 @@ namespace game_framework {
 			isBitmapLoaded = false;
 			price = 50;
 			heart = 30;
-			attack_range = 5;
-			power = 5;
+			attack_range = 400;
+			power = 10;
 			walk_speed = 2;
 			if_attack = 0;
 			type = 0;
 			back_time = 0;
 			whether_attack = false;
+			single_attack = 0;
 		}
 		if (type_ID == 11) {
 			isBitmapLoaded = false;
 			price = 50;
 			heart = 30;
 			attack_range = 5;
-			power = 5;
+			power = 0;
 			walk_speed = 2;
 			if_attack = 0;
 			type = 0;
 			back_time = 0;
 			whether_attack = false;
+			single_attack = 1;
 		}
 	}
 
