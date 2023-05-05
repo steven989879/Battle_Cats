@@ -34,7 +34,7 @@ namespace game_framework {
 			isBitmapLoaded = false;
 			price = 50;
 			heart = 30;
-			attack_range = 400;
+			attack_range = 1000;
 			power = 10;
 			walk_speed = 2;
 			if_attack = 0;

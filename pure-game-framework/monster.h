@@ -34,6 +34,7 @@ namespace game_framework {
 		int type;
 		int back_time;
 		bool whether_attack;
+		bool stop_showing;
 		CMovingBitmap attack;
 		CMovingBitmap bump;
 		//CMovingBitmap back;
