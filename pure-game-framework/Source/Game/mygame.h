@@ -198,6 +198,7 @@ namespace game_framework {
 		CMovingBitmap money_map;
 		CMovingBitmap character_call_cat_1;
 		CMovingBitmap cat_1_cool;
+		CMovingBitmap cat_2_cool;
 		CMovingBitmap character_call_cat_2;
 		CMovingBitmap character_call_cat_3;
 		CMovingBitmap character_call_cat_4;
@@ -219,6 +220,7 @@ namespace game_framework {
 		int current_cat_1 = 0;
 		int current_enemy_1 = 0;
 		monster base_1;
+		monster base_2;
 		monster base_11;
 		std::string s;
 		std::string s2;
