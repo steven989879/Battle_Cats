@@ -42,14 +42,17 @@ void CGameStateInit::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 
 }
 
+
 void CGameStateInit::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	if (point.x >= 630 && point.x <= 1083 && point.y >= 432 && point.y <= 507) {
-		GotoGameState(GAME_STATE_RUN_1);		// 切換至GAME_STATE_RUN
+		GotoGameState(GAME_STATE_RUN);		// 切換至GAME_STATE_RUN
 	}
+	/*
 	else {
 		GotoGameState(GAME_STATE_RUN_1);		// 切換至GAME_STATE_RUN_1
 	}
+	*/
 }
 
 void CGameStateInit::OnShow()
@@ -60,7 +63,6 @@ void CGameStateInit::OnShow()
 void CGameStateInit::load_background() {
 	background.LoadBitmapByString({ "resources/background.bmp" });
 	background.SetTopLeft(0, 0);
-
 }
 
 /*void CGameStateInit::draw_text() {
