@@ -60,6 +60,7 @@
     <ClCompile Include="mygame_run_1.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
+    <ClCompile Include="mygame_run_2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Library\audio.h">

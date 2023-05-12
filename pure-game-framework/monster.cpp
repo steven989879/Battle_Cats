@@ -43,12 +43,38 @@ namespace game_framework {
 			whether_attack = false;
 			single_attack = 0;
 		}
+		if (type_ID == 2) { //坦克貓，但我的關卡2基本沒用
+			isBitmapLoaded = false;
+			price = 100;
+			heart = 100;
+			attack_range = 200;
+			power = 3;
+			walk_speed = 2;
+			if_attack = 0;
+			type = 0;
+			back_time = 0;
+			whether_attack = false;
+			single_attack = 0;
+		}
 		if (type_ID == 11) {
 			isBitmapLoaded = false;
-			price = 50;
-			heart = 30;
+			price = 50;//敵人
+			heart = 30;//敵人
 			attack_range = 5;
-			power = 0;
+			power = 5;
+			walk_speed = 2;
+			if_attack = 0;
+			type = 0;
+			back_time = 0;
+			whether_attack = false;
+			single_attack = 1;
+		}
+		if (type_ID == 12) { //蛇
+			isBitmapLoaded = false;
+			price = 50;//敵人
+			heart = 30;//敵人
+			attack_range = 5;
+			power = 7;
 			walk_speed = 2;
 			if_attack = 0;
 			type = 0;
