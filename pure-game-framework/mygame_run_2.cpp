@@ -709,10 +709,10 @@ void CGameStateRun_2::OnShow()
 							}
 						}
 						else {
-							if (cat_one_friend[i].get_single_attack() == 1) {
+							if (cat_one_friend[i].get_single_attack() == 1 && cat_one_friend[i].get_if_attack() == 0) {
 								enemy_one_v[now_position_enemy].heart -= cat_one_friend[i].power;
 								cat_one_friend[i].if_attack = 1;
-								if (enemy_one_v[now_position_enemy].heart <= 0) {
+								if (enemy_one_v[now_position_enemy].heart <= 0 && !(enemy_one_v_if_death[now_position_enemy])) {
 									cat_one_friend[i].attack.SetFrameIndexOfBitmap(0);
 									cat_one_friend[i].bump.SetFrameIndexOfBitmap(0);
 									enemy_one_v_if_death[now_position_enemy] = true;
