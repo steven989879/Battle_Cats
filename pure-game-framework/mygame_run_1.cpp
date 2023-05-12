@@ -39,7 +39,7 @@ void CGameStateRun_1::OnMove()							// 移動遊戲元素
 				t += 1;
 			}
 		}
-		if ((t == cat_one_friend.size() || cat_one_friend.size() == 0) && enemy_one_v[d].GetLeft() + 50 + enemy_one_v[d].GetWidth() < character_tower_1.GetLeft() && enemy_one_v[d].get_type() != 2  && !(enemy_one_v_if_death[d])) {
+		if ((t == cat_one_friend.size() || cat_one_friend.size() == 0) && enemy_one_v[d].GetLeft() + 50 + enemy_one_v[d].GetWidth() < character_tower_1.GetLeft() && enemy_one_v[d].get_type() != 2 && !(enemy_one_v_if_death[d])) {
 			enemy_one_v[d].SetTopLeft(enemy_one_v[d].GetLeft() + 1, enemy_one_v[d].GetTop());
 		}
 		else {
@@ -161,7 +161,7 @@ void CGameStateRun_1::OnInit()  								// 遊戲的初值及圖形設定
 	money_map.LoadBitmapByString({
 		"resources/money.bmp"
 		}, RGB(255, 255, 255));
-	money_map.SetTopLeft(1540, 15);
+	money_map.SetTopLeft(1505, 10);
 
 	////////////////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////////////
@@ -594,7 +594,7 @@ void CGameStateRun_1::OnShow()
 							enemy_tower -= cat_one_friend[i].get_power();
 							cat_one_friend[i].if_attack = 1;
 							for (int j = 0; j < enemy_one_v.size(); j++) {
-								if (enemy_one_v[j].GetLeft() + enemy_one_v[j].GetWidth() > cat_one_friend[i].GetLeft() - cat_one_friend  [i].get_attack_range() && cat_one_friend[i].get_single_attack() == 1) {
+								if (enemy_one_v[j].GetLeft() + enemy_one_v[j].GetWidth() > cat_one_friend[i].GetLeft() - cat_one_friend[i].get_attack_range() && cat_one_friend[i].get_single_attack() == 1) {
 									enemy_one_v[j].heart -= cat_one_friend[i].get_power();
 								}
 							}
@@ -606,7 +606,7 @@ void CGameStateRun_1::OnShow()
 							if (cat_one_friend[i].get_single_attack() == 1) {
 								enemy_one_v[now_position_enemy].heart -= cat_one_friend[i].power;
 								cat_one_friend[i].if_attack = 1;
-								if (enemy_one_v[now_position_enemy].heart <= 0) {
+								if (enemy_one_v[now_position_enemy].heart <= 0 && !(enemy_one_v_if_death[now_position_enemy])) {
 									cat_one_friend[i].attack.SetFrameIndexOfBitmap(0);
 									cat_one_friend[i].bump.SetFrameIndexOfBitmap(0);
 									enemy_one_v_if_death[now_position_enemy] = true;
@@ -636,9 +636,9 @@ void CGameStateRun_1::OnShow()
 									}
 
 									if (enemy_one_v[j].heart <= 0 && !(enemy_one_v_if_death[j])) {
-										
-										//cat_one_friend[i].attack.SetFrameIndexOfBitmap(0);
-										//cat_one_friend[i].bump.SetFrameIndexOfBitmap(0);
+
+										cat_one_friend[i].attack.SetFrameIndexOfBitmap(0);
+										cat_one_friend[i].bump.SetFrameIndexOfBitmap(0);
 										enemy_one_v_if_death[j] = true;
 										enemy_one_v_back[j].SetTopLeft(enemy_one_v[j].GetLeft() - 136, enemy_one_v[j].GetTop() - 50);
 										enemy_one_v_death[j].SetTopLeft(enemy_one_v[j].GetLeft() - 136, 0);
@@ -649,11 +649,11 @@ void CGameStateRun_1::OnShow()
 										enemy_one_v_back[j].ShowBitmap();
 									}
 									else if (enemy_one_v[j].heart <= 15 && enemy_one_v[j].get_back_time() == 0) {
-										
+
 										enemy_one_v[j].back_time = 1;
 										enemy_one_v[j].type = 2;
-										//cat_one_friend[i].attack.SetFrameIndexOfBitmap(0);
-										//cat_one_friend[i].bump.SetFrameIndexOfBitmap(0);
+										cat_one_friend[i].attack.SetFrameIndexOfBitmap(0);
+										cat_one_friend[i].bump.SetFrameIndexOfBitmap(0);
 										enemy_one_v[j].SetTopLeft(enemy_one_v[j].GetLeft() - 136, enemy_one_v[j].GetTop());
 										enemy_one_v[j].attack.SetTopLeft(enemy_one_v[j].GetLeft(), enemy_one_v[j].GetTop());
 										enemy_one_v_back[j].SetTopLeft(enemy_one_v[j].GetLeft(), enemy_one_v[j].GetTop() - 50);
@@ -729,9 +729,9 @@ void CGameStateRun_1::draw_text() {
 	std::string  print = s + "/" + s2;
 	CTextDraw::ChangeFontLog(pDC, 30, "Arial Black", RGB(255, 200, 0), 900);
 	if (money_30 > 9) {
-		Px -= 30;
+		Px -= 25;
 		if (money_30 > 99) {
-			Px -= 30;
+			Px -= 25;
 		}
 	}
 	CTextDraw::Print(pDC, Px, 3, print);
@@ -742,7 +742,7 @@ void CGameStateRun_1::draw_text() {
 	show_enemy_tower = std::to_string(enemy_tower);
 	CTextDraw::Print(pDC, 255, 175, (show_enemy_tower + "/500"));
 
-	if (enemy_one_v.size() >= 1 && cat_one_friend.size() >= 1)
+	/*if (enemy_one_v.size() >= 1 && cat_one_friend.size() >= 1)
 	{
 		std::string s1 = std::to_string(enemy_one_v[0].get_heart());
 		std::string s2 = std::to_string(cat_one_friend[0].get_heart());
@@ -755,7 +755,7 @@ void CGameStateRun_1::draw_text() {
 		std::string s4 = std::to_string(enemy_one_v[0].get_power());
 		CTextDraw::ChangeFontLog(pDC, 30, "Arial Black", RGB(255, 200, 0), 900);
 		CTextDraw::Print(pDC, Px, 3, s4);;
-	}
+	}*/
 
 	CDDraw::ReleaseBackCDC();
 }

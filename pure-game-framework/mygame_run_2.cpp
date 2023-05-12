@@ -41,7 +41,7 @@ void game_framework::CGameStateRun_2::OnInit()
 	money_map.LoadBitmapByString({
 		"resources/money.bmp"
 		}, RGB(255, 255, 255));
-	money_map.SetTopLeft(1540, 15);
+	money_map.SetTopLeft(1505, 10);
 
 	////////////////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////////////
@@ -110,9 +110,11 @@ void game_framework::CGameStateRun_2::OnInit()
 	cat_1_cool.SetFrameIndexOfBitmap(24);
 
 	character_call_cat_2.LoadBitmapByString({
-		"resources/call_cat_2_2.bmp", "resources/call_cat_2_1.bmp" , "resources/call_cat_2_load.bmp"       // ¸ü¤J¥l³ê¿ß«}2(ªÅ)«ö¶s
+		"resources/call_longcat_2.bmp" , "resources/call_longcat_1.bmp" , "resources/call_longcat_load.bmp"        // ¸ü¤J¥l³ê¿ß«}2(ªÅ)«ö¶s
 		}, RGB(255, 255, 255));
 	character_call_cat_2.SetTopLeft(625, 680);
+	character_call_cat_2.SetFrameIndexOfBitmap(1);
+
 	cat_2_cool.LoadBitmapByString({
 		"resources/load_1.bmp" , "resources/load_2.bmp" , "resources/load_3.bmp" ,
 		"resources/load_4.bmp" , "resources/load_5.bmp" , "resources/load_6.bmp" ,
@@ -152,10 +154,15 @@ void game_framework::CGameStateRun_2::OnInit()
 		}, RGB(255, 255, 255));
 	character_tower_2.SetTopLeft(100, 163);
 
+	esc.LoadBitmapByString({
+		"resources/esc.bmp"        // ¸ü¤J¼Ä¤è¨¾¿m¶ð
+		}, RGB(255, 255, 255));
+	esc.SetTopLeft(0, 0);
+
 	base_1 = monster(1);
 	base_2 = monster(2);
+
 	base_11 = monster(11);
-	base_12 = monster(12);
 
 	friend_tower = 1000;
 	enemy_tower = 500;
@@ -202,6 +209,9 @@ void CGameStateRun_2::OnMove()							// ²¾°Ê¹CÀ¸¤¸¯À
 	money_30 = money / 30;
 	if (money_30 >= base_1.get_price() && cat_1_cool.GetFrameIndexOfBitmap() == 24) {
 		character_call_cat_1.SetFrameIndexOfBitmap(0);
+	}
+	if (money_30 >= base_2.get_price() && cat_2_cool.GetFrameIndexOfBitmap() == 24) {
+		character_call_cat_2.SetFrameIndexOfBitmap(0);
 	}
 
 	///////////////////////
@@ -376,55 +386,56 @@ void CGameStateRun_2::OnLButtonDown(UINT nFlags, CPoint point)  // ³B²z·Æ¹«ªº°Ê§
 			}, RGB(255, 255, 255));
 	}
 
-	else if (point.x >= 625 && point.x <= 769 && point.y >= 680 && point.y <= 789 && money_30 >= base_2.get_price() && cat_2_cool.GetFrameIndexOfBitmap() == 24) {
+	if (point.x >= 625 && point.x <= 769 && point.y >= 680 && point.y <= 789 && money_30 >= base_2.get_price() && cat_2_cool.GetFrameIndexOfBitmap() == 24) {
 		money_30 = money_30 - base_2.get_price();
 		money = money - (base_2.get_price() * 30);
 		character_call_cat_2.SetFrameIndexOfBitmap(2);
+
 		cat_2_cool.SetFrameIndexOfBitmap(0);
 		cat_2_cool.SetAnimation(250, 0);
 		cat_one_friend_if_death.push_back(false);
 
-		monster temp1(2);
-		cat_one_friend.push_back(temp1);
+		monster temp2(2);
+		cat_one_friend.push_back(temp2);
 		cat_one_friend[cat_one_friend.size() - 1].LoadBitmapByString({
-		"resources/cat_2_attack_1.bmp" , "resources/cat_2_attack_2.bmp" , "resources/cat_2_attack_1.bmp" , "resources/cat_2_attack_2.bmp"        // ¸ü¤J¿ß«}1¨«¸ô°Êµe
+		"resources/longcat_walk_1.bmp" , "resources/longcat_walk_2.bmp" , "resources/longcat_walk_3.bmp" , "resources/longcat_walk_2.bmp"        // ¸ü¤J¿ß«}2¨«¸ô°Êµe
 			}, RGB(255, 255, 255));
-		cat_one_friend[cat_one_friend.size() - 1].SetTopLeft(1400, 430);
+		cat_one_friend[cat_one_friend.size() - 1].SetTopLeft(1350, 345);
 		cat_one_friend[cat_one_friend.size() - 1].SetAnimation(125, 0);
 
 		cat_one_friend[cat_one_friend.size() - 1].attack.LoadBitmapByString({
-		"resources/cat_attack_1.bmp" , "resources/cat_attack_2.bmp" , "resources/cat_attack_1.bmp" ,
-		"resources/cat_attack_3.bmp" , "resources/cat_attack_3.bmp" , "resources/cat_attack_3.bmp" ,
-		"resources/cat_attack_3.bmp" , "resources/cat_attack_3.bmp" , "resources/cat_walk_2.bmp" ,
-		"resources/cat_walk_2.bmp" , "resources/cat_walk_2.bmp" , "resources/cat_walk_2.bmp"        // ¸ü¤J¿ß«}1§ðÀ»°Êµe
+		"resources/longcat_attack_1.bmp" , "resources/longcat_attack_2.bmp" , "resources/longcat_attack_1.bmp" ,
+		"resources/longcat_attack_3.bmp" , "resources/longcat_attack_4.bmp" , "resources/longcat_attack_4.bmp" ,
+		"resources/longcat_attack_4.bmp" , "resources/longcat_attack_4.bmp" , "resources/longcat_walk_2.bmp" ,
+		"resources/longcat_walk_2.bmp" , "resources/longcat_walk_2.bmp" , "resources/longcat_walk_2.bmp"        // ¸ü¤J¿ß«}2§ðÀ»°Êµe
 			}, RGB(255, 255, 255));
 
 		cat_one_friend[cat_one_friend.size() - 1].bump.LoadBitmapByString({
 		"resources/bump_0.bmp" , "resources/bump_0.bmp" , "resources/bump_0.bmp" ,
 		"resources/bump_1.bmp" , "resources/bump_2.bmp" , "resources/bump_3.bmp" ,
 		"resources/bump_4.bmp" , "resources/bump_5.bmp" , "resources/bump_0.bmp" ,
-		"resources/bump_0.bmp" , "resources/bump_0.bmp" , "resources/bump_0.bmp"        // ¸ü¤J¿ß«}1§ðÀ»Ãz¬µ°Êµe
+		"resources/bump_0.bmp" , "resources/bump_0.bmp" , "resources/bump_0.bmp"        // ¸ü¤J¿ß«}2§ðÀ»Ãz¬µ°Êµe
 			}, RGB(255, 255, 255));
 
-		monster back1(2);
-		cat_one_friend_back.push_back(back1);
+		monster back2(2);
+		cat_one_friend_back.push_back(back2);
 		cat_one_friend_back[cat_one_friend_back.size() - 1].LoadBitmapByString({
-		"resources/cat_back_0.bmp" , "resources/cat_back_1.bmp" , "resources/cat_back_2.bmp" ,
-		"resources/cat_back_3.bmp" , "resources/cat_back_4.bmp" , "resources/cat_back_5.bmp" ,
-		"resources/cat_back_6.bmp" , "resources/cat_back_7.bmp" , "resources/cat_back_8.bmp" ,
-		"resources/cat_back_9.bmp" , "resources/cat_back_10.bmp" , "resources/cat_back_11.bmp" ,
-		"resources/cat_back_12.bmp" , "resources/cat_back_13.bmp" , "resources/cat_back_14.bmp" ,
-		"resources/cat_back_15.bmp" , "resources/cat_back_16.bmp" , "resources/cat_back_17.bmp" ,
-		"resources/cat_back_18.bmp" , "resources/cat_back_19.bmp" , "resources/cat_back_20.bmp" ,
-		"resources/cat_back_21.bmp" , "resources/cat_back_22.bmp" , "resources/cat_back_23.bmp" ,
-		"resources/cat_back_24.bmp" , "resources/cat_back_25.bmp" , "resources/cat_back_26.bmp" ,
-		"resources/cat_back_27.bmp" , "resources/cat_back_28.bmp" , "resources/cat_back_29.bmp" ,
-		"resources/cat_back_30.bmp" , "resources/cat_back_31.bmp" , "resources/cat_back_32.bmp" ,
-		"resources/cat_back_33.bmp" , "resources/cat_back_34.bmp" , "resources/cat_back_35.bmp"
+		"resources/longcat_back_0.bmp" , "resources/longcat_back_1.bmp" , "resources/longcat_back_2.bmp" ,
+		"resources/longcat_back_3.bmp" , "resources/longcat_back_4.bmp" , "resources/longcat_back_5.bmp" ,
+		"resources/longcat_back_6.bmp" , "resources/longcat_back_7.bmp" , "resources/longcat_back_8.bmp" ,
+		"resources/longcat_back_9.bmp" , "resources/longcat_back_10.bmp" , "resources/longcat_back_11.bmp" ,
+		"resources/longcat_back_12.bmp" , "resources/longcat_back_13.bmp" , "resources/longcat_back_14.bmp" ,
+		"resources/longcat_back_15.bmp" , "resources/longcat_back_16.bmp" , "resources/longcat_back_17.bmp" ,
+		"resources/longcat_back_18.bmp" , "resources/longcat_back_19.bmp" , "resources/longcat_back_20.bmp" ,
+		"resources/longcat_back_21.bmp" , "resources/longcat_back_22.bmp" , "resources/longcat_back_23.bmp" ,
+		"resources/longcat_back_24.bmp" , "resources/longcat_back_25.bmp" , "resources/longcat_back_26.bmp" ,
+		"resources/longcat_back_27.bmp" , "resources/longcat_back_28.bmp" , "resources/longcat_back_29.bmp" ,
+		"resources/longcat_back_30.bmp" , "resources/longcat_back_31.bmp" , "resources/longcat_back_32.bmp" ,
+		"resources/longcat_back_33.bmp" , "resources/longcat_back_34.bmp" , "resources/longcat_back_35.bmp" ,
 			}, RGB(255, 255, 255));
 
-		monster death1(2);
-		cat_one_friend_death.push_back(death1);
+		monster death2(2);
+		cat_one_friend_death.push_back(death2);
 		cat_one_friend_death[cat_one_friend_death.size() - 1].LoadBitmapByString({
 		"resources/death_1.bmp" , "resources/death_2.bmp" , "resources/death_3.bmp" ,
 		"resources/death_4.bmp" , "resources/death_5.bmp" , "resources/death_6.bmp" ,
@@ -500,8 +511,7 @@ void CGameStateRun_2::OnShow()
 		character_call_cat_1.ShowBitmap();
 		cat_1_cool.ShowBitmap();
 	}
-
-	if (cat_2_cool.GetFrameIndexOfBitmap() > 23) {        // Åã¥Ü©Û³ê¿ß«}1«ö¶s»P§N«o
+	if (cat_2_cool.GetFrameIndexOfBitmap() > 23) {        // Åã¥Ü©Û³ê¿ß«}2«ö¶s»P§N«o
 		if (money_30 < base_2.get_price()) {
 			character_call_cat_2.SetFrameIndexOfBitmap(1);
 		}
@@ -509,11 +519,9 @@ void CGameStateRun_2::OnShow()
 		cat_2_cool.SetFrameIndexOfBitmap(24);
 	}
 	else {
-		character_call_cat_1.ShowBitmap();
+		character_call_cat_2.ShowBitmap();
 		cat_2_cool.ShowBitmap();
 	}
-
-	character_call_cat_2.ShowBitmap();        // Åã¥Ü¥l³ê¿ß«}2(ªÅ)«ö¶s
 	character_call_cat_3.ShowBitmap();        // Åã¥Ü¥l³ê¿ß«}3(ªÅ)«ö¶s
 	character_call_cat_4.ShowBitmap();        // Åã¥Ü¥l³ê¿ß«}4(ªÅ)«ö¶s
 	character_call_cat_5.ShowBitmap();        // Åã¥Ü¥l³ê¿ß«}5(ªÅ)«ö¶s
@@ -735,8 +743,8 @@ void CGameStateRun_2::OnShow()
 
 									if (enemy_one_v[j].heart <= 0 && !(enemy_one_v_if_death[j])) {
 
-										//cat_one_friend[i].attack.SetFrameIndexOfBitmap(0);
-										//cat_one_friend[i].bump.SetFrameIndexOfBitmap(0);
+										cat_one_friend[i].attack.SetFrameIndexOfBitmap(0);
+										cat_one_friend[i].bump.SetFrameIndexOfBitmap(0);
 										enemy_one_v_if_death[j] = true;
 										enemy_one_v_back[j].SetTopLeft(enemy_one_v[j].GetLeft() - 136, enemy_one_v[j].GetTop() - 50);
 										enemy_one_v_death[j].SetTopLeft(enemy_one_v[j].GetLeft() - 136, 0);
@@ -750,8 +758,8 @@ void CGameStateRun_2::OnShow()
 
 										enemy_one_v[j].back_time = 1;
 										enemy_one_v[j].type = 2;
-										//cat_one_friend[i].attack.SetFrameIndexOfBitmap(0);
-										//cat_one_friend[i].bump.SetFrameIndexOfBitmap(0);
+										cat_one_friend[i].attack.SetFrameIndexOfBitmap(0);
+										cat_one_friend[i].bump.SetFrameIndexOfBitmap(0);
 										enemy_one_v[j].SetTopLeft(enemy_one_v[j].GetLeft() - 136, enemy_one_v[j].GetTop());
 										enemy_one_v[j].attack.SetTopLeft(enemy_one_v[j].GetLeft(), enemy_one_v[j].GetTop());
 										enemy_one_v_back[j].SetTopLeft(enemy_one_v[j].GetLeft(), enemy_one_v[j].GetTop() - 50);
@@ -814,6 +822,7 @@ void CGameStateRun_2::OnShow()
 			enemy_one_v[d].whether_attack = false;
 		}
 	}
+	/////////////////////////////////////////////////////////////////////////////////
 }
 
 void CGameStateRun_2::draw_text() {
@@ -826,9 +835,9 @@ void CGameStateRun_2::draw_text() {
 	std::string  print = s + "/" + s2;
 	CTextDraw::ChangeFontLog(pDC, 30, "Arial Black", RGB(255, 200, 0), 900);
 	if (money_30 > 9) {
-		Px -= 30;
+		Px -= 25;
 		if (money_30 > 99) {
-			Px -= 30;
+			Px -= 25;
 		}
 	}
 	CTextDraw::Print(pDC, Px, 3, print);
@@ -839,7 +848,7 @@ void CGameStateRun_2::draw_text() {
 	show_enemy_tower = std::to_string(enemy_tower);
 	CTextDraw::Print(pDC, 255, 175, (show_enemy_tower + "/500"));
 
-	if (enemy_one_v.size() >= 1 && cat_one_friend.size() >= 1)
+	/*if (enemy_one_v.size() >= 1 && cat_one_friend.size() >= 1)
 	{
 		std::string s1 = std::to_string(enemy_one_v[0].get_heart());
 		std::string s2 = std::to_string(cat_one_friend[0].get_heart());
@@ -852,7 +861,7 @@ void CGameStateRun_2::draw_text() {
 		std::string s4 = std::to_string(enemy_one_v[0].get_power());
 		CTextDraw::ChangeFontLog(pDC, 30, "Arial Black", RGB(255, 200, 0), 900);
 		CTextDraw::Print(pDC, Px, 3, s4);;
-	}
+	}*/
 
 	CDDraw::ReleaseBackCDC();
 }
