@@ -13,7 +13,7 @@ using namespace game_framework;
 // 這個class為遊戲的結束狀態(Game Over)
 /////////////////////////////////////////////////////////////////////////////
 
-CGameStateOver::CGameStateOver(CGame *g): CGameState(g)
+CGameStateOver::CGameStateOver(CGame *g) : CGameState(g)
 {
 }
 
@@ -46,6 +46,11 @@ void CGameStateOver::OnInit()
 	ShowInitProgress(100, "OK!");
 
 	Sleep(1000);
+}
+
+void  CGameStateOver::OnLButtonDown(UINT nFlags, CPoint point)
+{
+
 }
 
 void CGameStateOver::OnShow()

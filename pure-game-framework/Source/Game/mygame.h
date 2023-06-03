@@ -73,7 +73,7 @@ namespace game_framework {
 		//void load_background();
 		//void draw_text();
 		CMovingBitmap background;
-		
+
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -113,6 +113,7 @@ namespace game_framework {
 		CGameStateOver(CGame *g);
 		void OnBeginState();							// 設定每次重玩所需的變數
 		void OnInit();
+		void OnLButtonDown(UINT nFlags, CPoint point);  // 處理滑鼠的動作
 	protected:
 		void OnMove();									// 移動遊戲元素
 		void OnShow();									// 顯示這個狀態的遊戲畫面
@@ -252,6 +253,7 @@ namespace game_framework {
 		std::string show_enemy_tower;
 		int friend_tower;
 		int enemy_tower;
+		int dog_number = 0;
 
 		//test
 		vector<int> dead_list;
