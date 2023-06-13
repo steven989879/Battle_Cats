@@ -38,6 +38,7 @@ namespace game_framework {
 		gameStateTable[GAME_STATE_RUN] = new CGameStateRun(this);
 		gameStateTable[GAME_STATE_RUN_1] = new CGameStateRun_1(this);
 		gameStateTable[GAME_STATE_RUN_2] = new CGameStateRun_2(this);
+		gameStateTable[GAME_STATE_RUN_3] = new CGameStateRun_3(this);
 		gameStateTable[GAME_STATE_OVER] = new CGameStateOver(this);
 		gameState = NULL;
 	}

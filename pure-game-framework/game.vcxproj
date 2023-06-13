@@ -239,6 +239,7 @@
     <ClCompile Include="monster.cpp" />
     <ClCompile Include="mygame_run_1.cpp" />
     <ClCompile Include="mygame_run_2.cpp" />
+    <ClCompile Include="mygame_run_3.cpp" />
     <ClCompile Include="Source\Core\game.cpp" />
     <ClCompile Include="Source\Core\gameDoc.cpp" />
     <ClCompile Include="Source\Core\gameView.cpp" />

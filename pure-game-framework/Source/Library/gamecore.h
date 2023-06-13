@@ -9,6 +9,7 @@ enum GAME_STATES {
 	GAME_STATE_RUN,
 	GAME_STATE_RUN_1,
 	GAME_STATE_RUN_2,
+	GAME_STATE_RUN_3,
 	GAME_STATE_OVER
 };
 
@@ -124,6 +125,7 @@ namespace game_framework {
 	class CGameStateRun;
 	class CGameStateRun_1;
 	class CGameStateRun_2;
+	class CGameStateRun_3;
 	class CGameStateOver;
 
 	/////////////////////////////////////////////////////////////////////////////
