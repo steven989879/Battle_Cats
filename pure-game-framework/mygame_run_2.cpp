@@ -618,7 +618,8 @@ void CGameStateRun_2::OnShow()
 
 				for (int j = 0; j < cat_one_friend.size(); j++) {
 					if (cat_one_friend[j].GetLeft() < now_position) {
-						now_position = enemy_one_v[j].GetLeft() + enemy_one_v[j].GetWidth();
+						//now_position = enemy_one_v[j].GetLeft() + enemy_one_v[j].GetWidth();
+						now_position = cat_one_friend[j].GetLeft();
 						now_position_cat = j;
 					}
 				}
