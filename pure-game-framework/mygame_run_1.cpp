@@ -63,7 +63,7 @@ void CGameStateRun_1::OnMove()							// 移動遊戲元素
 	}
 	// 錢
 	if (money_30 < max_money_30) {
-		money += money_persecond;
+		money += 20;
 	}
 	money_30 = money / 30;
 	if (money_30 >= base_1.get_price() && cat_1_cool.GetFrameIndexOfBitmap() == 24) {
