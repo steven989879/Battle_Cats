@@ -150,6 +150,8 @@ namespace game_framework {
 		int max_money_30 = 100;
 		int now_Level = 1;
 
+		int if_tab = 0;
+
 		CMovingBitmap background;
 		CMovingBitmap money_map;
 		CMovingBitmap character_call_cat_1;
@@ -160,7 +162,7 @@ namespace game_framework {
 		CMovingBitmap character_call_cat_4;
 		CMovingBitmap character_call_cat_5;
 		CMovingBitmap Level_dark;
-		CMovingBitmap Level_shine[7];
+		CMovingBitmap Level_shine[8];
 		CMovingBitmap character_tower_1;
 		CMovingBitmap character_tower_2;
 		CMovingBitmap esc;
