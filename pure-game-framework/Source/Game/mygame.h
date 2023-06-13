@@ -222,6 +222,8 @@ namespace game_framework {
 		CMovingBitmap background;
 		CMovingBitmap money_map;
 
+		int if_tab = 0;
+
 		CMovingBitmap character_call_cat_1;
 		CMovingBitmap cat_1_cool;
 		CMovingBitmap character_call_cat_2;
@@ -230,7 +232,7 @@ namespace game_framework {
 		CMovingBitmap character_call_cat_4;
 		CMovingBitmap character_call_cat_5;
 		CMovingBitmap Level_dark;
-		CMovingBitmap Level_shine[7];
+		CMovingBitmap Level_shine[8];
 		CMovingBitmap character_tower_1;
 		CMovingBitmap character_tower_2;
 		CMovingBitmap esc;
