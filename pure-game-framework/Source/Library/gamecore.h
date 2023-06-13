@@ -10,6 +10,7 @@ enum GAME_STATES {
 	GAME_STATE_RUN_1,
 	GAME_STATE_RUN_2,
 	GAME_STATE_RUN_3,
+	GAME_STATE_RUN_4,
 	GAME_STATE_OVER
 };
 
@@ -126,6 +127,7 @@ namespace game_framework {
 	class CGameStateRun_1;
 	class CGameStateRun_2;
 	class CGameStateRun_3;
+	class CGameStateRun_4;
 	class CGameStateOver;
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -196,7 +198,7 @@ namespace game_framework {
 		bool            suspended;			// 遊戲是否被suspended
 		const int		NUM_GAME_STATES;	// 遊戲的狀態數(3個狀態)
 		CGameState		*gameState;			// pointer指向目前的遊戲狀態
-		CGameState		*gameStateTable[5];	// 遊戲狀態物件的pointer
+		CGameState		*gameStateTable[7];	// 遊戲狀態物件的pointer
 		static CGame	instance;			// 遊戲唯一的instance
 	};
 }

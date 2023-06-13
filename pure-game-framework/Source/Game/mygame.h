@@ -101,6 +101,7 @@ namespace game_framework {
 		CMovingBitmap taiwan;
 		CMovingBitmap hongkong;
 		CMovingBitmap thailand;
+		CMovingBitmap china;
 		int choose;
 	};
 
@@ -150,6 +151,8 @@ namespace game_framework {
 		int max_money_30 = 100;
 		int now_Level = 1;
 
+		int if_tab = 0;
+
 		CMovingBitmap background;
 		CMovingBitmap money_map;
 		CMovingBitmap character_call_cat_1;
@@ -160,7 +163,7 @@ namespace game_framework {
 		CMovingBitmap character_call_cat_4;
 		CMovingBitmap character_call_cat_5;
 		CMovingBitmap Level_dark;
-		CMovingBitmap Level_shine[7];
+		CMovingBitmap Level_shine[8];
 		CMovingBitmap character_tower_1;
 		CMovingBitmap character_tower_2;
 		CMovingBitmap esc;
@@ -260,6 +263,7 @@ namespace game_framework {
 		vector<int> dead_list;
 		vector<int> back_list;
 	};
+
 	class CGameStateRun_3 : public CGameState {
 	public:
 		CGameStateRun_3(CGame *g);
@@ -314,6 +318,77 @@ namespace game_framework {
 		int current_enemy_1 = 0;
 		monster base_1;
 		monster base_2;
+		monster base_11;
+		monster base_12;
+		std::string s;
+		std::string s2;
+		std::string show_friend_tower;
+		std::string show_enemy_tower;
+		int friend_tower;
+		int enemy_tower;
+		int dog_number = 0;
+
+		//test
+		vector<int> dead_list;
+		vector<int> back_list;
+	};
+
+	class CGameStateRun_4 : public CGameState {
+	public:
+		CGameStateRun_4(CGame *g);
+		~CGameStateRun_4();
+		void OnBeginState();							// 設定每次重玩所需的變數
+		void OnInit();  								// 遊戲的初值及圖形設定
+		void OnKeyDown(UINT, UINT, UINT);
+		void OnKeyUp(UINT, UINT, UINT);
+		void OnLButtonDown(UINT nFlags, CPoint point);  // 處理滑鼠的動作
+		void OnLButtonUp(UINT nFlags, CPoint point);	// 處理滑鼠的動作
+		void OnMouseMove(UINT nFlags, CPoint point);	// 處理滑鼠的動作 
+		void OnRButtonDown(UINT nFlags, CPoint point);  // 處理滑鼠的動作
+		void OnRButtonUp(UINT nFlags, CPoint point);	// 處理滑鼠的動作
+	protected:
+		void OnMove();									// 移動遊戲元素
+		void OnShow();									// 顯示這個狀態的遊戲畫面
+	private:
+		int enemy = 150;
+		void draw_text();
+		int times = 0;
+		int money = 0;
+		int money_persecond = 6;
+		int money_30 = 0;
+		int max_money_30 = 100;
+		int now_Level = 1;
+		CMovingBitmap background;
+		CMovingBitmap money_map;
+
+		CMovingBitmap character_call_cat_1;
+		CMovingBitmap cat_1_cool;
+		CMovingBitmap character_call_cat_2;
+		CMovingBitmap cat_2_cool;
+		CMovingBitmap character_call_cat_3;
+		CMovingBitmap cat_3_cool;
+		CMovingBitmap character_call_cat_4;
+		CMovingBitmap character_call_cat_5;
+		CMovingBitmap Level_dark;
+		CMovingBitmap Level_shine[7];
+		CMovingBitmap character_tower_1;
+		CMovingBitmap character_tower_2;
+		CMovingBitmap esc;
+
+		vector<monster> enemy_one_v;
+		vector<monster> enemy_one_v_back;
+		vector<monster> enemy_one_v_death;
+		vector<bool> enemy_one_v_if_death;
+
+		vector<monster> cat_one_friend;
+		vector<monster> cat_one_friend_back;
+		vector<monster> cat_one_friend_death;
+		vector<bool> cat_one_friend_if_death;
+		int current_cat_1 = 0;
+		int current_enemy_1 = 0;
+		monster base_1;
+		monster base_2;
+		monster base_3;
 		monster base_11;
 		monster base_12;
 		std::string s;

@@ -56,6 +56,19 @@ namespace game_framework {
 			whether_attack = false;
 			single_attack = 0;
 		}
+		if (type_ID == 3) { //斧頭貓，但我的關卡2基本沒用
+			isBitmapLoaded = false;
+			price = 200;
+			heart = 50;
+			attack_range = 10;
+			power = 50;
+			walk_speed = 2;
+			if_attack = 0;
+			type = 0;
+			back_time = 0;
+			whether_attack = false;
+			single_attack = 1;
+		}
 		if (type_ID == 11) {
 			isBitmapLoaded = false;
 			price = 50;//敵人

@@ -130,7 +130,7 @@ void game_framework::CGameStateRun_3::OnInit()
 	cat_2_cool.SetFrameIndexOfBitmap(24);
 
 	character_call_cat_3.LoadBitmapByString({
-		"resources/call_axcat_2.bmp" , "resources/call_axcat_1.bmp" , "resources/call_axcat_load.bmp"        // ¸ü¤J¥l³ê¿ß«}3(ªÅ)«ö¶s
+		"resources/call_cat_empty.bmp"        // ¸ü¤J¥l³ê¿ß«}3(ªÅ)«ö¶s
 		}, RGB(255, 255, 255));
 	character_call_cat_3.SetTopLeft(780, 680);
 	character_call_cat_3.SetAnimation(1000, 0);
@@ -153,7 +153,7 @@ void game_framework::CGameStateRun_3::OnInit()
 	character_tower_2.LoadBitmapByString({
 		"resources/tower_3.bmp"        // ¸ü¤J¼Ä¤è¨¾¿m¶ð
 		}, RGB(255, 255, 255));
-	character_tower_2.SetTopLeft(100, 260);
+	character_tower_2.SetTopLeft(100, 163);
 
 	esc.LoadBitmapByString({
 		"resources/esc.bmp"
@@ -574,6 +574,9 @@ void CGameStateRun_3::OnShow()
 	else if (money_30 >= now_Level * 40 && now_Level < 8) {
 		Level_shine[now_Level - 1].SetAnimation(100, 0);
 		Level_shine[now_Level - 1].ShowBitmap();
+	}
+	else {
+		Level_shine[7].ShowBitmap();
 	}
 	draw_text();
 	if (cat_1_cool.GetFrameIndexOfBitmap() > 23) {        // Åã¥Ü©Û³ê¿ß«}1«ö¶s»P§N«o
