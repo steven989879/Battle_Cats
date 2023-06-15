@@ -301,12 +301,13 @@ void CGameStateRun_2::OnMove()							// 移動遊戲元素
 			}, RGB(255, 255, 255));
 
 		dog_number += 1;
-		if (dog_number == 2) {
-			enemy = 0;        // 計數歸零
-			dog_number = 0;
-		}
+		
 	}
 	
+	if (dog_number == 2) {
+		enemy = 0;        // 計數歸零
+		dog_number = 0;
+	}
 	enemy += 1;        // 時間計數每秒+30
 }
 

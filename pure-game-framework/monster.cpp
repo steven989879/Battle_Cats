@@ -95,6 +95,20 @@ namespace game_framework {
 			whether_attack = false;
 			single_attack = 1;
 		}
+
+		if (type_ID == 13) { //小人
+			isBitmapLoaded = false;
+			price = 50;//敵人
+			heart = 30;//敵人
+			attack_range = 5;
+			power = 7;
+			walk_speed = 2;
+			if_attack = 0;
+			type = 0;
+			back_time = 0;
+			whether_attack = false;
+			single_attack = 1;
+		}
 	}
 
 	int monster::get_type()

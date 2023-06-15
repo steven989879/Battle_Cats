@@ -320,16 +320,12 @@ void CGameStateRun_4::OnMove()							// 移動遊戲元素
 			}, RGB(255, 255, 255));
 
 		dog_number += 1;
-		if (dog_number == 2) {
-			enemy = 0;        // 計數歸零
-			dog_number = 0;
-		}
 	}
-	if (enemy % 300 == 0 && enemy > 0) {        // 計數達指定次數生成敵對生物
+	if (enemy % 600 == 0 && enemy > 0) {        // 計數達指定次數生成敵對生物
 		enemy_one_v_if_death.push_back(false);
 
-		monster enemy1(12);
-		enemy_one_v.push_back(enemy1);
+		monster enemy2(12);
+		enemy_one_v.push_back(enemy2);
 		enemy_one_v[enemy_one_v.size() - 1].LoadBitmapByString({
 		"resources/snake_walk_1.bmp" , "resources/snake_walk_2.bmp" , "resources/snake_walk_3.bmp" , "resources/snake_walk_2.bmp"        // 載入敵對狗走路動畫
 			}, RGB(255, 255, 255));
@@ -354,8 +350,8 @@ void CGameStateRun_4::OnMove()							// 移動遊戲元素
 		"resources/bump_0.bmp" , "resources/bump_0.bmp" , "resources/bump_0.bmp"        // 載入敵對狗攻擊爆炸動畫
 			}, RGB(255, 255, 255));
 
-		monster enemy1_back(12);
-		enemy_one_v_back.push_back(enemy1_back);
+		monster enemy2_back(12);
+		enemy_one_v_back.push_back(enemy2_back);
 		enemy_one_v_back[enemy_one_v_back.size() - 1].LoadBitmapByString({
 		"resources/snake_back_0.bmp" , "resources/snake_back_1.bmp" , "resources/snake_back_2.bmp" ,
 		"resources/snake_back_3.bmp" , "resources/snake_back_4.bmp" , "resources/snake_back_5.bmp" ,
@@ -371,8 +367,8 @@ void CGameStateRun_4::OnMove()							// 移動遊戲元素
 		"resources/snake_back_33.bmp" , "resources/snake_back_34.bmp" , "resources/snake_back_35.bmp" ,
 			}, RGB(255, 255, 255));
 
-		monster enemy1_death(12);
-		enemy_one_v_death.push_back(enemy1_death);
+		monster enemy2_death(12);
+		enemy_one_v_death.push_back(enemy2_death);
 		enemy_one_v_death[enemy_one_v_death.size() - 1].LoadBitmapByString({
 		"resources/death_1.bmp" , "resources/death_2.bmp" , "resources/death_3.bmp" ,
 		"resources/death_4.bmp" , "resources/death_5.bmp" , "resources/death_6.bmp" ,
@@ -396,6 +392,10 @@ void CGameStateRun_4::OnMove()							// 移動遊戲元素
 		"resources/death_58.bmp" , "resources/death_59.bmp" , "resources/death_60.bmp" ,
 		"resources/death_61.bmp"
 			}, RGB(255, 255, 255));
+	}
+	if (dog_number == 2) {
+		enemy = 0;        // 計數歸零
+		dog_number = 0;
 	}
 	enemy += 1;        // 時間計數每秒+30
 }

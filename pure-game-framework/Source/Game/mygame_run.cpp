@@ -43,16 +43,18 @@ void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 	hongkong.LoadBitmapByString({ "resources/choose_hongkong.bmp" });//按開始遊戲，進入第二關
 	thailand.LoadBitmapByString({ "resources/choose_thailand.bmp" });//按開始遊戲，進入第三關
 	china.LoadBitmapByString({ "resources/choose_china.bmp" });//按開始遊戲，進入第四關
+	mongolia.LoadBitmapByString({ "resources/choose_mongolia.bmp" });//按開始遊戲，進入第五關
 	taiwan.SetTopLeft(0, 0);
 	hongkong.SetTopLeft(0, 0);
 	thailand.SetTopLeft(0, 0);
 	china.SetTopLeft(0, 0);
+	mongolia.SetTopLeft(0, 0);
 	choose = 1; //當前選擇的關卡，init階端默認為第一關
 }
 
 void CGameStateRun::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
-	if (nChar == VK_RIGHT && choose < 4) { //鍵盤右鍵，選擇的關卡+1
+	if (nChar == VK_RIGHT && choose < 5) { //鍵盤右鍵，選擇的關卡+1
 		choose += 1;
 	}
 	else if (nChar == VK_LEFT && choose >1) {//左鍵，選擇的關卡-1
@@ -82,6 +84,9 @@ void CGameStateRun::OnLButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的
 		}
 		else if (choose == 4) {
 			GotoGameState(GAME_STATE_RUN_4);		// 根據choose切換至GAME_STATE_RUN_4
+		}
+		else if (choose == 5) {
+			GotoGameState(GAME_STATE_RUN_5);		// 根據choose切換至GAME_STATE_RUN_5
 		}
 	}
 }
@@ -115,6 +120,9 @@ void CGameStateRun::OnShow()
 	}
 	else if (choose == 4) {
 		china.ShowBitmap();
+	}
+	else if (choose == 5) {
+		mongolia.ShowBitmap();
 	}
 	
 	/////////////////////////////////////////////////////////////////////////////////
