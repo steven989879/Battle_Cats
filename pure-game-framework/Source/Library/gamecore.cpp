@@ -30,7 +30,7 @@ namespace game_framework {
 	CGame CGame::instance;
 
 	CGame::CGame()
-		: NUM_GAME_STATES(8)
+		: NUM_GAME_STATES(9)
 	{
 		running = true;
 		suspended = false;
@@ -41,7 +41,8 @@ namespace game_framework {
 		gameStateTable[GAME_STATE_RUN_3] = new CGameStateRun_3(this);
 		gameStateTable[GAME_STATE_RUN_4] = new CGameStateRun_4(this);
 		gameStateTable[GAME_STATE_RUN_5] = new CGameStateRun_5(this);
-		gameStateTable[GAME_STATE_OVER] = new CGameStateOver(this);
+		gameStateTable[GAME_STATE_OVER_1] = new CGameStateOver_1(this);
+		gameStateTable[GAME_STATE_OVER_2] = new CGameStateOver_2(this);
 		gameState = NULL;
 	}
 

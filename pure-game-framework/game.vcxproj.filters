@@ -48,9 +48,6 @@
     <ClCompile Include="Source\Game\mygame_initialize.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Game\mygame_over.cpp">
-      <Filter>MyGame</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Game\mygame_run.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
@@ -70,6 +67,12 @@
       <Filter>MyGame</Filter>
     </ClCompile>
     <ClCompile Include="mygame_run_5.cpp">
+      <Filter>MyGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\mygame_over_1.cpp">
+      <Filter>MyGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\mygame_over_2.cpp">
       <Filter>MyGame</Filter>
     </ClCompile>
   </ItemGroup>

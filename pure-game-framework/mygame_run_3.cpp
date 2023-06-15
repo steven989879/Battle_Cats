@@ -699,7 +699,7 @@ void CGameStateRun_3::OnShow()
 							friend_tower -= enemy_one_v[d].get_power();
 							enemy_one_v[d].if_attack = 1;
 							if (friend_tower <= 0) {
-								GotoGameState(GAME_STATE_OVER);
+								GotoGameState(GAME_STATE_OVER_2);
 							}
 						}
 						else {
@@ -732,7 +732,7 @@ void CGameStateRun_3::OnShow()
 						friend_tower -= enemy_one_v[d].get_power();
 						enemy_one_v[d].if_attack = 1;
 						if (friend_tower <= 0) {
-							GotoGameState(GAME_STATE_OVER);
+							GotoGameState(GAME_STATE_OVER_2);
 						}
 					}
 				}
@@ -823,7 +823,7 @@ void CGameStateRun_3::OnShow()
 								}
 							}
 							if (enemy_tower <= 0) {
-								GotoGameState(GAME_STATE_OVER);
+								GotoGameState(GAME_STATE_OVER_1);
 							}
 						}
 						else {
@@ -893,7 +893,7 @@ void CGameStateRun_3::OnShow()
 						enemy_tower -= cat_one_friend[i].get_power();
 						cat_one_friend[i].if_attack = 1;
 						if (enemy_tower <= 0) {
-							GotoGameState(GAME_STATE_OVER);
+							GotoGameState(GAME_STATE_OVER_1);
 						}
 					}
 				}

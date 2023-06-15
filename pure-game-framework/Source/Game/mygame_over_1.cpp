@@ -13,23 +13,23 @@ using namespace game_framework;
 // 這個class為遊戲的結束狀態(Game Over)
 /////////////////////////////////////////////////////////////////////////////
 
-CGameStateOver::CGameStateOver(CGame *g) : CGameState(g)
+CGameStateOver_1::CGameStateOver_1(CGame *g) : CGameState(g)
 {
 }
 
-void CGameStateOver::OnMove()
+void CGameStateOver_1::OnMove()
 {
 	//GotoGameState(GAME_STATE_INIT);
 }
 
-void CGameStateOver::OnBeginState()
+void CGameStateOver_1::OnBeginState()
 {
 
 }
 
-void CGameStateOver::OnInit()
+void CGameStateOver_1::OnInit()
 {
-	background.LoadBitmapByString({ "resources/win.bmp" });
+	background.LoadBitmapByString({"resources/end_win.bmp"});
 	background.SetTopLeft(0, 0);
 	//
 	// 當圖很多時，OnInit載入所有的圖要花很多時間。為避免玩遊戲的人
@@ -39,21 +39,21 @@ void CGameStateOver::OnInit()
 	//
 	// 開始載入資料
 	//
-	Sleep(1000);				// 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
+	//Sleep(1000);				// 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
 	//
 	// 最終進度為100%
 	//
 	ShowInitProgress(100, "OK!");
 
-	Sleep(1000);
+	//Sleep(1000);
 }
 
-void  CGameStateOver::OnLButtonDown(UINT nFlags, CPoint point)
+void  CGameStateOver_1::OnLButtonDown(UINT nFlags, CPoint point)
 {
 
 }
 
-void CGameStateOver::OnShow()
-{
+void CGameStateOver_1::OnShow()
+{	
 	background.ShowBitmap();
 }
