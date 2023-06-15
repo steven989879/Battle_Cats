@@ -35,11 +35,11 @@ void CGameStateRun::OnMove()							// 移動遊戲元素
 
 void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
 {	
-	taiwan.LoadBitmapByString({ "resources/choose_taiwan.bmp" }); //按開始遊戲，進入第一關
-	hongkong.LoadBitmapByString({ "resources/choose_hongkong.bmp" });//按開始遊戲，進入第二關
-	thailand.LoadBitmapByString({ "resources/choose_thailand.bmp" });//按開始遊戲，進入第三關
-	china.LoadBitmapByString({ "resources/choose_china.bmp" });//按開始遊戲，進入第四關
-	mongolia.LoadBitmapByString({ "resources/choose_mongolia.bmp" });//按開始遊戲，進入第五關
+	taiwan.LoadBitmapByString({ "resources/choose_taiwan.bmp" });			//按開始遊戲，進入第一關
+	hongkong.LoadBitmapByString({ "resources/choose_hongkong.bmp" });		//按開始遊戲，進入第二關
+	thailand.LoadBitmapByString({ "resources/choose_thailand.bmp" });		//按開始遊戲，進入第三關
+	china.LoadBitmapByString({ "resources/choose_china.bmp" });				//按開始遊戲，進入第四關
+	mongolia.LoadBitmapByString({ "resources/choose_mongolia.bmp" });		//按開始遊戲，進入第五關
 	taiwan.SetTopLeft(0, 0);
 	hongkong.SetTopLeft(0, 0);
 	thailand.SetTopLeft(0, 0);
@@ -65,9 +65,6 @@ void CGameStateRun::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 
 void CGameStateRun::OnLButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的動作
 {
-	///////////////////////////////////
-	// 藉由點擊次數生成相應數量貓咪
-	///////////////////////////////////
 	if (point.x >= 1250 && point.x <= 1599 && point.y >= 488 && point.y <= 570) { //圖片中的戰鬥開始
 		if (choose == 1) {
 			CAudio::Instance()->Stop(Menu_BGM);
@@ -130,6 +127,4 @@ void CGameStateRun::OnShow()
 	else if (choose == 5) {
 		mongolia.ShowBitmap();
 	}
-	
-	/////////////////////////////////////////////////////////////////////////////////
 }

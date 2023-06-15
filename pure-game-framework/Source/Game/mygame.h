@@ -70,6 +70,7 @@ namespace game_framework {
 	protected:
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 		void load_background();
+		void draw_text();
 	private:
 		CMovingBitmap logo;								// csie的logo
 		//void load_background();
