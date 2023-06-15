@@ -37,6 +37,7 @@ namespace game_framework {
 			attack_range = 10;
 			power = 10;
 			walk_speed = 2;
+			attack_speed = 200;
 			if_attack = 0;
 			type = 0;
 			back_time = 0;
@@ -47,9 +48,9 @@ namespace game_framework {
 			isBitmapLoaded = false;
 			price = 100;
 			heart = 100;
-			attack_range = 1000;
-			power = 30;
-			walk_speed = 2;
+			attack_range = 100;
+			power = 5;
+			walk_speed = 1;
 			if_attack = 0;
 			type = 0;
 			back_time = 0;
@@ -61,7 +62,7 @@ namespace game_framework {
 			price = 200;
 			heart = 50;
 			attack_range = 10;
-			power = 50;
+			power = 20;
 			walk_speed = 2;
 			if_attack = 0;
 			type = 0;
@@ -74,8 +75,8 @@ namespace game_framework {
 			price = 50;//敵人
 			heart = 30;//敵人
 			attack_range = 5;
-			power = 5;
-			walk_speed = 2;
+			power = 8;
+			walk_speed = 1;
 			if_attack = 0;
 			type = 0;
 			back_time = 0;
@@ -87,8 +88,8 @@ namespace game_framework {
 			price = 50;//敵人
 			heart = 30;//敵人
 			attack_range = 5;
-			power = 7;
-			walk_speed = 2;
+			power = 10;
+			walk_speed = 1;
 			if_attack = 0;
 			type = 0;
 			back_time = 0;
@@ -101,7 +102,7 @@ namespace game_framework {
 			price = 50;//敵人
 			heart = 30;//敵人
 			attack_range = 5;
-			power = 7;
+			power = 10;
 			walk_speed = 2;
 			if_attack = 0;
 			type = 0;

@@ -171,7 +171,7 @@ void game_framework::CGameStateRun_3::OnInit()
 	base_11 = monster(11);
 
 	friend_tower = 1000;
-	enemy_tower = 500;
+	enemy_tower = 1000;
 }
 
 void CGameStateRun_3::OnMove()							// 移動遊戲元素
@@ -187,7 +187,7 @@ void CGameStateRun_3::OnMove()							// 移動遊戲元素
 			}
 		}
 		if ((t == cat_one_friend.size() || cat_one_friend.size() == 0) && enemy_one_v[d].GetLeft() + 50 + enemy_one_v[d].GetWidth() < character_tower_1.GetLeft() && enemy_one_v[d].get_type() != 2 && !(enemy_one_v_if_death[d])) {
-			enemy_one_v[d].SetTopLeft(enemy_one_v[d].GetLeft() + 1, enemy_one_v[d].GetTop());
+			enemy_one_v[d].SetTopLeft(enemy_one_v[d].GetLeft() + enemy_one_v[d].get_walk_speed(), enemy_one_v[d].GetTop());
 		}
 		else {
 			enemy_one_v[d].SetFrameIndexOfBitmap(1);
@@ -202,7 +202,7 @@ void CGameStateRun_3::OnMove()							// 移動遊戲元素
 			}
 		}
 		if ((t == enemy_one_v.size() || enemy_one_v.size() == 0) && cat_one_friend[i].GetLeft() > character_tower_2.GetLeft() + 50 + character_tower_2.GetWidth() && cat_one_friend[i].get_type() != 2) {
-			cat_one_friend[i].SetTopLeft(cat_one_friend[i].GetLeft() - 2, cat_one_friend[i].GetTop());
+			cat_one_friend[i].SetTopLeft(cat_one_friend[i].GetLeft() - cat_one_friend[i].get_walk_speed(), cat_one_friend[i].GetTop());
 		}
 		else {
 			cat_one_friend[i].SetFrameIndexOfBitmap(1);
@@ -972,7 +972,7 @@ void CGameStateRun_3::draw_text() {
 	show_friend_tower = std::to_string(friend_tower);
 	CTextDraw::Print(pDC, 1290, 175, (show_friend_tower + "/1000"));
 	show_enemy_tower = std::to_string(enemy_tower);
-	CTextDraw::Print(pDC, 255, 175, (show_enemy_tower + "/500"));
+	CTextDraw::Print(pDC, 255, 175, (show_enemy_tower + "/1000"));
 
 	/*if (enemy_one_v.size() >= 1 && cat_one_friend.size() >= 1)
 	{

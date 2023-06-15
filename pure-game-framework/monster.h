@@ -51,6 +51,7 @@ namespace game_framework {
 		int heart;
 		int single_attack;
 		int attack_range;
+		int attack_speed;
 		int power;
 		int walk_speed;
 		int cool_time;
