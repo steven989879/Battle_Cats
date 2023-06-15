@@ -26,8 +26,14 @@ void CGameStateInit::OnInit()
 	//
 	// 開始載入資料
 	//
+	//Sleep(100);				// 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
 	load_background();
-	//Sleep(1000);				// 放慢，以便看清楚進度，實際遊戲請刪除此Sleep
+	CAudio::Instance()->Load(OP_BGM, "resources/Audio/OP_BGM.wav");
+	CAudio::Instance()->Load(Battle_BGM, "resources/Audio/Battle_BGM1.wav");
+	CAudio::Instance()->Load(Menu_BGM, "resources/Audio/Menu_BGM.wav");
+	CAudio::Instance()->Load(Hit_audio_1, "resources/Audio/Hit_audio.wav");
+	CAudio::Instance()->Load(Hit_audio_2, "resources/Audio/Hit_audio.wav");
+	CAudio::Instance()->Play(OP_BGM, true);
 	//
 	// 此OnInit動作會接到CGameStaterRun::OnInit()，所以進度還沒到100%
 	//
@@ -46,6 +52,8 @@ void CGameStateInit::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 void CGameStateInit::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	if (point.x >= 630 && point.x <= 1083 && point.y >= 432 && point.y <= 507) {
+		CAudio::Instance()->Stop(OP_BGM);
+		CAudio::Instance()->Play(Menu_BGM, true);
 		GotoGameState(GAME_STATE_RUN);		// 切換至GAME_STATE_RUN
 	}
 	/*

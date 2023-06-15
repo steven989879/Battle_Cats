@@ -314,6 +314,8 @@ void CGameStateRun_2::OnMove()							// 移動遊戲元素
 void CGameStateRun_2::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags) // 按esc快速返回
 {
 	if (nChar == VK_ESCAPE) {
+		CAudio::Instance()->Stop(Battle_BGM);
+		CAudio::Instance()->Play(Menu_BGM, true);
 		GotoGameState(GAME_STATE_RUN);
 	}
 	if (nChar == VK_TAB) {
@@ -625,11 +627,13 @@ void CGameStateRun_2::OnShow()
 					}
 				}
 				if (enemy_one_v[d].attack.GetFrameIndexOfBitmap() == 4 && enemy_one_v[d].get_type() == 1 && enemy_one_v[d].get_if_attack() == 0) { //設定攻擊動畫扣血
+					CAudio::Instance()->Play(Hit_audio_2);
 					if (cat_one_friend.size() > 0) {
 						if (enemy_one_v[now_position_cat].GetLeft() > 1400) {
 							friend_tower -= enemy_one_v[d].get_power();
 							enemy_one_v[d].if_attack = 1;
 							if (friend_tower <= 0) {
+								CAudio::Instance()->Stop(Battle_BGM);
 								GotoGameState(GAME_STATE_OVER_2);
 							}
 						}
@@ -663,6 +667,7 @@ void CGameStateRun_2::OnShow()
 						friend_tower -= enemy_one_v[d].get_power();
 						enemy_one_v[d].if_attack = 1;
 						if (friend_tower <= 0) {
+							CAudio::Instance()->Stop(Battle_BGM);
 							GotoGameState(GAME_STATE_OVER_2);
 						}
 					}
@@ -743,7 +748,8 @@ void CGameStateRun_2::OnShow()
 						now_position_enemy = j;
 					}
 				}
-				if (cat_one_friend[i].attack.GetFrameIndexOfBitmap() == 4 && cat_one_friend[i].get_type() == 1 && cat_one_friend[i].get_if_attack() == 0) { //設定攻擊動畫扣血	
+				if (cat_one_friend[i].attack.GetFrameIndexOfBitmap() == 4 && cat_one_friend[i].get_type() == 1 && cat_one_friend[i].get_if_attack() == 0) { //設定攻擊動畫扣血
+					CAudio::Instance()->Play(Hit_audio_1);
 					if (enemy_one_v.size() > 0) {
 						if (enemy_one_v[now_position_enemy].GetLeft() < 100) {//如果都在塔後
 							enemy_tower -= cat_one_friend[i].get_power();
@@ -754,6 +760,7 @@ void CGameStateRun_2::OnShow()
 								}
 							}
 							if (enemy_tower <= 0) {
+								CAudio::Instance()->Stop(Battle_BGM);
 								GotoGameState(GAME_STATE_OVER_1);
 							}
 						}
@@ -824,6 +831,7 @@ void CGameStateRun_2::OnShow()
 						enemy_tower -= cat_one_friend[i].get_power();
 						cat_one_friend[i].if_attack = 1;
 						if (enemy_tower <= 0) {
+							CAudio::Instance()->Stop(Battle_BGM);
 							GotoGameState(GAME_STATE_OVER_1);
 						}
 					}

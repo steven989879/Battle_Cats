@@ -130,7 +130,9 @@ namespace game_framework {
 	class CGameStateRun_2;
 	class CGameStateRun_3;
 	class CGameStateRun_4;
-	class CGameStateOver;
+	class CGameStateRun_5;
+	class CGameStateOver_1;
+	class CGameStateOver_2;
 
 	/////////////////////////////////////////////////////////////////////////////
 	// 這個class為遊戲的各種狀態之Base class(是一個abstract class)

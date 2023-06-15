@@ -31,14 +31,10 @@ void CGameStateRun::OnBeginState()
 
 void CGameStateRun::OnMove()							// 移動遊戲元素
 {
-	/////////////////////////////////////
-	// 設定敵對生物及貓咪移動停止參數
-	/////////////////////////////////////
-	
 }
 
 void CGameStateRun::OnInit()  								// 遊戲的初值及圖形設定
-{
+{	
 	taiwan.LoadBitmapByString({ "resources/choose_taiwan.bmp" }); //按開始遊戲，進入第一關
 	hongkong.LoadBitmapByString({ "resources/choose_hongkong.bmp" });//按開始遊戲，進入第二關
 	thailand.LoadBitmapByString({ "resources/choose_thailand.bmp" });//按開始遊戲，進入第三關
@@ -74,18 +70,28 @@ void CGameStateRun::OnLButtonDown(UINT nFlags, CPoint point)  // 處理滑鼠的
 	///////////////////////////////////
 	if (point.x >= 1250 && point.x <= 1599 && point.y >= 488 && point.y <= 570) { //圖片中的戰鬥開始
 		if (choose == 1) {
+			CAudio::Instance()->Stop(Menu_BGM);
+			CAudio::Instance()->Play(Battle_BGM, true);
 			GotoGameState(GAME_STATE_RUN_1);		// 根據choose切換至GAME_STATE_RUN_1
 		}
 		else if (choose == 2) {
+			CAudio::Instance()->Stop(Menu_BGM);
+			CAudio::Instance()->Play(Battle_BGM, true);
 			GotoGameState(GAME_STATE_RUN_2);		// 根據choose切換至GAME_STATE_RUN_2
 		}
 		else if (choose == 3) {
+			CAudio::Instance()->Stop(Menu_BGM);
+			CAudio::Instance()->Play(Battle_BGM, true);
 			GotoGameState(GAME_STATE_RUN_3);		// 根據choose切換至GAME_STATE_RUN_3
 		}
 		else if (choose == 4) {
+			CAudio::Instance()->Stop(Menu_BGM);
+			CAudio::Instance()->Play(Battle_BGM, true);
 			GotoGameState(GAME_STATE_RUN_4);		// 根據choose切換至GAME_STATE_RUN_4
 		}
 		else if (choose == 5) {
+			CAudio::Instance()->Stop(Menu_BGM);
+			CAudio::Instance()->Play(Battle_BGM, true);
 			GotoGameState(GAME_STATE_RUN_5);		// 根據choose切換至GAME_STATE_RUN_5
 		}
 	}

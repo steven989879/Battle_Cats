@@ -53,6 +53,14 @@ void  CGameStateOver_1::OnLButtonDown(UINT nFlags, CPoint point)
 
 }
 
+void CGameStateOver_1::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags) // 按esc快速返回
+{
+	if (nChar == VK_ESCAPE) {
+		CAudio::Instance()->Play(Menu_BGM, true);
+		GotoGameState(GAME_STATE_RUN);
+	}
+}
+
 void CGameStateOver_1::OnShow()
 {	
 	background.ShowBitmap();

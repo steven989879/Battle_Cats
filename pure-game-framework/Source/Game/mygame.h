@@ -48,9 +48,11 @@ namespace game_framework {
 	/////////////////////////////////////////////////////////////////////////////
 
 	enum AUDIO_ID {				// 定義各種音效的編號
-		AUDIO_DING,				// 0
-		AUDIO_LAKE,				// 1
-		AUDIO_NTUT				// 2
+		Battle_BGM,
+		OP_BGM,
+		Menu_BGM,
+		Hit_audio_1,
+		Hit_audio_2
 	};
 
 	/////////////////////////////////////////////////////////////////////////////
@@ -98,6 +100,7 @@ namespace game_framework {
 		void OnMove();									// 移動遊戲元素
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
+		//CAudio music;
 		CMovingBitmap taiwan;
 		CMovingBitmap hongkong;
 		CMovingBitmap thailand;
@@ -117,6 +120,7 @@ namespace game_framework {
 		void OnBeginState();							// 設定每次重玩所需的變數
 		void OnInit();
 		void OnLButtonDown(UINT nFlags, CPoint point);  // 處理滑鼠的動作
+		void OnKeyDown(UINT, UINT, UINT);
 	protected:
 		void OnMove();									// 移動遊戲元素
 		void OnShow();									// 顯示這個狀態的遊戲畫面
@@ -131,6 +135,7 @@ namespace game_framework {
 		void OnBeginState();							// 設定每次重玩所需的變數
 		void OnInit();
 		void OnLButtonDown(UINT nFlags, CPoint point);  // 處理滑鼠的動作
+		void OnKeyDown(UINT, UINT, UINT);
 	protected:
 		void OnMove();									// 移動遊戲元素
 		void OnShow();									// 顯示這個狀態的遊戲畫面
