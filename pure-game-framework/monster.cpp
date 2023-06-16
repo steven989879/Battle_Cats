@@ -75,7 +75,7 @@ namespace game_framework {
 			price = 50;//¼Ä¤H
 			heart = 30;//¼Ä¤H
 			attack_range = 5;
-			power = 8;
+			power = 7;
 			walk_speed = 1;
 			if_attack = 0;
 			type = 0;

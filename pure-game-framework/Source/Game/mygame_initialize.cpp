@@ -61,7 +61,7 @@ void CGameStateInit::draw_text() {
 	CDC *pDC = CDDraw::GetBackCDC();
 
 	CTextDraw::ChangeFontLog(pDC, 24, "Arial Black", RGB(50, 50, 50), 900);
-	CTextDraw::Print(pDC, 540, 700, ("Author: ntut_Feng & Syun"));
+	CTextDraw::Print(pDC, 650, 700, ("Author: ntut_Feng & Syun"));
 
 	CDDraw::ReleaseBackCDC();
 }

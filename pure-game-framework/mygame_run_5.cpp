@@ -900,7 +900,7 @@ void CGameStateRun_5::OnShow()
 								cat_one_friend_back[now_position_cat].SetTopLeft(cat_one_friend[now_position_cat].GetLeft(), cat_one_friend[now_position_cat].GetTop() - 50);
 								cat_one_friend_death[now_position_cat].SetTopLeft(cat_one_friend[now_position_cat].GetLeft() + 136, 0);
 								cat_one_friend_back[now_position_cat].SetAnimation(20, 0);
-								cat_one_friend.erase(cat_one_friend.begin() + now_position_cat);
+								
 							}
 							else if (cat_one_friend[now_position_cat].heart <= 15 && cat_one_friend[now_position_cat].get_back_time() == 0) {
 								cat_one_friend[now_position_cat].back_time = 1;
@@ -942,14 +942,12 @@ void CGameStateRun_5::OnShow()
 		}
 	}
 	for (int i = 0; i < cat_one_friend_back.size(); i++) {
-		if (cat_one_friend_back[i].IsAnimation() && cat_one_friend_if_death[i]) {
+		if (cat_one_friend_back[i].IsAnimation() && cat_one_friend_if_death[i] && cat_one_friend_back[i].GetFrameIndexOfBitmap() != 34) {
 			cat_one_friend_back[i].ShowBitmap();
 		}
 		if (cat_one_friend_back[i].GetFrameIndexOfBitmap() > 33 && cat_one_friend_if_death[i]) {
 			cat_one_friend_death[i].SetAnimation(15, 0);
-			cat_one_friend_back.erase(cat_one_friend_back.begin() + i);
-			cat_one_friend_if_death.erase(cat_one_friend_if_death.begin() + i);
-			i -= 1;
+			cat_one_friend_back[i].SetFrameIndexOfBitmap(34);
 		}
 	}
 	for (int i = 0; i < cat_one_friend_death.size(); i++) {
@@ -957,8 +955,11 @@ void CGameStateRun_5::OnShow()
 			cat_one_friend_death[i].ShowBitmap();
 		}
 		if (cat_one_friend_death[i].GetFrameIndexOfBitmap() > 59) {
+			cat_one_friend_back.erase(cat_one_friend_back.begin() + i);
+			cat_one_friend_if_death.erase(cat_one_friend_if_death.begin() + i);
+			cat_one_friend.erase(cat_one_friend.begin() + i);
 			cat_one_friend_death.erase(cat_one_friend_death.begin() + i);
-			i -= 1;
+			i = 0;
 		}
 	}
 	/////////////////////////////////////////////////////////////////////////////////
@@ -1123,7 +1124,7 @@ void CGameStateRun_5::OnShow()
 			enemy_one_v_if_death.erase(enemy_one_v_if_death.begin() + d);
 			enemy_one_v.erase(enemy_one_v.begin() + d);
 			enemy_one_v_death.erase(enemy_one_v_death.begin() + d);
-			d -= 1;
+			d = 0;
 		}
 	}
 	for (int d = 0; d < enemy_one_v.size(); d++) {
