@@ -803,7 +803,6 @@ void CGameStateRun_5::OnShow()
 	// 設定敵對生物及貓咪移動停止參數
 	/////////////////////////////////////
 	for (int d = 0; d < enemy_one_v.size(); d++) {
-		//if(){}
 		int t = 0;
 		for (int i = 0; i < cat_one_friend.size(); i++) {
 			if (enemy_one_v[d].GetLeft() + 50 + enemy_one_v[d].GetWidth() < cat_one_friend[i].GetLeft() || cat_one_friend_if_death[i]) {
@@ -889,7 +888,7 @@ void CGameStateRun_5::OnShow()
 					if (enemy_one_v[d].attack.GetFrameIndexOfBitmap() == 4 && enemy_one_v[d].get_type() == 1 && enemy_one_v[d].get_if_attack() == 0) { //設定攻擊動畫扣血
 						CAudio::Instance()->Play(Hit_audio_2);
 						if (cat_one_friend.size() > 0) {
-							if (cat_one_friend[now_position_cat].GetLeft() > 1400) {
+							if (cat_one_friend[now_position_cat].GetLeft() > character_tower_1.GetLeft()) {
 								friend_tower -= enemy_one_v[d].get_power();
 								enemy_one_v[d].if_attack = 1;
 								if (friend_tower <= 0) {
@@ -905,7 +904,9 @@ void CGameStateRun_5::OnShow()
 									enemy_one_v[d].bump.SetFrameIndexOfBitmap(0);
 									cat_one_friend_if_death[now_position_cat] = true;
 									cat_one_friend_back[now_position_cat].SetTopLeft(cat_one_friend[now_position_cat].GetLeft(), cat_one_friend[now_position_cat].GetTop() - 50);
-									cat_one_friend_death[now_position_cat].SetTopLeft(cat_one_friend[now_position_cat].GetLeft() + 136, 0);
+									cat_one_friend[now_position_cat].SetTopLeft(cat_one_friend[now_position_cat].GetLeft() + 136, cat_one_friend[now_position_cat].GetTop());
+									cat_one_friend[now_position_cat].attack.SetTopLeft(cat_one_friend[now_position_cat].GetLeft(), cat_one_friend[now_position_cat].GetTop());
+									cat_one_friend_death[now_position_cat].SetTopLeft(cat_one_friend[now_position_cat].GetLeft(), 0);
 									cat_one_friend_back[now_position_cat].SetAnimation(20, 0);
 
 								}
@@ -1013,7 +1014,7 @@ void CGameStateRun_5::OnShow()
 					if (cat_one_friend[i].attack.GetFrameIndexOfBitmap() == 4 && cat_one_friend[i].get_type() == 1 && cat_one_friend[i].get_if_attack() == 0) { //設定攻擊動畫扣血
 						CAudio::Instance()->Play(Hit_audio_1);
 						if (enemy_one_v.size() > 0) {
-							if (enemy_one_v[now_position_enemy].GetLeft() < 100) {//如果都在塔後
+							if (enemy_one_v[now_position_enemy].GetLeft() < character_tower_2.GetLeft()) {//如果都在塔後
 								enemy_tower -= cat_one_friend[i].get_power();
 								cat_one_friend[i].if_attack = 1;
 								for (int j = 0; j < enemy_one_v.size(); j++) {
@@ -1034,10 +1035,11 @@ void CGameStateRun_5::OnShow()
 										cat_one_friend[i].attack.SetFrameIndexOfBitmap(0);
 										cat_one_friend[i].bump.SetFrameIndexOfBitmap(0);
 										enemy_one_v_if_death[now_position_enemy] = true;
-										enemy_one_v_back[now_position_enemy].SetTopLeft(enemy_one_v[now_position_enemy].GetLeft() - 136, enemy_one_v[now_position_enemy].GetTop() - 50);
-										enemy_one_v_death[now_position_enemy].SetTopLeft(enemy_one_v[now_position_enemy].GetLeft() - 136, 0);
+										enemy_one_v[now_position_enemy].SetTopLeft(enemy_one_v[now_position_enemy].GetLeft() - 136, enemy_one_v[now_position_enemy].GetTop());
+										enemy_one_v[now_position_enemy].attack.SetTopLeft(enemy_one_v[now_position_enemy].GetLeft(), enemy_one_v[now_position_enemy].GetTop());
+										enemy_one_v_back[now_position_enemy].SetTopLeft(enemy_one_v[now_position_enemy].GetLeft(), enemy_one_v[now_position_enemy].GetTop() - 50);
+										enemy_one_v_death[now_position_enemy].SetTopLeft(enemy_one_v[now_position_enemy].GetLeft(), 0);
 										enemy_one_v_back[now_position_enemy].SetAnimation(20, 0);
-
 									}
 									else if (enemy_one_v[now_position_enemy].heart <= 15 && enemy_one_v[now_position_enemy].get_back_time() == 0) {
 										enemy_one_v[now_position_enemy].back_time = 1;
@@ -1058,22 +1060,18 @@ void CGameStateRun_5::OnShow()
 										if ((enemy_one_v[j].GetLeft() + enemy_one_v[j].GetWidth() > cat_one_friend[i].GetLeft() - cat_one_friend[i].get_attack_range()) && !(enemy_one_v_if_death[j])) {
 											enemy_one_v[j].heart -= cat_one_friend[i].get_power();
 										}
-
 										if (enemy_one_v[j].heart <= 0 && !(enemy_one_v_if_death[j])) {
-
 											cat_one_friend[i].attack.SetFrameIndexOfBitmap(0);
 											cat_one_friend[i].bump.SetFrameIndexOfBitmap(0);
 											enemy_one_v_if_death[j] = true;
-											enemy_one_v_back[j].SetTopLeft(enemy_one_v[j].GetLeft() - 136, enemy_one_v[j].GetTop() - 50);
-											enemy_one_v_death[j].SetTopLeft(enemy_one_v[j].GetLeft() - 136, 0);
 											enemy_one_v[j].SetTopLeft(enemy_one_v[j].GetLeft() - 136, enemy_one_v[j].GetTop());
 											enemy_one_v[j].attack.SetTopLeft(enemy_one_v[j].GetLeft(), enemy_one_v[j].GetTop());
-											enemy_one_v[j].bump.SetTopLeft(enemy_one_v[j].GetLeft(), enemy_one_v[j].GetTop());
+											enemy_one_v_back[j].SetTopLeft(enemy_one_v[j].GetLeft(), enemy_one_v[j].GetTop() - 50);
+											enemy_one_v_death[j].SetTopLeft(enemy_one_v[j].GetLeft(), 0);
 											enemy_one_v_back[j].SetAnimation(20, 0);
 											enemy_one_v_back[j].ShowBitmap();
 										}
 										else if (enemy_one_v[j].heart <= 15 && enemy_one_v[j].get_back_time() == 0) {
-
 											enemy_one_v[j].back_time = 1;
 											enemy_one_v[j].type = 2;
 											cat_one_friend[i].attack.SetFrameIndexOfBitmap(0);
@@ -1147,7 +1145,6 @@ void CGameStateRun_5::OnShow()
 void CGameStateRun_5::draw_text() {
 	int Px = 1390;
 	CDC *pDC = CDDraw::GetBackCDC();
-	//CFont* fp;
 	s = std::to_string(money_30);
 	s2 = std::to_string(max_money_30);
 	int move = 0;
@@ -1166,21 +1163,6 @@ void CGameStateRun_5::draw_text() {
 	CTextDraw::Print(pDC, 1290, 175, (show_friend_tower + "/1000"));
 	show_enemy_tower = std::to_string(enemy_tower);
 	CTextDraw::Print(pDC, 255, 175, (show_enemy_tower + "/1500"));
-
-	if (enemy_one_v.size() >= 1 && cat_one_friend.size() >= 1)
-	{
-		std::string s1 = std::to_string(enemy_one_v.size());
-		std::string s2 = std::to_string(cat_one_friend.size());
-		std::string s3 = s1 + "//" + s2;
-		int Px = 500;
-		CTextDraw::ChangeFontLog(pDC, 30, "Arial Black", RGB(255, 200, 0), 900);
-		CTextDraw::Print(pDC, Px, 3, s3);
-
-		Px = 700;
-		std::string s4 = std::to_string(enemy_one_v[0].get_power());
-		CTextDraw::ChangeFontLog(pDC, 30, "Arial Black", RGB(255, 200, 0), 900);
-		CTextDraw::Print(pDC, Px, 3, s4);;
-	}
 
 	CDDraw::ReleaseBackCDC();
 }

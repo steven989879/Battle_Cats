@@ -73,8 +73,6 @@ namespace game_framework {
 		void draw_text();
 	private:
 		CMovingBitmap logo;								// csie的logo
-		//void load_background();
-		//void draw_text();
 		CMovingBitmap background;
 
 	};
@@ -101,7 +99,6 @@ namespace game_framework {
 		void OnMove();									// 移動遊戲元素
 		void OnShow();									// 顯示這個狀態的遊戲畫面
 	private:
-		//CAudio music;
 		CMovingBitmap taiwan;
 		CMovingBitmap hongkong;
 		CMovingBitmap thailand;
@@ -179,7 +176,6 @@ namespace game_framework {
 		CMovingBitmap character_call_cat_1;
 		CMovingBitmap cat_1_cool;
 		CMovingBitmap character_call_cat_2;
-		CMovingBitmap cat_2_cool;
 		CMovingBitmap character_call_cat_3;
 		CMovingBitmap character_call_cat_4;
 		CMovingBitmap character_call_cat_5;
@@ -210,7 +206,6 @@ namespace game_framework {
 		int friend_tower;
 		int enemy_tower;
 
-		//test
 		vector<int> dead_list;
 		vector<int> back_list;
 
@@ -282,7 +277,6 @@ namespace game_framework {
 		int enemy_tower;
 		int dog_number = 0;
 
-		//test
 		vector<int> dead_list;
 		vector<int> back_list;
 	};
@@ -353,7 +347,6 @@ namespace game_framework {
 		int enemy_tower;
 		int dog_number = 0;
 
-		//test
 		vector<int> dead_list;
 		vector<int> back_list;
 	};
@@ -426,7 +419,6 @@ namespace game_framework {
 		int enemy_tower;
 		int dog_number = 0;
 
-		//test
 		vector<int> dead_list;
 		vector<int> back_list;
 	};
@@ -499,7 +491,6 @@ namespace game_framework {
 		int enemy_tower;
 		int dog_number = 0;
 
-		//test
 		vector<int> dead_list;
 		vector<int> back_list;
 	};
